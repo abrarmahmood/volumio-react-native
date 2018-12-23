@@ -2,7 +2,12 @@ import React from "react";
 import { View, Text, Button, StyleSheet, TextInput } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 
-export default class HomeScreen extends React.Component<NavigationInjectedProps> {
+
+interface State {
+  text: string
+}
+
+export default class HomeScreen extends React.Component<NavigationInjectedProps, State> {
   state = {text: ''};
 
   static navigationOptions = {

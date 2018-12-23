@@ -4,7 +4,7 @@ import { Text, SectionList, StyleSheet, View, Image } from "react-native";
 
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';
 
-type Props = {
+interface Props {
     data: object
 }
 

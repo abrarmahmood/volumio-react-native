@@ -5,7 +5,11 @@ import volumioService from '../services/volumio-service';
 import { NavigationInjectedProps } from "react-navigation";
 
 
-export default class SearchScreen extends React.Component<NavigationInjectedProps> {
+interface State {
+    data: Array<object>
+}
+
+export default class SearchScreen extends React.Component<NavigationInjectedProps, State> {
     state = { data: [] };
     static navigationOptions = ({ navigation }) => {
         const str = navigation.getParam('searchText', 'london grammar');
