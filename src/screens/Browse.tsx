@@ -67,10 +67,24 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
         const uri = this.props.navigation.getParam('uri');
         console.log(obj)
 
-        this.props.navigation.push('Browse', {
-            uri: obj.uri,
-            prevUri: uri || 'tidal://',
-        })
+        if (obj.type === 'song') {
+            this.props.navigation.push('Play', {
+                event: {
+                    type: 'addPlay',
+                    payload: {
+                        uri: obj.uri,
+                        title: obj.title,
+                        albumart: obj.albumart,
+                        service: obj.service,
+                    }
+                }
+            })
+        } else {
+            this.props.navigation.push('Browse', {
+                uri: obj.uri,
+                prevUri: uri || 'tidal://',
+            })
+        }
     }
 
     render() {

@@ -21,10 +21,12 @@ export default class ItemList extends React.Component<Props> {
             return {
                 title: li.title,
                 data: li.items.map((item: any) => {
-                    const { title, albumart, uri } = item;
+                    const { type, title, albumart, uri, service } = item;
                     return {
+                        type,
                         title,
                         albumart: ensureAlbumArt(albumart),
+                        service,
                         uri,
                         unmanaged: item,
                     }
