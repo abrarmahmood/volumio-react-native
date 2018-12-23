@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, Button, FlatList, SectionList } from "react-native";
-import { searchResult } from './data';
 import ItemList from '../components/item-list';
 
 
 export default class SearchScreen extends React.Component {
+    state = { data: [] };
     static navigationOptions = ({ navigation }) => {
         const str = navigation.getParam('searchText', 'london grammar');
 
@@ -13,12 +13,21 @@ export default class SearchScreen extends React.Component {
         };
     };
 
-    render() {
-        /* 2. Get the param, provide a fallback value if not available */
+    componentDidMount() {
         const { navigation } = this.props;
         const searchText = navigation.getParam('searchText', 'london grammar');
+        console.log('hello')
 
-        const data = ItemList.mapData(searchResult.navigation.lists)
+        fetch('http://192.168.1.65:8080/search')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ data: data.navigation.lists })
+            })
+            .catch(e => console.log(e));
+    }
+    
+    render() {
+        const data = ItemList.mapData(this.state.data);
 
         return (
             <View style={{ flex: 1 }}>

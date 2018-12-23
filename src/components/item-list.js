@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
         height: 10,
     },
     listHeader: {
+        backgroundColor: 'white',
         // borderBottomWidth: 3,
         // borderBottomColor: 'gray',
         fontWeight: 'bold',
