@@ -10,11 +10,11 @@ const AppNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen
   },
-  Details: {
+  Search: {
     screen: SearchScreen
   }
 }, {
-  initialRouteName: "Home",
+  initialRouteName: "Search",
   defaultNavigationOptions: {
     // headerStyle: {
     //   backgroundColor: '#000000',

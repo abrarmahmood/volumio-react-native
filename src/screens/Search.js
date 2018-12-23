@@ -1,50 +1,29 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, FlatList, SectionList } from "react-native";
+import { searchResult } from './data';
+import ItemList from '../components/item-list';
 
 
 export default class SearchScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Search',
-        headerRight: (
-            <Button
-                onPress={() => alert('This is a button!')}
-                title="Search"
-            // color="#00000"
-            />
-        ),
+    static navigationOptions = ({ navigation }) => {
+        const str = navigation.getParam('searchText', 'london grammar');
+
+        return {
+            title: `Search results for "${str}"`
+        };
     };
 
     render() {
         /* 2. Get the param, provide a fallback value if not available */
         const { navigation } = this.props;
-        const itemId = navigation.getParam('itemId', 'NO-ID');
-        const otherParam = navigation.getParam('otherParam', 'some default value');
+        const searchText = navigation.getParam('searchText', 'london grammar');
+
+        const data = ItemList.mapData(searchResult.navigation.lists)
 
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Details Screen</Text>
-                <Text>itemId: {JSON.stringify(itemId)}</Text>
-                <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-                <Button
-                    title="Go to Details... again"
-                    onPress={() =>
-                        this.props.navigation.push('Details', {
-                            itemId: Math.floor(Math.random() * 100),
-                        })}
-                />
-                <Button
-                    title="Go to Home"
-                    onPress={() => this.props.navigation.navigate('Home')}
-                />
-                <Button
-                    title="Go back"
-                    onPress={() => this.props.navigation.goBack()}
-                />
-                <Button
-                    title="Update the title"
-                    onPress={() => this.props.navigation.setParams({ otherParam: 'Updated!' })}
-                />
+            <View style={{ flex: 1 }}>
+                <ItemList data={data} />
             </View>
-        );
+        )
     }
 }
