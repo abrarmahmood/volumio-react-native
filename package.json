@@ -13,10 +13,15 @@
     "react-navigation": "^3.0.9"
   },
   "devDependencies": {
+    "@types/react": "^16.7.18",
+    "@types/react-native": "^0.57.20",
+    "@types/react-navigation": "^3.0.1",
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.51.1",
-    "react-test-renderer": "16.6.3"
+    "react-native-typescript-transformer": "^1.2.11",
+    "react-test-renderer": "16.6.3",
+    "typescript": "^3.2.2"
   },
   "jest": {
     "preset": "react-native"

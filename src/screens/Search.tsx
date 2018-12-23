@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, FlatList, SectionList } from "react-native";
+import { View } from "react-native";
 import ItemList from '../components/item-list';
 import volumioService from '../services/volumio-service';
 
@@ -10,7 +10,7 @@ export default class SearchScreen extends React.Component {
         const str = navigation.getParam('searchText', 'london grammar');
 
         return {
-            title: `Search results for "${str}"`
+            title: `${str}`
         };
     };
 
