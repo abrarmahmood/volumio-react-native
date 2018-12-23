@@ -13,9 +13,8 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
     state = { data: [] };
     static navigationOptions = ({ navigation }) => {
         const searchText = navigation.getParam('searchText');
-        const type = navigation.getParam('type');
-        const id = navigation.getParam('id');
-        let title = `type: ${type} id: ${id}`;
+        const uri = navigation.getParam('uri');
+        let title = `uri: ${uri}`;
 
         if (typeof searchText !== 'undefined') {
             title = `Results for ${searchText}`
@@ -27,15 +26,15 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
     async componentDidMount() {
         const { navigation } = this.props;
         const searchText = navigation.getParam('searchText');
-        const type = navigation.getParam('type');
-        const id = navigation.getParam('id');
+        const uri = navigation.getParam('uri');
+        const prevUri = navigation.getParam('prevUri');
 
         try {
             let data = [];
             if (typeof searchText !== 'undefined') {
                 data = await volumioService.search(searchText);
             } else {
-                data = await volumioService.browse(type, id);
+                data = await volumioService.browse(uri, prevUri);
             }
 
             this.setState({ data })
@@ -47,15 +46,15 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
     async componentWillReceiveProps() {
         const { navigation } = this.props;
         const searchText = navigation.getParam('searchText');
-        const type = navigation.getParam('type');
-        const id = navigation.getParam('id');
+        const uri = navigation.getParam('uri');
+        const prevUri = navigation.getParam('prevUri');
 
         try {
             let data = [];
             if (typeof searchText !== 'undefined') {
                 data = await volumioService.search(searchText);
             } else {
-                data = await volumioService.browse(type, id);
+                data = await volumioService.browse(uri, prevUri);
             }
 
             this.setState({ data })
@@ -65,9 +64,12 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
     }
 
     onPress(obj: any): void {
+        const uri = this.props.navigation.getParam('uri');
+        console.log(obj)
+
         this.props.navigation.push('Browse', {
-            type: obj.type,
-            id: obj.id
+            uri: obj.uri,
+            prevUri: uri || 'tidal://',
         })
     }
 

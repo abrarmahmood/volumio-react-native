@@ -16,8 +16,8 @@ class VolumioHttpService {
         return json.navigation.lists;
     }
 
-    async browse(type: string, id: string) {
-        const response = await fetch(this.host + `/browse/${type}/${id}`)
+    async browse(uri: string, prevUri: string) {
+        const response = await fetch(this.host + `/browse?uri=${encodeURIComponent(uri)}&prevUri=${encodeURIComponent(prevUri)}`)
         const json = await response.json();
 
         return json.navigation.lists;

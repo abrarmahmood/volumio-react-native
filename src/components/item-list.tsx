@@ -42,14 +42,7 @@ export default class ItemList extends React.Component<Props> {
     }
 
     onItemPress = (item: any) => {
-        console.log(item);
-        const split = item.uri.split('/');
-        const parsed = {
-            id: split[3],
-            type: split[2],
-        };
-
-        this.props.onPress(parsed);
+        this.props.onPress(item);
     }
 
     renderItem = ({ item, index }) => {
