@@ -20,11 +20,15 @@ export default class ItemList extends React.Component<Props> {
         const sections = data.map((li: any) => {
             return {
                 title: li.title,
-                data: li.items.map(({ title, albumart, uri }) => ({
-                    title,
-                    albumart: ensureAlbumArt(albumart),
-                    uri,
-                }))
+                data: li.items.map((item: any) => {
+                    const { title, albumart, uri } = item;
+                    return {
+                        title,
+                        albumart: ensureAlbumArt(albumart),
+                        uri,
+                        unmanaged: item,
+                    }
+                })
             };
         });
 
@@ -38,7 +42,7 @@ export default class ItemList extends React.Component<Props> {
     }
 
     onItemPress = (item: any) => {
-        console.log('hello')
+        console.log(item);
         const split = item.uri.split('/');
         const parsed = {
             id: split[3],

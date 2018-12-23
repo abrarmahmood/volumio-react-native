@@ -49,7 +49,6 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
         const searchText = navigation.getParam('searchText');
         const type = navigation.getParam('type');
         const id = navigation.getParam('id');
-        console.log('cwrp', typeof searchText, typeof type, typeof id, searchText, type, id)
 
         try {
             let data = [];
