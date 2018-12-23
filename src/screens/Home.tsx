@@ -33,9 +33,7 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
         <Button
           title="Search"
           onPress={() => {
-            this.props.navigation.navigate('Search', {
-              itemId: 86,
-              otherParam: 'anything you want here',
+            this.props.navigation.navigate('Browse', {
               searchText: this.state.text,
             });
           }}

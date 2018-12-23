@@ -4,7 +4,7 @@ import React from "react";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import volumioService from './services/volumio-service';
 import HomeScreen from './screens/Home';
-import SearchScreen from './screens/Search';
+import BrowseScreen from './screens/Browse';
 
 
 volumioService.init('http://192.168.1.65:8080');
@@ -13,11 +13,11 @@ const AppNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen
   },
-  Search: {
-    screen: SearchScreen
+  Browse: {
+    screen: BrowseScreen
   }
 }, {
-  initialRouteName: "Search",
+  initialRouteName: "Home",
   defaultNavigationOptions: {
     // headerStyle: {
     //   backgroundColor: '#000000',

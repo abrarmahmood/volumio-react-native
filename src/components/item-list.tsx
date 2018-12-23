@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, SectionList, StyleSheet, View, Image } from "react-native";
+import { Text, SectionList, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';
 
 interface Props {
     data: object
+    onPress(obj: any): any
 }
 
 export default class ItemList extends React.Component<Props> {
@@ -36,22 +37,28 @@ export default class ItemList extends React.Component<Props> {
         );
     }
 
+    onItemPress = (item: any) => {
+        console.log('hello')
+        const split = item.uri.split('/');
+        const parsed = {
+            id: split[3],
+            type: split[2],
+        };
+
+        this.props.onPress(parsed);
+    }
+
     renderItem = ({ item, index }) => {
         return (
-            <View style={styles.listItemContainer}>
+            <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onItemPress(item)}>
                 <Image
                     source={{uri: item.albumart}}
-                    // style={styles.listItemArt}
-                    style={{
-                        flex: 1,
-                        maxWidth: 50,
-                        maxHeight: 50,
-                    }}
+                    style={styles.listItemArt}
                 />
                 <Text key={index} style={styles.listItemText}>
                     {item.title}
                 </Text>
-            </View>
+            </TouchableOpacity>
         );
     }
 
@@ -84,8 +91,8 @@ const styles = StyleSheet.create({
     },
     listItemArt: {
         flex: 1,
-        width: 10,
-        height: 10,
+        maxWidth: 50,
+        maxHeight: 50,
     },
     listHeader: {
         backgroundColor: 'white',
