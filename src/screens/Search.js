@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, FlatList, SectionList } from "react-native";
 import ItemList from '../components/item-list';
+import volumioService from '../services/volumio-service';
 
 
 export default class SearchScreen extends React.Component {
@@ -13,17 +14,17 @@ export default class SearchScreen extends React.Component {
         };
     };
 
-    componentDidMount() {
+    async componentDidMount() {
         const { navigation } = this.props;
         const searchText = navigation.getParam('searchText', 'london grammar');
-        console.log('hello')
 
-        fetch('http://192.168.1.65:8080/search')
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ data: data.navigation.lists })
-            })
-            .catch(e => console.log(e));
+        try {
+            const data = await volumioService.search(searchText);
+
+            this.setState({ data })
+        } catch (e) {
+            console.log(e);
+        }
     }
     
     render() {
