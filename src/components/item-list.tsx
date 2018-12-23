@@ -4,15 +4,19 @@ import { Text, SectionList, StyleSheet, View, Image } from "react-native";
 
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';
 
-export default class ItemList extends React.Component {
-    static mapData (data) {
+type Props = {
+    data: object
+}
+
+export default class ItemList extends React.Component<Props> {
+    static mapData (data: any) {
         const ensureAlbumArt = (url = '') => {
             if (url.includes('http')) {
                 return url;
             }
             return DEFAULT_ALBUM_ART;
         }
-        const sections = data.map(li => {
+        const sections = data.map((li: any) => {
             return {
                 title: li.title,
                 data: li.items.map(({ title, albumart, uri }) => ({
@@ -32,7 +36,7 @@ export default class ItemList extends React.Component {
         );
     }
 
-    renderItem = ({ item, index, section }) => {
+    renderItem = ({ item, index }) => {
         return (
             <View style={styles.listItemContainer}>
                 <Image
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         borderWidth: 3,
-        borderColor: 0,
+        borderColor: 'transparent',
         height: 60,
     },
     listItemText: {

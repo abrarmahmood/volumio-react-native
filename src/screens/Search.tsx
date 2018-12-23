@@ -2,9 +2,10 @@ import React from "react";
 import { View } from "react-native";
 import ItemList from '../components/item-list';
 import volumioService from '../services/volumio-service';
+import { NavigationInjectedProps } from "react-navigation";
 
 
-export default class SearchScreen extends React.Component {
+export default class SearchScreen extends React.Component<NavigationInjectedProps> {
     state = { data: [] };
     static navigationOptions = ({ navigation }) => {
         const str = navigation.getParam('searchText', 'london grammar');
