@@ -112,10 +112,7 @@ export default class Player extends Component<NavigationInjectedProps, State> {
 
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-
-        />
+        <StatusBar barStyle="light-content" />
         <Header message="Playing From Charts" />
         <AlbumArt url={event.payload.albumart} />
         <TrackDetails title={event.payload.title} artist={event.payload.artist} />

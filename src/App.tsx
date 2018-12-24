@@ -21,7 +21,7 @@ const AppNavigator = createStackNavigator({
     screen: PlayScreen
   },
 }, {
-  initialRouteName: "Play",
+  initialRouteName: "Home",
   defaultNavigationOptions: {
     // headerStyle: {
     //   backgroundColor: '#000000',

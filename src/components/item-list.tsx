@@ -66,6 +66,7 @@ export default class ItemList extends React.Component<Props> {
 
         return (
             <SectionList
+                style={styles.sectionList}
                 renderItem={this.renderItem}
                 renderSectionHeader={this.renderHeader}
                 sections={data}
@@ -76,6 +77,9 @@ export default class ItemList extends React.Component<Props> {
 }
 
 const styles = StyleSheet.create({
+    sectionList: {
+        backgroundColor: 'black',
+    },
     listItemContainer: {
         flex: 1,
         flexDirection: 'row',
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     listItemText: {
         flex: 2,
         padding: 5,
-        color: 'gray'
+        color: 'white'
     },
     listItemArt: {
         flex: 1,
@@ -94,7 +98,8 @@ const styles = StyleSheet.create({
         maxHeight: 50,
     },
     listHeader: {
-        backgroundColor: 'white',
+        backgroundColor: '#191919',
+        color: 'white',
         // borderBottomWidth: 3,
         // borderBottomColor: 'gray',
         fontWeight: 'bold',

@@ -1,9 +1,12 @@
 import React from "react";
-import { View } from "react-native";
+import { View, SafeAreaView, StatusBar } from "react-native";
 import ItemList from '../components/item-list';
 import volumioService from '../services/volumio-service';
 import { NavigationInjectedProps, NavigationParams, NavigationScreenProp } from "react-navigation";
 
+
+const DEFAULT_SEARCH_TEXT = undefined;
+// const DEFAULT_SEARCH_TEXT = 'london grammar';
 
 interface State {
     data: Array<object>
@@ -12,7 +15,7 @@ interface State {
 export default class SearchScreen extends React.Component<NavigationInjectedProps, State> {
     state = { data: [] };
     static navigationOptions = ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
-        const searchText = navigation.getParam('searchText');
+        const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
         const uri = navigation.getParam('uri');
         let title = `uri: ${uri}`;
 
@@ -20,12 +23,16 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
             title = `Results for ${searchText}`
         }
 
-        return { title };
+        return {
+            title: title,
+            headerStyle: { backgroundColor: '#191919' },
+            headerTitleStyle: { color: 'white' },
+        };
     };
 
     async componentDidMount() {
         const { navigation } = this.props;
-        const searchText = navigation.getParam('searchText');
+        const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
         const uri = navigation.getParam('uri');
         const prevUri = navigation.getParam('prevUri');
 
@@ -45,7 +52,7 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
 
     async componentWillReceiveProps() {
         const { navigation } = this.props;
-        const searchText = navigation.getParam('searchText');
+        const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
         const uri = navigation.getParam('uri');
         const prevUri = navigation.getParam('prevUri');
 
@@ -92,6 +99,7 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
 
         return (
             <View style={{ flex: 1 }}>
+                <StatusBar barStyle="light-content" />
                 <ItemList data={data} onPress={data => this.onPress(data)} />
             </View>
         )
