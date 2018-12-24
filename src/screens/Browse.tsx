@@ -1,19 +1,29 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { View, StatusBar, TextInput, StyleSheet } from "react-native";
-import ItemList from '../components/item-list';
-import volumioService from '../services/volumio-service';
 import { NavigationInjectedProps, NavigationParams, NavigationScreenProp } from "react-navigation";
+import ItemList from '../components/item-list';
+import { search, browse } from '../data-layer/tidal';
+import { BrowseSearchResult } from "../data-layer/tidal/map-response";
 
 
 // const DEFAULT_SEARCH_TEXT = undefined;
 const DEFAULT_SEARCH_TEXT = 'london grammar';
 
-interface State {
-    data: Array<object>
+
+interface Props extends NavigationInjectedProps {
+    search(term: string): void;
+    browse(uri: string, prevUri?: string): void;
+    results: Array<BrowseSearchResult>;
 }
 
-export default class SearchScreen extends React.Component<NavigationInjectedProps, State> {
-    state = { data: [] };
+interface State {
+    searchInput: string;
+}
+
+class SearchScreen extends React.Component<Props, State> {
+    state = { searchInput: '' };
+
     static navigationOptions = ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
         const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
         const uri = navigation.getParam('uri');
@@ -28,45 +38,31 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
         };
     };
 
-    async componentDidMount() {
+    componentDidMount() {
         const { navigation } = this.props;
         const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
         const uri = navigation.getParam('uri');
         const prevUri = navigation.getParam('prevUri');
 
-        try {
-            let data = [];
-            if (typeof searchText !== 'undefined') {
-                data = await volumioService.search(searchText);
-            } else {
-                data = await volumioService.browse(uri, prevUri);
-            }
-
-            this.setState({ data })
-        } catch (e) {
-            console.log(e);
+        if (typeof searchText !== 'undefined') {
+            this.props.search(searchText);
+        } else {
+            this.props.browse(uri, prevUri);
         }
     }
 
-    async componentWillReceiveProps() {
-        const { navigation } = this.props;
-        const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
-        const uri = navigation.getParam('uri');
-        const prevUri = navigation.getParam('prevUri');
+    // componentWillReceiveProps() {
+    //     const { navigation } = this.props;
+    //     const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
+    //     const uri = navigation.getParam('uri');
+    //     const prevUri = navigation.getParam('prevUri');
 
-        try {
-            let data = [];
-            if (typeof searchText !== 'undefined') {
-                data = await volumioService.search(searchText);
-            } else {
-                data = await volumioService.browse(uri, prevUri);
-            }
-
-            this.setState({ data })
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    //     if (typeof searchText !== 'undefined') {
+    //         this.props.search(searchText);
+    //     } else {
+    //         this.props.browse(uri, prevUri);
+    //     }
+    // }
 
     onPress(obj: any): void {
         const uri = this.props.navigation.getParam('uri');
@@ -92,9 +88,13 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
         }
     }
 
-    render() {
-        const data = ItemList.mapData(this.state.data);
+    onSearchInput = (searchInput: string) => {
+        console.log('search input', searchInput);
+        this.props.search(searchInput);
+        // this.setState({ searchInput });
+    }
 
+    render() {
         return (
             <View style={{ flex: 1, backgroundColor: 'black' }}>
                 <StatusBar barStyle="light-content" />
@@ -102,12 +102,27 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
                     style={styles.textInput}
                     placeholder='Search...'
                     placeholderTextColor='#5b5b5b'
+                    onChangeText={this.onSearchInput}
                 />
-                <ItemList data={data} onPress={data => this.onPress(data)} />
+                <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
             </View>
         )
     }
 }
+
+
+const mapStateToProps = (state: any) => {
+    return {
+        results: state.tidal.results,
+    };
+};
+
+const mapDispatchToProps = {
+    search,
+    browse,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchScreen);
 
 
 const styles = StyleSheet.create({

@@ -1,14 +1,19 @@
 // In App.js in a new project
 
 import React from "react";
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationParams } from "react-navigation";
-import volumioService from './services/volumio-service';
 import HomeScreen from './screens/Home';
 import BrowseScreen from './screens/Browse';
 import PlayScreen from './screens/Play';
+import reducer from './data-layer/tidal';
 
 
-volumioService.init('http://192.168.1.65:8080');
+const client = axios.create({ baseURL: 'http://192.168.1.65:8080', responseType: 'json' });
 
 const routes = {
   Home: {
@@ -22,37 +27,26 @@ const routes = {
   },
 };
 
-const config = {
+const routeConfig = {
   initialRouteName: "Browse",
   defaultNavigationOptions: ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
     return {
       headerStyle: { backgroundColor: '#191919' },
       headerTitleStyle: { color: 'white' },
-      // headerRight: (
-      //   <Button
-      //     onPress={() => alert('This is a button!')}
-      //     title="Search"
-      //   // color="#00000"
-      //   />
-      // ),
-      // headerLeft: (
-      //   <Button
-      //     onPress={() => alert('This is a button!')}
-      //     title="Home"
-      //   // color="#00000"
-      //   />
-      // ),
     }
   }
 };
 
-const AppNavigator = createStackNavigator(routes, config);
+const AppNavigator = createStackNavigator(routes, routeConfig);
 const AppContainer = createAppContainer(AppNavigator);
+const store = createStore(combineReducers({tidal: reducer}), {}, composeWithDevTools(applyMiddleware(axiosMiddleware(client))));
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer
-      uriPrefix="/app"
-    />;
+    return (
+      <Provider store={store}>
+        <AppContainer uriPrefix="/app" />
+      </Provider>
+    );
   }
 }
