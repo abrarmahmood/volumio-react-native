@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { NavigationInjectedProps } from 'react-navigation';
 import {
-  View,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import Header from '../components/player/Header';
 import AlbumArt from '../components/player/AlbumArt';
@@ -24,7 +24,11 @@ interface State {
 export default class Player extends Component<NavigationInjectedProps, State> {
 
   static navigationOptions = {
-    title: 'Now Playing',
+    // headerMode: 'none',
+    header: null,
+    // title: 'Now Playing',
+    // headerStyle: { backgroundColor: 'red' },
+    // headerTitleStyle: { color: 'green' },
   };
 
   constructor(props: any) {
@@ -107,8 +111,11 @@ export default class Player extends Component<NavigationInjectedProps, State> {
   });
 
     return (
-      <View style={styles.container}>
-        <StatusBar hidden={true} />
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          barStyle="light-content"
+
+        />
         <Header message="Playing From Charts" />
         <AlbumArt url={event.payload.albumart} />
         <TrackDetails title={event.payload.title} artist={event.payload.artist} />
@@ -128,7 +135,7 @@ export default class Player extends Component<NavigationInjectedProps, State> {
           onBack={this.onBack.bind(this)}
           onForward={this.onForward.bind(this)}
           paused={this.state.paused}/>
-      </View>
+      </SafeAreaView>
     );
   }
 }

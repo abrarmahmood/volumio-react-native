@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import ItemList from '../components/item-list';
 import volumioService from '../services/volumio-service';
-import { NavigationInjectedProps } from "react-navigation";
+import { NavigationInjectedProps, NavigationParams, NavigationScreenProp } from "react-navigation";
 
 
 interface State {
@@ -11,7 +11,7 @@ interface State {
 
 export default class SearchScreen extends React.Component<NavigationInjectedProps, State> {
     state = { data: [] };
-    static navigationOptions = ({ navigation }) => {
+    static navigationOptions = ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
         const searchText = navigation.getParam('searchText');
         const uri = navigation.getParam('uri');
         let title = `uri: ${uri}`;
