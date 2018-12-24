@@ -93,6 +93,10 @@ export default class Player extends Component<NavigationInjectedProps, State> {
     }
   }
 
+  goBack = () => {
+    this.props.navigation.goBack();
+  }
+
   render() {
     const event = this.props.navigation.getParam('event', {
       action: 'addPlay',
@@ -109,7 +113,7 @@ export default class Player extends Component<NavigationInjectedProps, State> {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <Header message="Playing From Charts" />
+        <Header message="Now Playing" onDownPress={this.goBack} />
         <AlbumArt url={event.payload.albumart} />
         <TrackDetails title={event.payload.title} artist={event.payload.artist} />
         <SeekBar

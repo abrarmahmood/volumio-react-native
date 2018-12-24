@@ -1,15 +1,21 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { View, StatusBar, TextInput, StyleSheet } from "react-native";
-import { NavigationInjectedProps, NavigationParams, NavigationScreenProp } from "react-navigation";
+import { NavigationInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
 import { search, browse } from '../data-layer/tidal';
 import { BrowseSearchResult } from "../data-layer/tidal/map-response";
 
 
-// const DEFAULT_SEARCH_TEXT = undefined;
-const DEFAULT_SEARCH_TEXT = 'london grammar';
+const DEFAULT_SEARCH_TEXT = undefined;
+// const DEFAULT_SEARCH_TEXT = 'london grammar';
 
+export interface BrowseNavState {
+    searching: boolean;
+    searchText: string;
+    uri: string;
+    prevUri: string;
+}
 
 interface Props extends NavigationInjectedProps {
     search(term: string): void;
@@ -18,55 +24,40 @@ interface Props extends NavigationInjectedProps {
 }
 
 interface State {
-    searchInput: string;
+    searching: boolean;
+    searchText: string;
 }
 
-class SearchScreen extends React.Component<Props, State> {
-    state = { searchInput: '' };
 
-    static navigationOptions = ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
-        const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
-        const uri = navigation.getParam('uri');
-        let title = `uri: ${uri}`;
+@connect(
+    (state: any) => ({
+        results: state.tidal.results,
+    }),
+    {
+        search: search,
+        browse: browse,
+    }
+)
+export default class SearchScreen extends React.Component<Props, State> {
+    state = { searching: false, searchText: '' };
 
-        if (typeof searchText !== 'undefined') {
-            title = `Results for ${searchText}`
-        }
-
-        return {
-            title: title,
-        };
+    static navigationOptions = {
+        title: 'Browse',
     };
 
     componentDidMount() {
-        const { navigation } = this.props;
-        const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
-        const uri = navigation.getParam('uri');
-        const prevUri = navigation.getParam('prevUri');
+        const navState: BrowseNavState = this.props.navigation.getParam('state');
 
-        if (typeof searchText !== 'undefined') {
-            this.props.search(searchText);
+        if (navState.searching) {
+            this.setState({searching: true, searchText: navState.searchText });
+            this.props.search(navState.searchText);
         } else {
-            this.props.browse(uri, prevUri);
+            this.props.browse(navState.uri, navState.prevUri);
         }
     }
 
-    // componentWillReceiveProps() {
-    //     const { navigation } = this.props;
-    //     const searchText = navigation.getParam('searchText', DEFAULT_SEARCH_TEXT);
-    //     const uri = navigation.getParam('uri');
-    //     const prevUri = navigation.getParam('prevUri');
-
-    //     if (typeof searchText !== 'undefined') {
-    //         this.props.search(searchText);
-    //     } else {
-    //         this.props.browse(uri, prevUri);
-    //     }
-    // }
-
     onPress(obj: any): void {
         const uri = this.props.navigation.getParam('uri');
-        console.log(obj)
 
         if (obj.type === 'song') {
             this.props.navigation.push('Play', {
@@ -81,48 +72,46 @@ class SearchScreen extends React.Component<Props, State> {
                 }
             })
         } else {
-            this.props.navigation.push('Browse', {
+            // TOOD: This state should go in Redux
+            const state: BrowseNavState = {
+                searching: false,
+                searchText: '',
                 uri: obj.uri,
-                prevUri: uri || 'tidal://',
-            })
+                prevUri: uri || 'tidal://'
+            };
+
+            this.props.navigation.push('Browse', {state})
         }
     }
 
     onSearchInput = (searchInput: string) => {
         console.log('search input', searchInput);
-        this.props.search(searchInput);
-        // this.setState({ searchInput });
+        this.setState({ searching: true });
+        if (searchInput.length > 2) {
+            this.props.search(searchInput);
+        }
     }
 
     render() {
+        const { searching, searchText } = this.state;
+
         return (
             <View style={{ flex: 1, backgroundColor: 'black' }}>
                 <StatusBar barStyle="light-content" />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Search...'
-                    placeholderTextColor='#5b5b5b'
-                    onChangeText={this.onSearchInput}
-                />
+                {searching === true && (
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Search...'
+                        placeholderTextColor='#5b5b5b'
+                        defaultValue={searchText}
+                        onChangeText={this.onSearchInput}
+                    />
+                )}
                 <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
             </View>
         )
     }
 }
-
-
-const mapStateToProps = (state: any) => {
-    return {
-        results: state.tidal.results,
-    };
-};
-
-const mapDispatchToProps = {
-    search,
-    browse,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchScreen);
 
 
 const styles = StyleSheet.create({

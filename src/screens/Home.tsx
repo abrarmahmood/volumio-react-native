@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet, TextInput, StatusBar } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
+import { BrowseNavState } from "./Browse";
 
 
 interface State {
@@ -8,7 +9,7 @@ interface State {
 }
 
 export default class HomeScreen extends React.Component<NavigationInjectedProps, State> {
-  state = {text: ''};
+  state = { text: '' };
 
   static navigationOptions = {
     title: 'Home',
@@ -21,6 +22,17 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
     // ),
   };
 
+  onSearchPress = () => {
+    const state: BrowseNavState = {
+      searching: true,
+      searchText: this.state.text,
+      uri: '',
+      prevUri: '',
+    };
+
+    this.props.navigation.navigate('Browse', { state });
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -29,15 +41,11 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
         <TextInput
           placeholder='Search here...'
           style={styles.input}
-          onChangeText={text => this.setState({text})}
+          onChangeText={text => this.setState({ text })}
         />
         <Button
           title="Search"
-          onPress={() => {
-            this.props.navigation.navigate('Browse', {
-              searchText: this.state.text,
-            });
-          }}
+          onPress={() => this.onSearchPress()}
         />
       </View>
     );

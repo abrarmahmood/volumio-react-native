@@ -23,7 +23,7 @@ export default class Header extends Component<Props> {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={onDownPress}>
-          <Image style={styles.button}
+          <Image style={styles.buttonBack}
             source={require('./img/ic_keyboard_arrow_down_white.png')} />
         </TouchableOpacity>
         <Text onPress={onMessagePress}
@@ -54,5 +54,9 @@ const styles = StyleSheet.create({
   },
   button: {
     opacity: 0.72
-  }
+  },
+  buttonBack: {
+    opacity: 0.72,
+    transform: [{ rotate: '90deg'}]
+  },
 });

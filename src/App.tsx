@@ -28,7 +28,7 @@ const routes = {
 };
 
 const routeConfig = {
-  initialRouteName: "Browse",
+  initialRouteName: "Home",
   defaultNavigationOptions: ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
     return {
       headerStyle: { backgroundColor: '#191919' },
