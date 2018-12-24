@@ -5,8 +5,8 @@ import volumioService from '../services/volumio-service';
 import { NavigationInjectedProps, NavigationParams, NavigationScreenProp } from "react-navigation";
 
 
-const DEFAULT_SEARCH_TEXT = undefined;
-// const DEFAULT_SEARCH_TEXT = 'london grammar';
+// const DEFAULT_SEARCH_TEXT = undefined;
+const DEFAULT_SEARCH_TEXT = 'london grammar';
 
 interface State {
     data: Array<object>
@@ -25,8 +25,6 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
 
         return {
             title: title,
-            headerStyle: { backgroundColor: '#191919' },
-            headerTitleStyle: { color: 'white' },
         };
     };
 

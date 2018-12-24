@@ -24,11 +24,7 @@ interface State {
 export default class Player extends Component<NavigationInjectedProps, State> {
 
   static navigationOptions = {
-    // headerMode: 'none',
     header: null,
-    // title: 'Now Playing',
-    // headerStyle: { backgroundColor: 'red' },
-    // headerTitleStyle: { color: 'green' },
   };
 
   constructor(props: any) {

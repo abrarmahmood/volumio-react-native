@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, TextInput } from "react-native";
+import { View, Text, Button, StyleSheet, TextInput, StatusBar } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 
 
@@ -24,6 +24,7 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <StatusBar barStyle="light-content" />
         <Text>Search TIDAL</Text>
         <TextInput
           placeholder='Search here...'
