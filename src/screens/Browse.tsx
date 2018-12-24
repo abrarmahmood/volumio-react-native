@@ -1,5 +1,5 @@
 import React from "react";
-import { View, SafeAreaView, StatusBar } from "react-native";
+import { View, StatusBar, TextInput, StyleSheet } from "react-native";
 import ItemList from '../components/item-list';
 import volumioService from '../services/volumio-service';
 import { NavigationInjectedProps, NavigationParams, NavigationScreenProp } from "react-navigation";
@@ -96,10 +96,27 @@ export default class SearchScreen extends React.Component<NavigationInjectedProp
         const data = ItemList.mapData(this.state.data);
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: 'black' }}>
                 <StatusBar barStyle="light-content" />
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Search...'
+                    placeholderTextColor='#5b5b5b'
+                />
                 <ItemList data={data} onPress={data => this.onPress(data)} />
             </View>
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    textInput: {
+        backgroundColor: '#191919',
+        color: 'white',
+        fontSize: 18,
+        margin: 10,
+        padding: 5,
+        borderRadius: 5,
+    },
+});

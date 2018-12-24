@@ -6,7 +6,6 @@ import volumioService from './services/volumio-service';
 import HomeScreen from './screens/Home';
 import BrowseScreen from './screens/Browse';
 import PlayScreen from './screens/Play';
-import { Button } from "react-native";
 
 
 volumioService.init('http://192.168.1.65:8080');
@@ -29,20 +28,20 @@ const config = {
     return {
       headerStyle: { backgroundColor: '#191919' },
       headerTitleStyle: { color: 'white' },
-      headerRight: (
-        <Button
-          onPress={() => alert('This is a button!')}
-          title="Search"
-        // color="#00000"
-        />
-      ),
-      headerLeft: (
-        <Button
-          onPress={() => alert('This is a button!')}
-          title="Home"
-        // color="#00000"
-        />
-      ),
+      // headerRight: (
+      //   <Button
+      //     onPress={() => alert('This is a button!')}
+      //     title="Search"
+      //   // color="#00000"
+      //   />
+      // ),
+      // headerLeft: (
+      //   <Button
+      //     onPress={() => alert('This is a button!')}
+      //     title="Home"
+      //   // color="#00000"
+      //   />
+      // ),
     }
   }
 };
