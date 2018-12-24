@@ -1,64 +1,145 @@
-import React from "react";
-import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
+import React, { Component } from 'react';
+import { NavigationInjectedProps } from 'react-navigation';
+import {
+  View,
+  StatusBar,
+} from 'react-native';
+import Header from '../components/player/Header';
+import AlbumArt from '../components/player/AlbumArt';
+import TrackDetails from '../components/player/TrackDetails';
+import SeekBar from '../components/player/SeekBar';
+import Controls from '../components/player/Controls';
 
-const PLAY_PAUSE_ICON = 'https://cdn0.iconfinder.com/data/icons/controls-essential/48/v-33-512.png';
 
-
-export default class SearchScreen extends React.Component<NavigationInjectedProps> {
-    static navigationOptions = {
-        title: 'Now Playing'
-    };
-
-    toggleOnPress = () => {
-        console.log('toggle play/pause');
-    }
-
-    render() {
-        const event = this.props.navigation.getParam('event', {
-            action: 'addPlay',
-            payload: {
-                uri: "tidal://song/71635119",
-                album: "If You Wait (Remixes)",
-                artist: "London Grammar",
-                title: "Wasting My Young Years",
-                albumart: "https://resources.tidal.com/images/461559ff/1603/4193/9e4b/31ed7b7549ba/480x480.jpg",
-                service: "streaming_services"
-            }
-        });
-
-        return (
-            <View style={styles.container}>
-                <Text style={styles.trackName}>{event.payload.title}</Text>
-                <Text style={styles.artistAlbum}>{event.payload.artist} / {event.payload.album}</Text>
-                <Image source={{ uri: event.payload.albumart }} style={styles.albumart} resizeMode="contain" resizeMethod="scale" />
-                <TouchableOpacity onPress={() => this.toggleOnPress()} style={styles.playPause}>
-                    <Image source={{ uri: PLAY_PAUSE_ICON }} style={styles.playPause}  resizeMethod="resize"/>
-                </TouchableOpacity>
-            </View>
-        )
-    }
+interface State {
+  paused: boolean;
+  totalLength: number;
+  currentPosition: number;
+  selectedTrack: number;
+  repeatOn: boolean;
+  shuffleOn: boolean;
+  isChanging: boolean;
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 15,
-    },
-    albumart: {
-        flex: 1,
-        // maxWidth: '80%',
-        // maxHeight: '80%',
-    },
-    trackName: {
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    artistAlbum: {
-        textAlign: 'center',
-    },
-    playPause: {
-        flex: 1,
-        maxWidth: 20,
-    },
-});
+export default class Player extends Component<NavigationInjectedProps, State> {
+
+  static navigationOptions = {
+    title: 'Now Playing',
+  };
+
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      paused: true,
+      totalLength: 1,
+      currentPosition: 0,
+      selectedTrack: 0,
+      repeatOn: false,
+      shuffleOn: false,
+      isChanging: false,
+    };
+  }
+
+  setDuration(data) {
+    // console.log(totalLength);
+    this.setState({totalLength: Math.floor(data.duration)});
+  }
+
+  setTime(data) {
+    //console.log(data);
+    this.setState({currentPosition: Math.floor(data.currentTime)});
+  }
+
+  seek(time) {
+    time = Math.round(time);
+    this.refs.audioElement && this.refs.audioElement.seek(time);
+    this.setState({
+      currentPosition: time,
+      paused: false,
+    });
+  }
+
+  onBack() {
+    if (this.state.currentPosition < 10 && this.state.selectedTrack > 0) {
+      this.refs.audioElement && this.refs.audioElement.seek(0);
+      this.setState({ isChanging: true });
+      setTimeout(() => this.setState({
+        currentPosition: 0,
+        paused: false,
+        totalLength: 1,
+        isChanging: false,
+        selectedTrack: this.state.selectedTrack - 1,
+      }), 0);
+    } else {
+      this.refs.audioElement.seek(0);
+      this.setState({
+        currentPosition: 0,
+      });
+    }
+  }
+
+  onForward() {
+    if (this.state.selectedTrack < this.props.tracks.length - 1) {
+      this.refs.audioElement && this.refs.audioElement.seek(0);
+      this.setState({ isChanging: true });
+      setTimeout(() => this.setState({
+        currentPosition: 0,
+        totalLength: 1,
+        paused: false,
+        isChanging: false,
+        selectedTrack: this.state.selectedTrack + 1,
+      }), 0);
+    }
+  }
+
+  render() {
+    const event = this.props.navigation.getParam('event', {
+      action: 'addPlay',
+      payload: {
+          uri: "tidal://song/71635119",
+          album: "If You Wait (Remixes)",
+          artist: "London Grammar",
+          title: "Wasting My Young Years",
+          albumart: "https://resources.tidal.com/images/461559ff/1603/4193/9e4b/31ed7b7549ba/480x480.jpg",
+          service: "streaming_services"
+      }
+  });
+
+    return (
+      <View style={styles.container}>
+        <StatusBar hidden={true} />
+        <Header message="Playing From Charts" />
+        <AlbumArt url={event.payload.albumart} />
+        <TrackDetails title={event.payload.title} artist={event.payload.artist} />
+        <SeekBar
+          onSeek={this.seek.bind(this)}
+          trackLength={this.state.totalLength}
+          onSlidingStart={() => this.setState({paused: true})}
+          currentPosition={this.state.currentPosition} />
+        <Controls
+          onPressRepeat={() => this.setState({repeatOn : !this.state.repeatOn})}
+          repeatOn={this.state.repeatOn}
+          shuffleOn={this.state.shuffleOn}
+          forwardDisabled={this.state.selectedTrack === /*this.props.tracks.length - 1*/ 8}
+          onPressShuffle={() => this.setState({shuffleOn: !this.state.shuffleOn})}
+          onPressPlay={() => this.setState({paused: false})}
+          onPressPause={() => this.setState({paused: true})}
+          onBack={this.onBack.bind(this)}
+          onForward={this.onForward.bind(this)}
+          paused={this.state.paused}/>
+      </View>
+    );
+  }
+}
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: 'rgb(4,4,4)',
+  },
+  audioElement: {
+    height: 0,
+    width: 0,
+  }
+};
