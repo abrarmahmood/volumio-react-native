@@ -15,13 +15,53 @@ const minutesAndSeconds = (position: number) => ([
 interface Props {
   trackLength: number;
   currentPosition: number;
+  paused: boolean;
   onSeek(time: number): void;
   onSlidingStart(): void;
 }
 
-export default class SeekBar extends Component<Props> {
+interface State {
+  currentPosition: number;
+}
+
+export default class SeekBar extends Component<Props, State> {
+  timer: any;
+  state = {
+    currentPosition: 0,
+  };
+
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      currentPosition: props.currentPosition,
+    }
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.currentPosition !== this.props.currentPosition) {
+      this.setState({currentPosition: nextProps.currentPosition});
+    }
+  }
+
+  // FIXME: Find a better solution than this to increment the seconds
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.paused !== this.props.paused) {
+      if (this.props.paused === false) {
+        this.timer = setInterval(() => {
+          this.setState({
+            currentPosition: ++this.state.currentPosition
+          });
+        }, 1000);
+      } else {
+        clearTimeout(this.timer);
+      }
+    }
+  }
+
   render() {
-    const { trackLength, currentPosition, onSeek, onSlidingStart } = this.props;
+    const { trackLength, onSeek, onSlidingStart } = this.props;
+    const {currentPosition} = this.state;
     const elapsed = minutesAndSeconds(currentPosition);
     const remaining = minutesAndSeconds(trackLength - currentPosition);
 

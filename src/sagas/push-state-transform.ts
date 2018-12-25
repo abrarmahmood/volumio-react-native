@@ -38,6 +38,8 @@ export type PlayerState = {
     stream: boolean;
 }
 
+const msecToSec = (val: number) => parseInt((val / 1000));
+
 export function mapServerResponse(response: any = {}): PlayerState {
     const _ensure = ensure(response);
 
@@ -53,7 +55,7 @@ export function mapServerResponse(response: any = {}): PlayerState {
         samplerate: _ensure('samplerate', ''),
         bitdepth: _ensure('bitdepth', ''),
         position: _ensure('position', 0),
-        seek: _ensure('seek', 0),
+        seek: msecToSec(_ensure('seek', 0)),
         duration: _ensure('duration', 0),
         volume: _ensure('volume', 100),
         channels: _ensure('channels', 2),
