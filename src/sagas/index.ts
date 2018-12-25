@@ -1,11 +1,24 @@
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, fork } from 'redux-saga/effects'
+import { SEARCH_LIBRARY, BROWSE_LIBRARY } from '../actions/browse-library';
+import { ReduxAction } from '../actions/utils';
 
-const handleSearch = function* handleNewMessage(params: any) {
-	yield takeEvery('ADD_MESSAGE', (action: any) => {
-		action.author = params.username
-
-		params.socket.emit(JSON.stringify(action))
-	})
+export const handleSearchSaga = function* (params: any) {
+	yield takeEvery(SEARCH_LIBRARY, (action: ReduxAction) => {
+		params.socket.emit('search', {
+			type: "any",
+			value: action.value,
+			plugin_name: "streaming_services",
+			plugin_type: "music_service",
+			uri: "tidal://"
+		});
+	});
 }
 
-export default handleSearch;
+export const handleBrowseSaga = function* (params: any) {
+	yield takeEvery(BROWSE_LIBRARY, (action: ReduxAction) => {
+		params.socket.emit('browseLibrary', {
+			uri: action.value.uri,
+			prevUri: action.value.prevUri,
+		});
+	});
+}

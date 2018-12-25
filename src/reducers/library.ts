@@ -1,20 +1,18 @@
-import {PUSH_STATE} from '../actions/player-state';
+import { PUSH_BROWSE_LIBRARY } from '../actions/browse-library';
 import { ReduxAction } from '../actions/utils';
 
 const defaultState = {
 	error: null,
-    value: {
-
-    }
+    value: []
 };
 
-const playerState = (state = defaultState, action: ReduxAction) => {
+const library = (state = defaultState, action: ReduxAction) => {
 	switch (action.type) {
-		case PUSH_STATE:
+		case PUSH_BROWSE_LIBRARY:
 			return Object.assign({}, state, {value: action.value});
 		default:
 			return state;
 	}
 }
 
-export default playerState;
+export default library;

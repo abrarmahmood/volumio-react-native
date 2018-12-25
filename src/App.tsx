@@ -10,7 +10,7 @@ import HomeScreen from './screens/Home';
 import BrowseScreen from './screens/Browse';
 import PlayScreen from './screens/Play';
 import reducer from './reducers';
-import handleSearch from "./sagas";
+import * as sagas from "./sagas";
 import initSocketio from "./socketio";
 
 
@@ -42,7 +42,8 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 const socket = initSocketio('http://192.168.1.81/', store.dispatch);
 
-sagaMiddleware.run(handleSearch, {socket})
+sagaMiddleware.run(sagas.handleBrowseSaga, {socket});
+sagaMiddleware.run(sagas.handleSearchSaga, {socket});
 
 export default class App extends React.Component {
   render() {

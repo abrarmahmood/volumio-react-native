@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { View, StatusBar, TextInput, StyleSheet } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
-import { search, browse } from '../data-layer/tidal';
 import { BrowseSearchResult } from "../data-layer/tidal/map-response";
+import { searchLibrary, browseLibrary } from "../actions/browse-library";
 
 
 const DEFAULT_SEARCH_TEXT = undefined;
@@ -31,11 +31,11 @@ interface State {
 
 @connect(
     (state: any) => ({
-        results: state.tidal.results,
+        results: state.library.value,
     }),
     {
-        search: search,
-        browse: browse,
+        search: searchLibrary,
+        browse: browseLibrary,
     }
 )
 export default class SearchScreen extends React.Component<Props, State> {
