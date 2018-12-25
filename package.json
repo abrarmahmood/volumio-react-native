@@ -17,12 +17,14 @@
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-axios-middleware": "^4.0.0",
-    "redux-devtools-extension": "^2.13.7"
+    "redux-devtools-extension": "^2.13.7",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "@types/react": "^16.7.18",
     "@types/react-native": "^0.57.20",
     "@types/react-navigation": "^3.0.1",
+    "@types/socket.io-client": "^1.4.32",
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.51.1",

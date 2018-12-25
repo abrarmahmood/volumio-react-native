@@ -11,9 +11,10 @@ import HomeScreen from './screens/Home';
 import BrowseScreen from './screens/Browse';
 import PlayScreen from './screens/Play';
 import reducer from './data-layer/tidal';
+import './socketio';
 
 
-const client = axios.create({ baseURL: 'http://192.168.1.65:8080', responseType: 'json' });
+const client = axios.create({ baseURL: 'http://192.168.1.81:8080', responseType: 'json' });
 
 const routes = {
   Home: {
