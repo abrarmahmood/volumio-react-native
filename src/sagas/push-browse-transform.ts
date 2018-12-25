@@ -1,3 +1,8 @@
+import { takeEvery, put } from 'redux-saga/effects'
+import { PUSH_BROWSE_LIBRARY, pushBrowseLibraryTransformed } from '../actions/browse-library';
+import { ReduxAction } from '../actions/utils';
+
+
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';
 
 const ensureAlbumArt = (url = '') => {
@@ -21,7 +26,7 @@ export type BrowseSearchResult = {
     data: Array<ListItem>
 }
 
-const makeListItem = (obj: any) : ListItem => {
+const makeListItem = (obj: any): ListItem => {
     return {
         type: obj.type,
         title: obj.title,
@@ -32,7 +37,7 @@ const makeListItem = (obj: any) : ListItem => {
     }
 }
 
-export default function mapServerResponse(response: any): Array<BrowseSearchResult> {
+function mapServerResponse(response: any): Array<BrowseSearchResult> {
     const groups = response.navigation.lists;
     const result = groups.map((group: any) => {
         const listItems = group.items.map(makeListItem);
@@ -44,4 +49,14 @@ export default function mapServerResponse(response: any): Array<BrowseSearchResu
     });
 
     return result;
+}
+
+
+export const pushBrowseTransform = function* (params: any) {
+    yield takeEvery(PUSH_BROWSE_LIBRARY, function* (action: ReduxAction) {
+        const { value } = action;
+        const transformed = mapServerResponse(value);
+
+        yield put(pushBrowseLibraryTransformed(transformed));
+    });
 }

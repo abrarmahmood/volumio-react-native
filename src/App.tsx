@@ -44,6 +44,7 @@ const socket = initSocketio('http://192.168.1.81/', store.dispatch);
 
 sagaMiddleware.run(sagas.handleBrowseSaga, {socket});
 sagaMiddleware.run(sagas.handleSearchSaga, {socket});
+sagaMiddleware.run(sagas.pushBrowseTransform, {socket});
 
 export default class App extends React.Component {
   render() {

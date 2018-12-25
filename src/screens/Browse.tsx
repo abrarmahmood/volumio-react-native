@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { View, StatusBar, TextInput, StyleSheet } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
-import { BrowseSearchResult } from "../data-layer/tidal/map-response";
 import { searchLibrary, browseLibrary } from "../actions/browse-library";
+import { BrowseSearchResult } from "../sagas/push-browse-transform";
 
 
 const DEFAULT_SEARCH_TEXT = undefined;
