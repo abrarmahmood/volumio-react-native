@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { NavigationInjectedProps } from 'react-navigation';
 import {
   StatusBar,
@@ -9,6 +10,7 @@ import AlbumArt from '../components/player/AlbumArt';
 import TrackDetails from '../components/player/TrackDetails';
 import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
+import { PlayerState } from '../sagas/push-state-transform';
 
 
 interface State {
@@ -21,7 +23,20 @@ interface State {
   isChanging: boolean;
 }
 
-export default class Player extends Component<NavigationInjectedProps, State> {
+interface Props extends NavigationInjectedProps {
+  playerState: PlayerState
+}
+
+@connect(
+  (state: any) => ({
+      playerState: state.playerState.value,
+  }),
+  {
+      // search: searchLibrary,
+      // browse: browseLibrary,
+  }
+)
+export default class Player extends Component<Props, State> {
 
   static navigationOptions = {
     header: null,
@@ -32,7 +47,7 @@ export default class Player extends Component<NavigationInjectedProps, State> {
 
     this.state = {
       paused: true,
-      totalLength: 1,
+      totalLength: 80,
       currentPosition: 0,
       selectedTrack: 0,
       repeatOn: false,
@@ -98,40 +113,30 @@ export default class Player extends Component<NavigationInjectedProps, State> {
   }
 
   render() {
-    const event = this.props.navigation.getParam('event', {
-      action: 'addPlay',
-      payload: {
-          uri: "tidal://song/71635119",
-          album: "If You Wait (Remixes)",
-          artist: "London Grammar",
-          title: "Wasting My Young Years",
-          albumart: "https://resources.tidal.com/images/461559ff/1603/4193/9e4b/31ed7b7549ba/480x480.jpg",
-          service: "streaming_services"
-      }
-  });
+    const {playerState} = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Header message="Now Playing" onDownPress={this.goBack} />
-        <AlbumArt url={event.payload.albumart} />
-        <TrackDetails title={event.payload.title} artist={event.payload.artist} />
+        <AlbumArt url={playerState.albumart} />
+        <TrackDetails title={playerState.title} artist={playerState.artist} />
         <SeekBar
           onSeek={this.seek.bind(this)}
-          trackLength={this.state.totalLength}
+          trackLength={playerState.duration}
           onSlidingStart={() => this.setState({paused: true})}
-          currentPosition={this.state.currentPosition} />
+          currentPosition={playerState.seek} />
         <Controls
           onPressRepeat={() => this.setState({repeatOn : !this.state.repeatOn})}
-          repeatOn={this.state.repeatOn}
-          shuffleOn={this.state.shuffleOn}
+          repeatOn={playerState.repeat}
+          shuffleOn={playerState.random}
           forwardDisabled={this.state.selectedTrack === /*this.props.tracks.length - 1*/ 8}
           onPressShuffle={() => this.setState({shuffleOn: !this.state.shuffleOn})}
           onPressPlay={() => this.setState({paused: false})}
           onPressPause={() => this.setState({paused: true})}
           onBack={this.onBack.bind(this)}
           onForward={this.onForward.bind(this)}
-          paused={this.state.paused}/>
+          paused={playerState.status !== 'play'}/>
       </SafeAreaView>
     );
   }

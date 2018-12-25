@@ -7,9 +7,6 @@ import { searchLibrary, browseLibrary } from "../actions/browse-library";
 import { BrowseSearchResult } from "../sagas/push-browse-transform";
 
 
-const DEFAULT_SEARCH_TEXT = undefined;
-// const DEFAULT_SEARCH_TEXT = 'london grammar';
-
 export interface BrowseNavState {
     searching: boolean;
     searchText: string;

@@ -38,7 +38,7 @@ export type PlayerState = {
     stream: boolean;
 }
 
-function mapServerResponse(response: any): PlayerState {
+export function mapServerResponse(response: any = {}): PlayerState {
     const _ensure = ensure(response);
 
     const result = {
@@ -46,7 +46,7 @@ function mapServerResponse(response: any): PlayerState {
         title: _ensure('title', ''),
         artist: _ensure('artist', ''),
         album: _ensure('album', ''),
-        albumart: _ensure('albumart', ''),
+        albumart: _ensure('albumart', undefined), // special case so <Image /> doesn't complain
         service: _ensure('service', 'unknown'),
         uri: _ensure('uri', ''),
         trackType: _ensure('trackType', ''),
