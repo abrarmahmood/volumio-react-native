@@ -39,9 +39,8 @@ export default class SeekBar extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.currentPosition !== this.props.currentPosition) {
+      // Ususally on each pushState
       this.setState({currentPosition: nextProps.currentPosition});
-    }
   }
 
   // FIXME: Find a better solution than this to increment the seconds

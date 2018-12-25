@@ -11,6 +11,7 @@ import TrackDetails from '../components/player/TrackDetails';
 import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
 import { PlayerState } from '../sagas/push-state-transform';
+import { handlePlay, handlePause, handleNext, handlePrev } from '../actions/player-state';
 
 
 interface State {
@@ -24,7 +25,11 @@ interface State {
 }
 
 interface Props extends NavigationInjectedProps {
-  playerState: PlayerState
+  playerState: PlayerState;
+  play (): void;
+  pause (): void;
+  next (): void;
+  prev (): void;
 }
 
 @connect(
@@ -32,8 +37,10 @@ interface Props extends NavigationInjectedProps {
       playerState: state.playerState.value,
   }),
   {
-      // search: searchLibrary,
-      // browse: browseLibrary,
+    play: handlePlay,
+    pause: handlePause,
+    next: handleNext,
+    prev: handlePrev,
   }
 )
 export default class Player extends Component<Props, State> {
@@ -133,10 +140,10 @@ export default class Player extends Component<Props, State> {
           shuffleOn={playerState.random}
           forwardDisabled={this.state.selectedTrack === /*this.props.tracks.length - 1*/ 8}
           onPressShuffle={() => this.setState({shuffleOn: !this.state.shuffleOn})}
-          onPressPlay={() => this.setState({paused: false})}
-          onPressPause={() => this.setState({paused: true})}
-          onBack={this.onBack.bind(this)}
-          onForward={this.onForward.bind(this)}
+          onPressPlay={() => this.props.play()}
+          onPressPause={() => this.props.pause()}
+          onBack={() => this.props.prev()}
+          onForward={() => this.props.next()}
           paused={playerState.status !== 'play'}/>
       </SafeAreaView>
     );

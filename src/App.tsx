@@ -46,6 +46,10 @@ sagaMiddleware.run(sagas.handleBrowseSaga, {socket});
 sagaMiddleware.run(sagas.handleSearchSaga, {socket});
 sagaMiddleware.run(sagas.pushBrowseTransform, {socket});
 sagaMiddleware.run(sagas.pushStateTransform, {socket});
+sagaMiddleware.run(sagas.handlePlaySaga, {socket});
+sagaMiddleware.run(sagas.handlePauseSaga, {socket});
+sagaMiddleware.run(sagas.handleNextSaga, {socket});
+sagaMiddleware.run(sagas.handlePrevSaga, {socket});
 
 export default class App extends React.Component {
   render() {
