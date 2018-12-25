@@ -3,18 +3,16 @@
 import React from "react";
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import axios from 'axios';
-import axiosMiddleware from 'redux-axios-middleware';
+import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationParams } from "react-navigation";
 import HomeScreen from './screens/Home';
 import BrowseScreen from './screens/Browse';
 import PlayScreen from './screens/Play';
-import reducer from './data-layer/tidal';
-import './socketio';
+import reducer from './reducers';
+import handleSearch from "./sagas";
+import initSocketio from "./socketio";
 
-
-const client = axios.create({ baseURL: 'http://192.168.1.81:8080', responseType: 'json' });
 
 const routes = {
   Home: {
@@ -40,7 +38,11 @@ const routeConfig = {
 
 const AppNavigator = createStackNavigator(routes, routeConfig);
 const AppContainer = createAppContainer(AppNavigator);
-const store = createStore(combineReducers({tidal: reducer}), {}, composeWithDevTools(applyMiddleware(axiosMiddleware(client))));
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const socket = initSocketio('http://192.168.1.81/', store.dispatch);
+
+sagaMiddleware.run(handleSearch, {socket})
 
 export default class App extends React.Component {
   render() {
