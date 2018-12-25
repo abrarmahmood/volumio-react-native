@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects'
 import { ReduxAction } from '../actions/utils';
-import { PLAY, PAUSE, NEXT, PREV } from '../actions/player-state';
+import { PLAY, PAUSE, NEXT, PREV, ADD_PLAY } from '../actions/player-state';
 
 
 export const handlePlaySaga = function* (params: any) {
@@ -24,5 +24,11 @@ export const handleNextSaga = function* (params: any) {
 export const handlePrevSaga = function* (params: any) {
 	yield takeEvery(PREV, (action: ReduxAction) => {
 		params.socket.emit('prev');
+	});
+}
+
+export const handleAddPlaySaga = function* (params: any) {
+	yield takeEvery(ADD_PLAY, (action: ReduxAction) => {
+		params.socket.emit('addPlay', action.value);
 	});
 }

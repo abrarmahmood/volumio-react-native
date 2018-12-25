@@ -5,6 +5,7 @@ import { NavigationInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
 import { searchLibrary, browseLibrary } from "../actions/browse-library";
 import { BrowseSearchResult } from "../sagas/push-browse-transform";
+import { addPlay } from "../actions/player-state";
 
 
 export interface BrowseNavState {
@@ -16,6 +17,7 @@ export interface BrowseNavState {
 
 interface Props extends NavigationInjectedProps {
     search(term: string): void;
+    addPlay(uri: string, title: string, albumart: string): void;
     browse(uri: string, prevUri?: string): void;
     results: Array<BrowseSearchResult>;
 }
@@ -33,6 +35,7 @@ interface State {
     {
         search: searchLibrary,
         browse: browseLibrary,
+        addPlay: addPlay,
     }
 )
 export default class SearchScreen extends React.Component<Props, State> {
@@ -57,17 +60,8 @@ export default class SearchScreen extends React.Component<Props, State> {
         const uri = this.props.navigation.getParam('uri');
 
         if (obj.type === 'song') {
-            this.props.navigation.push('Play', {
-                event: {
-                    type: 'addPlay',
-                    payload: {
-                        uri: obj.uri,
-                        title: obj.title,
-                        albumart: obj.albumart,
-                        service: obj.service,
-                    }
-                }
-            })
+            this.props.addPlay(obj.uri, obj.title, obj.albumart);
+            this.props.navigation.push('Play');
         } else {
             // TOOD: This state should go in Redux
             const state: BrowseNavState = {

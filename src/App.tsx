@@ -27,7 +27,7 @@ const routes = {
 };
 
 const routeConfig = {
-  initialRouteName: "Play",
+  initialRouteName: "Home",
   defaultNavigationOptions: ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
     return {
       headerStyle: { backgroundColor: '#191919' },
@@ -42,6 +42,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 const socket = initSocketio('http://192.168.1.81/', store.dispatch);
 
+// TODO: This is getting silly now, read the redux-saga docs.
 sagaMiddleware.run(sagas.handleBrowseSaga, {socket});
 sagaMiddleware.run(sagas.handleSearchSaga, {socket});
 sagaMiddleware.run(sagas.pushBrowseTransform, {socket});
@@ -50,6 +51,7 @@ sagaMiddleware.run(sagas.handlePlaySaga, {socket});
 sagaMiddleware.run(sagas.handlePauseSaga, {socket});
 sagaMiddleware.run(sagas.handleNextSaga, {socket});
 sagaMiddleware.run(sagas.handlePrevSaga, {socket});
+sagaMiddleware.run(sagas.handleAddPlaySaga, {socket});
 
 export default class App extends React.Component {
   render() {

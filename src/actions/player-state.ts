@@ -6,6 +6,7 @@ export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
+export const ADD_PLAY = 'ADD_PLAY';
 
 
 export const pushState = (playerState: any): ReduxAction => ({
@@ -42,4 +43,10 @@ export const handlePrev = (): ReduxAction => ({
     type: PREV,
     error: null,
     value: null,
+});
+
+export const addPlay = (uri: string, title: string, albumart: string): ReduxAction => ({
+    type: ADD_PLAY,
+    error: null,
+    value: {uri, title, albumart, service: 'streaming_services'},
 });

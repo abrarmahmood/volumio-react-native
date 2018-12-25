@@ -25,7 +25,6 @@ function init(host: string, dispatch: Dispatch): SocketIOClient.Socket {
     });
     
     socket.on('pushState', (state: any) => {
-        // socket.emit('browseLibrary', {"uri":"tidal://artist/5135134/74549763","prevUri":"tidal://artist/5135134"});
         log('received event: pushState');
         dispatch(pushState(state));
     });
