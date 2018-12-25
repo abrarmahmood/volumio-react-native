@@ -1,4 +1,4 @@
-import {PUSH_STATE} from '../actions/player-state';
+import {PUSH_STATE_TRANSFORMED} from '../actions/player-state';
 import { ReduxAction } from '../actions/utils';
 
 const defaultState = {
@@ -10,8 +10,8 @@ const defaultState = {
 
 const playerState = (state = defaultState, action: ReduxAction) => {
 	switch (action.type) {
-		case PUSH_STATE:
-			return Object.assign({}, state, {value: action.value});
+		case PUSH_STATE_TRANSFORMED:
+			return {error: null, value: action.value};
 		default:
 			return state;
 	}
