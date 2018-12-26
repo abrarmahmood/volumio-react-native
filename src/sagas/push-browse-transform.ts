@@ -13,7 +13,7 @@ const ensureAlbumArt = (url = '') => {
     return DEFAULT_ALBUM_ART;
 }
 
-type ListItem = {
+export type ListItem = {
     type: string
     title: string;
     albumart: string;
@@ -53,7 +53,7 @@ function mapServerResponse(response: any): Array<BrowseSearchResult> {
 }
 
 
-export const pushBrowseTransform = function* (params: SagaParams) {
+export const pushBrowseTransform = function* (_params: SagaParams) {
     yield takeEvery(PUSH_BROWSE_LIBRARY, function* (action: ReduxAction) {
         const { payload: value } = action;
         const transformed = mapServerResponse(value);

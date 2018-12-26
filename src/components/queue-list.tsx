@@ -1,9 +1,10 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, Image, FlatList, View } from "react-native";
+import { QueueItem } from "../sagas/push-queue-transform";
 
 
 interface Props {
-    data: any;
+    data: Array<QueueItem>;
     onPress(index: number): any;
     onDeletePress(index: number): any;
 }
@@ -17,7 +18,7 @@ export default class QueueList extends React.Component<Props> {
         this.props.onDeletePress(index);
     }
 
-    renderItem = ({ item, index }) => {
+    renderItem = ({ item, index }: { item: QueueItem, index: number }) => {
         return (
             <View style={styles.sectionList}>
                 <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onItemPress(index)}>

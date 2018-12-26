@@ -1,24 +1,25 @@
 import React from "react";
 import { Text, SectionList, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { ListItem, BrowseSearchResult } from "../sagas/push-browse-transform";
 
 
 interface Props {
-    data: any;
+    data: Array<BrowseSearchResult>;
     onPress(obj: any): any
 }
 
 export default class ItemList extends React.Component<Props> {
-    renderHeader = ({ section: { title } }) => {
+    renderHeader = ({ section: { title } }: any) => {
         return (
             <Text style={styles.listHeader}>{title}</Text>
         );
     }
 
-    onItemPress = (item: any) => {
+    onItemPress = (item: ListItem) => {
         this.props.onPress(item);
     }
 
-    renderItem = ({ item, index }) => {
+    renderItem = ({ item, index }: {item: ListItem, index: number }) => {
         return (
             <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onItemPress(item)}>
                 <Image

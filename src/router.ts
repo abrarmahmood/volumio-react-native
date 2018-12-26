@@ -1,8 +1,6 @@
 import {
     createStackNavigator,
     createAppContainer,
-    NavigationScreenProp,
-    NavigationParams,
 } from "react-navigation";
 
 import HomeScreen from './screens/Home';
@@ -28,11 +26,9 @@ const routes = {
 
 const routeConfig = {
     initialRouteName: "Home",
-    defaultNavigationOptions: ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
-        return {
-            headerStyle: { backgroundColor: '#191919' },
-            headerTitleStyle: { color: 'white' },
-        }
+    defaultNavigationOptions: {
+        headerStyle: { backgroundColor: '#191919' },
+        headerTitleStyle: { color: 'white' },
     }
 };
 

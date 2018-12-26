@@ -50,7 +50,7 @@ export function mapServerResponse(response: any = {}): Array<QueueItem> {
 }
 
 
-export const pushQueueTransform = function* (params: SagaParams) {
+export const pushQueueTransform = function* (_params: SagaParams) {
     yield takeEvery(PUSH_QUEUE, function* (action: ReduxAction) {
         const { payload: value } = action;
         const transformed = mapServerResponse(value);

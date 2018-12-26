@@ -5,25 +5,25 @@ import { SagaParams } from '.';
 
 
 export const handlePlaySaga = function* (params: SagaParams) {
-	yield takeEvery(PLAY, (action: ReduxAction) => {
+	yield takeEvery(PLAY, (_action: ReduxAction) => {
 		params.socket.emit('play');
 	});
 }
 
 export const handlePauseSaga = function* (params: SagaParams) {
-	yield takeEvery(PAUSE, (action: ReduxAction) => {
+	yield takeEvery(PAUSE, (_action: ReduxAction) => {
 		params.socket.emit('pause');
 	});
 }
 
 export const handleNextSaga = function* (params: SagaParams) {
-	yield takeEvery(NEXT, (action: ReduxAction) => {
+	yield takeEvery(NEXT, (_action: ReduxAction) => {
 		params.socket.emit('next');
 	});
 }
 
 export const handlePrevSaga = function* (params: SagaParams) {
-	yield takeEvery(PREV, (action: ReduxAction) => {
+	yield takeEvery(PREV, (_action: ReduxAction) => {
 		params.socket.emit('prev');
 	});
 }

@@ -48,7 +48,7 @@ export default class Queue extends Component<Props, State> {
 
   onPress = (index: number) => {
     this.props.play(index);
-    this.props.navigation.push('Play');
+    this.props.navigation.goBack();
   }
 
   onDeletePress = (index: number) => {
