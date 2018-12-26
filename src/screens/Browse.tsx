@@ -28,7 +28,7 @@ interface State {
 }
 
 
-@connect(
+@(connect(
     (state: any) => ({
         results: state.library.value,
     }),
@@ -37,7 +37,7 @@ interface State {
         browse: browseLibrary,
         addPlay: addPlay,
     }
-)
+) as any)
 export default class SearchScreen extends React.Component<Props, State> {
     state = { searching: false, searchText: '' };
 

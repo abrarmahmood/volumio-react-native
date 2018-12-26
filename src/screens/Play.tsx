@@ -32,7 +32,7 @@ interface Props extends NavigationInjectedProps {
   prev (): void;
 }
 
-@connect(
+@(connect(
   (state: any) => ({
       playerState: state.playerState.value,
   }),
@@ -42,7 +42,7 @@ interface Props extends NavigationInjectedProps {
     next: handleNext,
     prev: handlePrev,
   }
-)
+) as any)
 export default class Player extends Component<Props, State> {
 
   static navigationOptions = {
