@@ -48,6 +48,7 @@ export default class QueueList extends React.Component<Props> {
             <FlatList
                 data={data}
                 renderItem={this.renderItem}
+                keyExtractor={(item, index) => index.toString()}
             />
         );
     }

@@ -47,6 +47,10 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
           title="Search"
           onPress={() => this.onSearchPress()}
         />
+        <Button
+          title="Now Playing"
+          onPress={() => this.props.navigation.navigate('Play')}
+        />
       </View>
     );
   }

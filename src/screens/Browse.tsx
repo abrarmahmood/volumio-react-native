@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { View, StatusBar, TextInput, StyleSheet } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
+import { NavigationInjectedProps, withNavigationFocus, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
 import { searchLibrary, browseLibrary } from "../actions/browse-library";
 import { BrowseSearchResult } from "../sagas/push-browse-transform";
@@ -15,7 +15,7 @@ export interface BrowseNavState {
     prevUri: string;
 }
 
-interface Props extends NavigationInjectedProps {
+interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
     search(term: string): void;
     addPlay(uri: string, title: string, albumart: string): void;
     browse(uri: string, prevUri?: string): void;
@@ -38,6 +38,7 @@ interface State {
         addPlay: addPlay,
     }
 ) as any)
+@(withNavigationFocus as any)
 export default class SearchScreen extends React.Component<Props, State> {
     state = { searching: false, searchText: '' };
 
@@ -45,14 +46,25 @@ export default class SearchScreen extends React.Component<Props, State> {
         title: 'Browse',
     };
 
-    componentDidMount() {
-        const navState: BrowseNavState = this.props.navigation.getParam('state');
+    private fetchBrowseLibrary(props: Props) {
+        const navState: BrowseNavState = props.navigation.getParam('state');
 
         if (navState.searching) {
             this.setState({searching: true, searchText: navState.searchText });
-            this.props.search(navState.searchText);
+            props.search(navState.searchText);
         } else {
-            this.props.browse(navState.uri, navState.prevUri);
+            props.browse(navState.uri, navState.prevUri);
+        }
+    }
+
+    componentDidMount() {
+        this.fetchBrowseLibrary(this.props);
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        // If user pressed 'back' from a browse screen 2 to browse screen 1
+        if (nextProps.isFocused === true && this.props.isFocused === false) {
+            this.fetchBrowseLibrary(this.props);
         }
     }
 
