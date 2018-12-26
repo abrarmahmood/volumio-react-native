@@ -11,7 +11,7 @@ import TrackDetails from '../components/player/TrackDetails';
 import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
 import { PlayerState } from '../sagas/push-state-transform';
-import { handlePlay, handlePause, handleNext, handlePrev } from '../actions/player-state';
+import { handlePlay, handlePause, handleNext, handlePrev, setRandom } from '../actions/player-state';
 
 
 interface State {
@@ -30,6 +30,7 @@ interface Props extends NavigationInjectedProps {
   pause (): void;
   next (): void;
   prev (): void;
+  setRandom (bool: boolean): void;
 }
 
 @(connect(
@@ -41,6 +42,7 @@ interface Props extends NavigationInjectedProps {
     pause: handlePause,
     next: handleNext,
     prev: handlePrev,
+    setRandom: setRandom,
   }
 ) as any)
 export default class Player extends Component<Props, State> {
@@ -123,6 +125,12 @@ export default class Player extends Component<Props, State> {
     this.props.navigation.push('Queue');
   }
 
+  onRandom = () => {
+    const {playerState} = this.props;
+
+    this.props.setRandom(!playerState.random);
+  }
+
   render() {
     const {playerState} = this.props;
 
@@ -143,7 +151,7 @@ export default class Player extends Component<Props, State> {
           repeatOn={playerState.repeat}
           shuffleOn={playerState.random}
           forwardDisabled={this.state.selectedTrack === /*this.props.tracks.length - 1*/ 8}
-          onPressShuffle={() => this.setState({shuffleOn: !this.state.shuffleOn})}
+          onPressShuffle={this.onRandom}
           onPressPlay={() => this.props.play()}
           onPressPause={() => this.props.pause()}
           onBack={() => this.props.prev()}

@@ -7,6 +7,7 @@ export const PAUSE = 'PAUSE';
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
 export const ADD_PLAY = 'ADD_PLAY';
+export const SET_RANDOM = 'SET_RANDOM';
 
 
 export const pushState = (playerState: any): ReduxAction => ({
@@ -49,4 +50,10 @@ export const addPlay = (uri: string, title: string, albumart: string): ReduxActi
     type: ADD_PLAY,
     error: null,
     payload: {uri, title, albumart, service: 'streaming_services'},
+});
+
+export const setRandom = (bool: boolean): ReduxAction => ({
+    type: SET_RANDOM,
+    error: null,
+    payload: {value: bool},
 });

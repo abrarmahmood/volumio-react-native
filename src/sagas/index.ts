@@ -9,6 +9,7 @@ import {
     handleNextSaga,
     handlePrevSaga,
     handleAddPlaySaga,
+    handleSetRandomSaga,
 } from './player-state';
 import { pushQueueTransform } from './push-queue-transform';
 import { handleDeleteQueueItemSaga, handlePlayQueueItemSaga } from './queue';
@@ -32,5 +33,6 @@ export default function* rootSaga(params: SagaParams) {
         fork(pushQueueTransform, params),
         fork(handleDeleteQueueItemSaga, params),
         fork(handlePlayQueueItemSaga, params),
+        fork(handleSetRandomSaga, params),
     ]
 }
