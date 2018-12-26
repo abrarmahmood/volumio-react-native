@@ -9,6 +9,7 @@ export const PREV = 'PREV';
 export const ADD_PLAY = 'ADD_PLAY';
 export const SET_RANDOM = 'SET_RANDOM';
 export const SET_REPEAT = 'SET_REPEAT';
+export const SEEK = 'SEEK';
 
 
 export const pushState = (playerState: any): ReduxAction => ({
@@ -63,4 +64,10 @@ export const setRepeat = (bool: boolean): ReduxAction => ({
     type: SET_REPEAT,
     error: null,
     payload: {value: bool},
+});
+
+export const handleSeek = (seconds: number): ReduxAction => ({
+    type: SEEK,
+    error: null,
+    payload: seconds,
 });

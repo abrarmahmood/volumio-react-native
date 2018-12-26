@@ -1,7 +1,16 @@
 import { takeEvery } from 'redux-saga/effects'
 import { ReduxAction } from '../actions/utils';
-import { PLAY, PAUSE, NEXT, PREV, ADD_PLAY, SET_RANDOM, SET_REPEAT } from '../actions/player-state';
 import { SagaParams } from '.';
+import {
+	PLAY,
+	PAUSE,
+	NEXT,
+	PREV,
+	ADD_PLAY,
+	SET_RANDOM,
+	SET_REPEAT,
+	SEEK,
+} from '../actions/player-state';
 
 
 export const handlePlaySaga = function* (params: SagaParams) {
@@ -43,5 +52,11 @@ export const handleSetRandomSaga = function* (params: SagaParams) {
 export const handleSetRepeatSaga = function* (params: SagaParams) {
 	yield takeEvery(SET_REPEAT, (action: ReduxAction) => {
 		params.socket.emit('setRepeat', action.payload);
+	});
+}
+
+export const handleSeekSaga = function* (params: SagaParams) {
+	yield takeEvery(SEEK, (action: ReduxAction) => {
+		params.socket.emit('seek', action.payload);
 	});
 }

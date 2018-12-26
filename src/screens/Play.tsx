@@ -18,18 +18,9 @@ import {
   handlePrev,
   setRandom,
   setRepeat,
+  handleSeek,
 } from '../actions/player-state';
 
-
-interface State {
-  paused: boolean;
-  totalLength: number;
-  currentPosition: number;
-  selectedTrack: number;
-  repeatOn: boolean;
-  shuffleOn: boolean;
-  isChanging: boolean;
-}
 
 interface Props extends NavigationInjectedProps {
   playerState: PlayerState;
@@ -39,6 +30,7 @@ interface Props extends NavigationInjectedProps {
   prev(): void;
   setRandom(bool: boolean): void;
   setRepeat(bool: boolean): void;
+  seek(seconds: number): void;
 }
 
 @(connect(
@@ -52,45 +44,20 @@ interface Props extends NavigationInjectedProps {
     prev: handlePrev,
     setRandom: setRandom,
     setRepeat: setRepeat,
+    seek: handleSeek,
   }
 ) as any)
-export default class Player extends Component<Props, State> {
+export default class Player extends Component<Props> {
 
   static navigationOptions = {
     header: null,
   };
 
-  constructor(props: any) {
-    super(props);
+  onSeek = (time: number) => {
+    const seconds = Math.round(time);
+    console.log('time', time);
 
-    this.state = {
-      paused: true,
-      totalLength: 80,
-      currentPosition: 0,
-      selectedTrack: 0,
-      repeatOn: false,
-      shuffleOn: false,
-      isChanging: false,
-    };
-  }
-
-  setDuration(data: any) {
-    // console.log(totalLength);
-    this.setState({ totalLength: Math.floor(data.duration) });
-  }
-
-  setTime(data: any) {
-    //console.log(data);
-    this.setState({ currentPosition: Math.floor(data.currentTime) });
-  }
-
-  seek(_time: number) {
-    // time = Math.round(time);
-    // this.refs.audioElement && this.refs.audioElement.seek(time);
-    // this.setState({
-    //   currentPosition: time,
-    //   paused: false,
-    // });
+    this.props.seek(seconds);
   }
 
   goBack = () => {
@@ -123,16 +90,16 @@ export default class Player extends Component<Props, State> {
         <AlbumArt url={playerState.albumart} />
         <TrackDetails title={playerState.title} artist={playerState.artist} />
         <SeekBar
-          onSeek={this.seek.bind(this)}
+          onSeek={this.onSeek}
           trackLength={playerState.duration}
-          onSlidingStart={() => this.setState({ paused: true })}
+          onSlidingStart={() => this.props.pause()}
           paused={playerState.status !== 'play'}
           currentPosition={playerState.seek} />
         <Controls
           onPressRepeat={this.onRepeat}
           repeatOn={playerState.repeat}
           shuffleOn={playerState.random}
-          forwardDisabled={this.state.selectedTrack === /*this.props.tracks.length - 1*/ 8}
+          forwardDisabled={/*this.state.selectedTrack === this.props.tracks.length - 1*/ false}
           onPressShuffle={this.onRandom}
           onPressPlay={() => this.props.play()}
           onPressPause={() => this.props.pause()}
