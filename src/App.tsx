@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 
-import sagas from "./sagas";
+import sagas, { SagaParams } from "./sagas";
 import initSocketio from "./socketio";
 import * as reducers from './reducers';
 import { AppContainer } from "./router";
@@ -15,8 +15,9 @@ import { AppContainer } from "./router";
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(combineReducers(reducers), {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 const socket = initSocketio('http://192.168.1.81/', store.dispatch);
+const sagaParams: SagaParams = {socket};
 
-sagaMiddleware.run(sagas, {socket});
+sagaMiddleware.run(sagas, sagaParams);
 
 export default class App extends React.Component {
   render() {

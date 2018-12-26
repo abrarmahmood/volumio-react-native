@@ -11,8 +11,12 @@ import {
     handleAddPlaySaga,
 } from './player-state';
 
+// Circular dep doesn't seem to be an issue
+export type SagaParams = {
+    socket: SocketIOClient.Socket
+}
 
-export default function* rootSaga(params: any) {
+export default function* rootSaga(params: SagaParams) {
     yield [
         fork(handleBrowseSaga, params),
         fork(handleSearchSaga, params),

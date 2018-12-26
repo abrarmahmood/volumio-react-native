@@ -1,6 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { PUSH_STATE, pushStateTransformed } from '../actions/player-state';
 import { ReduxAction } from '../actions/utils';
+import { SagaParams } from '.';
 
 
 const ensure = (obj: any) => (property: string, defaultValue: any): any => {
@@ -74,7 +75,7 @@ export function mapServerResponse(response: any = {}): PlayerState {
 }
 
 
-export const pushStateTransform = function* (params: any) {
+export const pushStateTransform = function* (params: SagaParams) {
     yield takeEvery(PUSH_STATE, function* (action: ReduxAction) {
         const { value } = action;
         const transformed = mapServerResponse(value);

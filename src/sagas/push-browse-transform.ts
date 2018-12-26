@@ -1,6 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { PUSH_BROWSE_LIBRARY, pushBrowseLibraryTransformed } from '../actions/browse-library';
 import { ReduxAction } from '../actions/utils';
+import { SagaParams } from '.';
 
 
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';
@@ -52,7 +53,7 @@ function mapServerResponse(response: any): Array<BrowseSearchResult> {
 }
 
 
-export const pushBrowseTransform = function* (params: any) {
+export const pushBrowseTransform = function* (params: SagaParams) {
     yield takeEvery(PUSH_BROWSE_LIBRARY, function* (action: ReduxAction) {
         const { value } = action;
         const transformed = mapServerResponse(value);
