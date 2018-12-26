@@ -8,7 +8,7 @@ import {
 import Header from '../components/player/Header';
 import { QueueItem } from '../sagas/push-queue-transform';
 import QueueList from '../components/queue-list';
-import { handleDeleteQueueItem } from '../actions/queue';
+import { handleDeleteQueueItem, handlePlayQueueItem } from '../actions/queue';
 
 
 interface State {
@@ -24,6 +24,7 @@ interface State {
 interface Props extends NavigationInjectedProps {
   queue: Array<QueueItem>;
   delete(index: number): void;
+  play(index: number): void;
 }
 
 @(connect(
@@ -31,8 +32,8 @@ interface Props extends NavigationInjectedProps {
     queue: state.queue.value,
   }),
   {
-    // play: handlePlay,
-    delete: handleDeleteQueueItem
+    delete: handleDeleteQueueItem,
+    play: handlePlayQueueItem,
   }
 ) as any)
 export default class Queue extends Component<Props, State> {
@@ -45,7 +46,8 @@ export default class Queue extends Component<Props, State> {
     this.props.navigation.goBack();
   }
 
-  onPress = (item: QueueItem) => {
+  onPress = (index: number) => {
+    this.props.play(index);
     this.props.navigation.push('Play');
   }
 

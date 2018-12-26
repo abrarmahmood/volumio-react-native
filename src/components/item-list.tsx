@@ -3,7 +3,7 @@ import { Text, SectionList, StyleSheet, TouchableOpacity, Image } from "react-na
 
 
 interface Props {
-    data: object
+    data: any;
     onPress(obj: any): any
 }
 
@@ -34,6 +34,12 @@ export default class ItemList extends React.Component<Props> {
 
     render() {
         const { data } = this.props;
+
+        if (data.length === 0) {
+            return (
+                <Text style={styles.noResults}>No results found.</Text>
+            );
+        }
 
         return (
             <SectionList
@@ -75,5 +81,11 @@ const styles = StyleSheet.create({
         // borderBottomColor: 'gray',
         fontWeight: 'bold',
         padding: 10,
-    }
+    },
+    noResults: {
+        fontWeight: 'bold',
+        color: 'white',
+        margin: 10,
+        padding: 5,
+    },
 });

@@ -27,7 +27,7 @@ const routes = {
 };
 
 const routeConfig = {
-    initialRouteName: "Queue",
+    initialRouteName: "Home",
     defaultNavigationOptions: ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
         return {
             headerStyle: { backgroundColor: '#191919' },
