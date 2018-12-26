@@ -9,7 +9,7 @@ const defaultState = {
 const library = (state = defaultState, action: ReduxAction) => {
 	switch (action.type) {
 		case PUSH_BROWSE_LIBRARY_TRANSFORMED:
-			return Object.assign({}, state, {value: action.value});
+			return Object.assign({}, state, {value: action.payload});
 		default:
 			return state;
 	}

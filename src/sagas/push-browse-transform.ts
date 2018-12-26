@@ -55,7 +55,7 @@ function mapServerResponse(response: any): Array<BrowseSearchResult> {
 
 export const pushBrowseTransform = function* (params: SagaParams) {
     yield takeEvery(PUSH_BROWSE_LIBRARY, function* (action: ReduxAction) {
-        const { value } = action;
+        const { payload: value } = action;
         const transformed = mapServerResponse(value);
 
         yield put(pushBrowseLibraryTransformed(transformed));

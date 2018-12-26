@@ -10,7 +10,7 @@ const defaultState = {
 const playerState = (state = defaultState, action: ReduxAction) => {
 	switch (action.type) {
 		case PUSH_STATE_TRANSFORMED:
-			return {error: null, value: action.value};
+			return {error: null, value: action.payload};
 		default:
 			return state;
 	}

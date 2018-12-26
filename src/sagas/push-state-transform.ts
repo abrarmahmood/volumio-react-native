@@ -77,7 +77,7 @@ export function mapServerResponse(response: any = {}): PlayerState {
 
 export const pushStateTransform = function* (params: SagaParams) {
     yield takeEvery(PUSH_STATE, function* (action: ReduxAction) {
-        const { value } = action;
+        const { payload: value } = action;
         const transformed = mapServerResponse(value);
 
         yield put(pushStateTransformed(transformed));

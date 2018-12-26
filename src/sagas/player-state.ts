@@ -30,6 +30,6 @@ export const handlePrevSaga = function* (params: SagaParams) {
 
 export const handleAddPlaySaga = function* (params: SagaParams) {
 	yield takeEvery(ADD_PLAY, (action: ReduxAction) => {
-		params.socket.emit('addPlay', action.value);
+		params.socket.emit('addPlay', action.payload);
 	});
 }
