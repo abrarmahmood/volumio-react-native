@@ -11,6 +11,7 @@ import {
     handleAddPlaySaga,
 } from './player-state';
 import { pushQueueTransform } from './push-queue-transform';
+import { handleQueueDeleteSaga } from './queue';
 
 // Circular dep doesn't seem to be an issue
 export type SagaParams = {
@@ -29,5 +30,6 @@ export default function* rootSaga(params: SagaParams) {
         fork(handlePrevSaga, params),
         fork(handleAddPlaySaga, params),
         fork(pushQueueTransform, params),
+        fork(handleQueueDeleteSaga, params),
     ]
 }
