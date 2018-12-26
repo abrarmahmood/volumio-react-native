@@ -119,13 +119,17 @@ export default class Player extends Component<Props, State> {
     this.props.navigation.goBack();
   }
 
+  goQueue = () => {
+    this.props.navigation.push('Queue');
+  }
+
   render() {
     const {playerState} = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <Header message="Now Playing" onDownPress={this.goBack} />
+        <Header message="Now Playing" onDownPress={this.goBack} onQueuePress={() => this.goQueue()} />
         <AlbumArt url={playerState.albumart} />
         <TrackDetails title={playerState.title} artist={playerState.artist} />
         <SeekBar

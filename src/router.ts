@@ -8,6 +8,7 @@ import {
 import HomeScreen from './screens/Home';
 import BrowseScreen from './screens/Browse';
 import PlayScreen from './screens/Play';
+import QueueScreen from './screens/Queue';
 
 
 const routes = {
@@ -20,10 +21,13 @@ const routes = {
     Play: {
         screen: PlayScreen
     },
+    Queue: {
+        screen: QueueScreen
+    },
 };
 
 const routeConfig = {
-    initialRouteName: "Home",
+    initialRouteName: "Queue",
     defaultNavigationOptions: ({ navigation }: { navigation: NavigationScreenProp<NavigationParams> }) => {
         return {
             headerStyle: { backgroundColor: '#191919' },
