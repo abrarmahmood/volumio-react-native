@@ -1,10 +1,2 @@
-import { combineReducers } from "redux"
-import playerState from "./player-state"
-import library from "./library"
-
-const chat = combineReducers({
-    playerState,
-    library
-});
-
-export default chat;
+export { default as playerState } from './player-state';
+export { default as library } from './library';
