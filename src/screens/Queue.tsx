@@ -8,7 +8,7 @@ import {
 import Header from '../components/player/Header';
 import { QueueItem } from '../sagas/push-queue-transform';
 import QueueList from '../components/queue-list';
-import { handleQueueDelete } from '../actions/queue';
+import { handleDeleteQueueItem } from '../actions/queue';
 
 
 interface State {
@@ -32,7 +32,7 @@ interface Props extends NavigationInjectedProps {
   }),
   {
     // play: handlePlay,
-    delete: handleQueueDelete
+    delete: handleDeleteQueueItem
   }
 ) as any)
 export default class Queue extends Component<Props, State> {
