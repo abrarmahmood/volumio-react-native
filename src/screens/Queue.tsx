@@ -6,8 +6,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Header from '../components/player/Header';
-import { PlayerState } from '../sagas/push-state-transform';
-import { handlePlay, handlePause, handleNext, handlePrev } from '../actions/player-state';
+import { QueueItem } from '../sagas/push-queue-transform';
+import QueueList from '../components/queue-list';
 
 
 interface State {
@@ -21,22 +21,18 @@ interface State {
 }
 
 interface Props extends NavigationInjectedProps {
-  playerState: PlayerState;
-  play (): void;
-  pause (): void;
-  next (): void;
-  prev (): void;
+  queue: Array<QueueItem>;
 }
 
 @(connect(
   (state: any) => ({
-      playerState: state.playerState.value,
+      queue: state.queue.value,
   }),
   {
-    play: handlePlay,
-    pause: handlePause,
-    next: handleNext,
-    prev: handlePrev,
+    // play: handlePlay,
+    // pause: handlePause,
+    // next: handleNext,
+    // prev: handlePrev,
   }
 ) as any)
 export default class Queue extends Component<Props, State> {
@@ -50,10 +46,13 @@ export default class Queue extends Component<Props, State> {
   }
 
   render() {
+    const { queue } = this.props;
+
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Header message="Play Queue" onDownPress={this.goBack}/>
+        <QueueList data={queue} />
       </SafeAreaView>
     );
   }
