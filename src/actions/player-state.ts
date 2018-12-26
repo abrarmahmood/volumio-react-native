@@ -8,6 +8,7 @@ export const NEXT = 'NEXT';
 export const PREV = 'PREV';
 export const ADD_PLAY = 'ADD_PLAY';
 export const SET_RANDOM = 'SET_RANDOM';
+export const SET_REPEAT = 'SET_REPEAT';
 
 
 export const pushState = (playerState: any): ReduxAction => ({
@@ -54,6 +55,12 @@ export const addPlay = (uri: string, title: string, albumart: string): ReduxActi
 
 export const setRandom = (bool: boolean): ReduxAction => ({
     type: SET_RANDOM,
+    error: null,
+    payload: {value: bool},
+});
+
+export const setRepeat = (bool: boolean): ReduxAction => ({
+    type: SET_REPEAT,
     error: null,
     payload: {value: bool},
 });

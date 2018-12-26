@@ -11,7 +11,14 @@ import TrackDetails from '../components/player/TrackDetails';
 import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
 import { PlayerState } from '../sagas/push-state-transform';
-import { handlePlay, handlePause, handleNext, handlePrev, setRandom } from '../actions/player-state';
+import {
+  handlePlay,
+  handlePause,
+  handleNext,
+  handlePrev,
+  setRandom,
+  setRepeat,
+} from '../actions/player-state';
 
 
 interface State {
@@ -26,16 +33,17 @@ interface State {
 
 interface Props extends NavigationInjectedProps {
   playerState: PlayerState;
-  play (): void;
-  pause (): void;
-  next (): void;
-  prev (): void;
-  setRandom (bool: boolean): void;
+  play(): void;
+  pause(): void;
+  next(): void;
+  prev(): void;
+  setRandom(bool: boolean): void;
+  setRepeat(bool: boolean): void;
 }
 
 @(connect(
   (state: any) => ({
-      playerState: state.playerState.value,
+    playerState: state.playerState.value,
   }),
   {
     play: handlePlay,
@@ -43,6 +51,7 @@ interface Props extends NavigationInjectedProps {
     next: handleNext,
     prev: handlePrev,
     setRandom: setRandom,
+    setRepeat: setRepeat,
   }
 ) as any)
 export default class Player extends Component<Props, State> {
@@ -67,12 +76,12 @@ export default class Player extends Component<Props, State> {
 
   setDuration(data) {
     // console.log(totalLength);
-    this.setState({totalLength: Math.floor(data.duration)});
+    this.setState({ totalLength: Math.floor(data.duration) });
   }
 
   setTime(data) {
     //console.log(data);
-    this.setState({currentPosition: Math.floor(data.currentTime)});
+    this.setState({ currentPosition: Math.floor(data.currentTime) });
   }
 
   seek(time) {
@@ -126,13 +135,19 @@ export default class Player extends Component<Props, State> {
   }
 
   onRandom = () => {
-    const {playerState} = this.props;
+    const { playerState } = this.props;
 
     this.props.setRandom(!playerState.random);
   }
 
+  onRepeat = () => {
+    const { playerState } = this.props;
+
+    this.props.setRepeat(!playerState.repeat);
+  }
+
   render() {
-    const {playerState} = this.props;
+    const { playerState } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -143,11 +158,11 @@ export default class Player extends Component<Props, State> {
         <SeekBar
           onSeek={this.seek.bind(this)}
           trackLength={playerState.duration}
-          onSlidingStart={() => this.setState({paused: true})}
+          onSlidingStart={() => this.setState({ paused: true })}
           paused={playerState.status !== 'play'}
           currentPosition={playerState.seek} />
         <Controls
-          onPressRepeat={() => this.setState({repeatOn : !this.state.repeatOn})}
+          onPressRepeat={this.onRepeat}
           repeatOn={playerState.repeat}
           shuffleOn={playerState.random}
           forwardDisabled={this.state.selectedTrack === /*this.props.tracks.length - 1*/ 8}
@@ -156,7 +171,7 @@ export default class Player extends Component<Props, State> {
           onPressPause={() => this.props.pause()}
           onBack={() => this.props.prev()}
           onForward={() => this.props.next()}
-          paused={playerState.status !== 'play'}/>
+          paused={playerState.status !== 'play'} />
       </SafeAreaView>
     );
   }
