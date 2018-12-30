@@ -20,10 +20,12 @@ import {
   setRepeat,
   handleSeek,
 } from '../actions/player-state';
+import { withCurrentTrackPosition } from '../hoc/current-track-position';
 
 
 interface Props extends NavigationInjectedProps {
   playerState: PlayerState;
+  currentPosition: number;
   play(): void;
   pause(): void;
   next(): void;
@@ -47,6 +49,7 @@ interface Props extends NavigationInjectedProps {
     seek: handleSeek,
   }
 ) as any)
+@(withCurrentTrackPosition as any)
 export default class Player extends Component<Props> {
 
   static navigationOptions = {
@@ -81,7 +84,7 @@ export default class Player extends Component<Props> {
   }
 
   render() {
-    const { playerState } = this.props;
+    const { playerState, currentPosition } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -93,8 +96,7 @@ export default class Player extends Component<Props> {
           onSeek={this.onSeek}
           trackLength={playerState.duration}
           onSlidingStart={() => this.props.pause()}
-          paused={playerState.status !== 'play'}
-          currentPosition={playerState.seek} />
+          currentPosition={currentPosition} />
         <Controls
           onPressRepeat={this.onRepeat}
           repeatOn={playerState.repeat}

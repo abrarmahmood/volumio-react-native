@@ -9,10 +9,12 @@ import {
     handleNext,
 } from '../actions/player-state';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
+import { withCurrentTrackPosition } from '../hoc/current-track-position';
 
 
 interface Props extends NavigationInjectedProps {
     playerState: PlayerState;
+    currentPosition: number;
     play(): void;
     pause(): void;
     next(): void;
@@ -29,17 +31,19 @@ interface Props extends NavigationInjectedProps {
     }
 ) as any)
 @(withNavigation as any)
+@(withCurrentTrackPosition as any)
 export default class Footer extends Component<Props> {
     onPressFooter = () => {
         this.props.navigation.push('Play');
     }
 
     render() {
-        const { playerState } = this.props;
+        const { playerState, currentPosition } = this.props;
+        const seekPercentage = (currentPosition / playerState.duration) * 100;
 
         return (
             <TouchableOpacity style={styles.container} onPress={this.onPressFooter}>
-                <View style={[styles.seekBar]}>
+                <View style={[styles.seekBar, { width: `${seekPercentage - 1}%` }]}>
                     <View style={styles.seekBarEndContainer}>
                         <View style={styles.seekBarEnd} />
                     </View>
@@ -53,7 +57,7 @@ export default class Footer extends Component<Props> {
                     <Text numberOfLines={1} style={styles.album}>{playerState.album}</Text>
                     <Text numberOfLines={1} style={styles.artist}>{playerState.artist}</Text>
                 </View>
-                <View style={styles.controlsBlock}/>
+                <View style={styles.controlsBlock} />
                 <View style={styles.controls}>
                     {playerState.status === 'play' ?
                         (
