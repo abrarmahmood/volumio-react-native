@@ -4,11 +4,15 @@ import { NavigationInjectedProps } from 'react-navigation';
 import {
   StatusBar,
   SafeAreaView,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  View,
 } from 'react-native';
 import Header from '../components/player/Header';
 import { QueueItem } from '../sagas/push-queue-transform';
 import QueueList from '../components/queue-list';
-import { handleDeleteQueueItem, handlePlayQueueItem } from '../actions/queue';
+import { handleDeleteQueueItem, handlePlayQueueItem, handleClearQueue } from '../actions/queue';
 
 
 interface State {
@@ -25,6 +29,7 @@ interface Props extends NavigationInjectedProps {
   queue: Array<QueueItem>;
   delete(index: number): void;
   play(index: number): void;
+  clearQueue(): void;
 }
 
 @(connect(
@@ -33,6 +38,7 @@ interface Props extends NavigationInjectedProps {
   }),
   {
     delete: handleDeleteQueueItem,
+    clearQueue: handleClearQueue,
     play: handlePlayQueueItem,
   }
 ) as any)
@@ -55,6 +61,10 @@ export default class Queue extends Component<Props, State> {
     this.props.delete(index);
   }
 
+  onClearPress = () => {
+    this.props.clearQueue();
+  }
+
   render() {
     const { queue } = this.props;
 
@@ -62,13 +72,18 @@ export default class Queue extends Component<Props, State> {
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Header message="Play Queue" onDownPress={this.goBack} />
+        <View style={styles.options}>
+          <TouchableOpacity style={styles.optionsButton} onPress={this.onClearPress}>
+            <Text style={styles.optionsText}>Clear queue</Text>
+          </TouchableOpacity>
+        </View>
         <QueueList data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
       </SafeAreaView>
     );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgb(4,4,4)',
@@ -76,5 +91,17 @@ const styles = {
   audioElement: {
     height: 0,
     width: 0,
+  },
+  options: {
+    width: '100%',
+    height: 40,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    alignItems: 'flex-end',
+  },
+  optionsButton: {
+    padding: 10,
+  },
+  optionsText: {
+    color: 'white',
   }
-};
+});

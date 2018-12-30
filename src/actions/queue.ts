@@ -4,6 +4,7 @@ export const PUSH_QUEUE = 'PUSH_QUEUE';
 export const PUSH_QUEUE_TRANSFORMED = 'PUSH_QUEUE_TRANSFORMED';
 export const DELETE_QUEUE_ITEM = 'DELETE_QUEUE_ITEM';
 export const PLAY_QUEUE_ITEM = 'PLAY_QUEUE_ITEM';
+export const DELETE_QUEUE = 'DELETE_QUEUE';
 
 
 export const pushQueue = (data: any): ReduxAction => ({
@@ -28,4 +29,10 @@ export const handlePlayQueueItem = (index: string): ReduxAction => ({
     type: PLAY_QUEUE_ITEM,
     error: null,
     payload: {value: index},
+});
+
+export const handleClearQueue = (): ReduxAction => ({
+    type: DELETE_QUEUE,
+    error: null,
+    payload: null,
 });

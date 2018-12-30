@@ -46,7 +46,7 @@ export function mapServerResponse(response: any = {}): PlayerState {
 
     const result = {
         status: _ensure('status', 'stop'),
-        title: _ensure('title', ''),
+        title: _ensure('title', '') || 'Nothing playing',
         artist: _ensure('artist', ''),
         album: _ensure('album', ''),
         albumart: _ensure('albumart', undefined), // special case so <Image /> doesn't complain
