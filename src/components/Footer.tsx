@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
         height: 70,
         borderTopWidth: 1,
         borderTopColor: 'rgba(255,255,255,0.2)',
+        width: '100%',
     },
     seekBar: {
         backgroundColor: 'white',

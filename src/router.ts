@@ -1,6 +1,8 @@
 import {
     createStackNavigator,
     createAppContainer,
+    StackNavigatorConfig,
+    NavigationRouteConfigMap,
 } from "react-navigation";
 
 import HomeScreen from './screens/Home';
@@ -9,7 +11,7 @@ import PlayScreen from './screens/Play';
 import QueueScreen from './screens/Queue';
 
 
-const routes = {
+const routes: NavigationRouteConfigMap = {
     Home: {
         screen: HomeScreen
     },
@@ -24,7 +26,7 @@ const routes = {
     },
 };
 
-const routeConfig = {
+const routeConfig: StackNavigatorConfig = {
     initialRouteName: "Home",
     defaultNavigationOptions: {
         headerStyle: { backgroundColor: '#191919' },
