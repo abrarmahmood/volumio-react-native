@@ -13,7 +13,16 @@ const ensureAlbumArt = (url = '') => {
     return DEFAULT_ALBUM_ART;
 }
 
-export type ListItem = {
+export enum ItemTypes {
+    ARTIST = 'artist',
+    ALBUM = 'album',
+    PLAYLIST = 'playlist',
+    TRACK = 'track',
+    UNKNOWN = 'unknown',
+}
+
+export type SearchItem = {
+    itemType: ItemTypes,
     type: string
     title: string;
     albumart: string;
@@ -24,11 +33,29 @@ export type ListItem = {
 
 export type BrowseSearchResult = {
     title: string;
-    data: Array<ListItem>
+    data: Array<SearchItem>
 }
 
-const makeListItem = (obj: any): ListItem => {
+const parseItemType = (title: string): ItemTypes => {
+    let libraryType: ItemTypes = ItemTypes.UNKNOWN;
+    const sanitized = title.trim().toLowerCase();
+
+    if (sanitized.includes('artists')) {
+        libraryType = ItemTypes.ARTIST;
+    } else if (sanitized.includes('albums')) {
+        libraryType = ItemTypes.ALBUM;
+    } else if (sanitized.includes('playlists')) {
+        libraryType = ItemTypes.PLAYLIST;
+    } else if (sanitized.includes('tracks')) {
+        libraryType = ItemTypes.TRACK;
+    }
+
+    return libraryType;
+}
+
+const makeListItem = (title: string) => (obj: any): SearchItem => {
     return {
+        itemType: parseItemType(title),
         type: obj.type,
         title: obj.title,
         albumart: ensureAlbumArt(obj.albumart),
@@ -41,7 +68,7 @@ const makeListItem = (obj: any): ListItem => {
 function mapServerResponse(response: any): Array<BrowseSearchResult> {
     const groups = response.navigation.lists;
     const result = groups.map((group: any) => {
-        const listItems = group.items.map(makeListItem);
+        const listItems = group.items.map(makeListItem(group.title));
 
         return {
             title: group.title,

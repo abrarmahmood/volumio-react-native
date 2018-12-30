@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, SectionList, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { ListItem, BrowseSearchResult } from "../sagas/mappers/transform-search";
+import { SearchItem, BrowseSearchResult } from "../sagas/mappers/transform-search";
 
 
 interface Props {
@@ -15,11 +15,11 @@ export default class ItemList extends React.Component<Props> {
         );
     }
 
-    onItemPress = (item: ListItem) => {
+    onItemPress = (item: SearchItem) => {
         this.props.onPress(item);
     }
 
-    renderItem = ({ item, index }: {item: ListItem, index: number }) => {
+    renderItem = ({ item, index }: {item: SearchItem, index: number }) => {
         return (
             <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onItemPress(item)}>
                 <Image

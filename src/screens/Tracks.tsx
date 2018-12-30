@@ -9,7 +9,7 @@ import QueueList from "../components/queue-list";
 import { TrackItem } from "../sagas/mappers/transform-tracks";
 
 
-export interface BrowseNavState {
+export interface TracksNavState {
     uri: string;
     prevUri: string;
 }

@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
-import { BrowseSearchResult } from "../sagas/mappers/transform-search";
+import { BrowseSearchResult, SearchItem, ItemTypes } from "../sagas/mappers/transform-search";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
-import { BrowseNavState } from "./Browse";
 import { searchLibrary } from "../actions/search-library";
+import { TracksNavState } from "./Tracks";
+import { FoldersNavState } from "./Folders";
 
 
 export interface SearchNavState {
@@ -49,18 +50,31 @@ export default class SearchScreen extends React.Component<Props, State> {
         this.props.search(navState.searchText);
     }
 
-    // TODO: This needs to handle clicks on artists, albums, playlists or songs
-    onPress(obj: any): void {
-        if (obj.type === 'song') {
-            this.props.addPlay(obj.uri, obj.title, obj.albumart);
-            this.props.navigation.push('Play');
-        } else {
-            const state: BrowseNavState = {
-                uri: obj.uri,
-                prevUri: 'tidal://'
-            };
+    onPress(obj: SearchItem): void {
+        let state: FoldersNavState | TracksNavState;
 
-            this.props.navigation.push('Folders', { state })
+        switch (obj.itemType) {
+            case ItemTypes.ARTIST:
+                state = {
+                    uri: obj.uri,
+                    prevUri: 'tidal://'
+                };
+                this.props.navigation.push('Folders', { state });
+                break;
+            case ItemTypes.ALBUM:
+            case ItemTypes.PLAYLIST:
+                state = {
+                    uri: obj.uri,
+                    prevUri: 'tidal://'
+                };
+                this.props.navigation.push('Tracks', { state });
+                break;
+            case ItemTypes.TRACK:
+                this.props.addPlay(obj.uri, obj.title, obj.albumart);
+                this.props.navigation.push('Play');
+                break;
+            default:
+                throw new Error(`Failed parsing item type ${obj.type}`);
         }
     }
 
