@@ -1,8 +1,8 @@
 import React from "react";
-import { Text, Button, StyleSheet, TextInput, StatusBar, SafeAreaView, View, Image } from "react-native";
+import { Text, Button, StyleSheet, TextInput, StatusBar, SafeAreaView, View } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
-import { BrowseNavState } from "./Browse";
 import Footer from "../components/Footer";
+import { SearchNavState } from "./Search";
 
 
 interface State {
@@ -24,14 +24,12 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
   };
 
   onSearchPress = () => {
-    const state: BrowseNavState = {
+    const state: SearchNavState = {
       searching: true,
       searchText: this.state.text,
-      uri: '',
-      prevUri: '',
     };
 
-    this.props.navigation.navigate('Browse', { state });
+    this.props.navigation.navigate('Search', { state });
   }
 
   render() {

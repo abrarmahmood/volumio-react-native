@@ -1,80 +1,92 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import { NavigationInjectedProps, withNavigationFocus, NavigationFocusInjectedProps } from "react-navigation";
+import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
 import { browseLibrary } from "../actions/browse-library";
 import { BrowseSearchResult } from "../sagas/push-browse-transform";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
+import { BrowseNavState } from "./Browse";
+import { searchLibrary } from "../actions/search-library";
 
 
-export interface BrowseNavState {
-    uri: string;
-    prevUri: string;
+export interface SearchNavState {
+    searching: boolean;
+    searchText: string;
 }
 
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
+    search(term: string): void;
     addPlay(uri: string, title: string, albumart: string): void;
     browse(uri: string, prevUri?: string): void;
     results: Array<BrowseSearchResult>;
 }
 
+interface State {
+    searchText: string;
+}
+
+
 @(connect(
     (state: any) => ({
-        results: state.library.value,
+        results: state.search.value,
     }),
     {
+        search: searchLibrary,
         browse: browseLibrary,
         addPlay: addPlay,
     }
 ) as any)
-@(withNavigationFocus as any)
-export default class SearchScreen extends React.Component<Props> {
+export default class SearchScreen extends React.Component<Props, State> {
+    state = { searchText: '' };
+
     static navigationOptions = {
         title: 'Browse',
     };
 
-    private fetchBrowseLibrary(props: Props) {
-        const navState: BrowseNavState = props.navigation.getParam('state');
-
-        props.browse(navState.uri, navState.prevUri);
-    }
-
     componentDidMount() {
-        this.fetchBrowseLibrary(this.props);
+        const navState: SearchNavState = this.props.navigation.getParam('state');
+
+        this.setState({ searchText: navState.searchText });
+        this.props.search(navState.searchText);
     }
 
-    componentWillReceiveProps(nextProps: Props) {
-        // If user pressed 'back' from a browse screen 2 to browse screen 1
-        if (nextProps.isFocused === true && this.props.isFocused === false) {
-            this.fetchBrowseLibrary(this.props);
-        }
-    }
-
+    // TODO: This needs to handle clicks on artists, albums, playlists or songs
     onPress(obj: any): void {
-        const uri = this.props.navigation.getParam('uri');
-
         if (obj.type === 'song') {
             this.props.addPlay(obj.uri, obj.title, obj.albumart);
             this.props.navigation.push('Play');
         } else {
-            // TOOD: This state should go in Redux
             const state: BrowseNavState = {
                 uri: obj.uri,
-                prevUri: uri || 'tidal://'
+                prevUri: 'tidal://'
             };
 
+            this.props.browse(obj.uri, 'tidal://');
             this.props.navigation.push('Browse', { state })
         }
     }
 
+    onSearchInput = (searchInput: string) => {
+        if (searchInput.length > 2) {
+            this.props.search(searchInput);
+        }
+    }
+
     render() {
+        const { searchText } = this.state;
 
         return (
             <SafeAreaView style={styles.container}>
                 <StatusBar barStyle="light-content" />
-                {/* Artist/Album/Playlist info goes here */}
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Search...'
+                    placeholderTextColor='#5b5b5b'
+                    defaultValue={searchText}
+                    onChangeText={this.onSearchInput}
+                />
                 <ScrollView>
                     <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
                 </ScrollView>

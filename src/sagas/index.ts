@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects';
 
-import {handleBrowseSaga, handleSearchSaga} from './browse-library';
+import {handleBrowseSaga} from './browse-library';
 import {pushBrowseTransform} from './push-browse-transform';
 import {pushStateTransform} from './push-state-transform';
 import {
@@ -19,6 +19,8 @@ import {
     handlePlayQueueItemSaga,
     handleClearQueueSaga,
 } from './queue';
+import { pushSearchTransform } from './push-search-transform';
+import { handleSearchSaga } from './search-library';
 
 // Circular dep doesn't seem to be an issue
 export type SagaParams = {
@@ -43,5 +45,6 @@ export default function* rootSaga(params: SagaParams) {
         fork(handleSetRepeatSaga, params),
         fork(handleSeekSaga, params),
         fork(handleClearQueueSaga, params),
+        fork(pushSearchTransform, params),
     ]
 }

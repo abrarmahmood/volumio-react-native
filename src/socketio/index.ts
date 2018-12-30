@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { pushState } from '../actions/player-state';
 import { pushBrowseLibrary } from '../actions/browse-library';
 import { pushQueue } from '../actions/queue';
+import { pushSearchLibrary } from '../actions/search-library';
 
 
 const log = (...args: any) => console.log(`socket.io client: `, ...args);
@@ -34,7 +35,11 @@ function init(host: string, dispatch: Dispatch): SocketIOClient.Socket {
     
     socket.on('pushBrowseLibrary', (data: any) => {
         log('received event: pushBrowseLibrary');
-        dispatch(pushBrowseLibrary(data));
+        if (data.navigation.isSearchResult === true) {
+            dispatch(pushSearchLibrary(data));
+        } else {
+            dispatch(pushBrowseLibrary(data));
+        }
     });
     
     socket.on('pushQueue', (data: any) => {
