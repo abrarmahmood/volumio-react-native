@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
-import { browseLibrary } from "../actions/browse-library";
 import { BrowseSearchResult } from "../sagas/push-search-transform";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
@@ -19,7 +18,6 @@ export interface SearchNavState {
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
     search(term: string): void;
     addPlay(uri: string, title: string, albumart: string): void;
-    browse(uri: string, prevUri?: string): void;
     results: Array<BrowseSearchResult>;
 }
 
@@ -34,7 +32,6 @@ interface State {
     }),
     {
         search: searchLibrary,
-        browse: browseLibrary,
         addPlay: addPlay,
     }
 ) as any)
@@ -63,8 +60,7 @@ export default class SearchScreen extends React.Component<Props, State> {
                 prevUri: 'tidal://'
             };
 
-            this.props.browse(obj.uri, 'tidal://');
-            this.props.navigation.push('Browse', { state })
+            this.props.navigation.push('Folders', { state })
         }
     }
 

@@ -5,7 +5,8 @@ export const PUSH_BROWSE_TRACKS_TRANSFORMED = 'PUSH_BROWSE_TRACKS_TRANSFORMED';
 
 export const PUSH_BROWSE_FOLDERS = 'PUSH_BROWSE_FOLDERS';
 export const PUSH_BROWSE_FOLDERS_TRANSFORMED = 'PUSH_BROWSE_FOLDERS_TRANSFORMED';
-export const BROWSE_LIBRARY = 'BROWSE_LIBRARY';
+export const FETCH_FOLDERS = 'FETCH_FOLDERS';
+export const FETCH_TRACKS = 'FETCH_TRACKS';
 
 export const pushBrowseFolders = (data: any): ReduxAction => ({
     type: PUSH_BROWSE_FOLDERS,
@@ -31,9 +32,14 @@ export const pushBrowseTracksTransformed = (data: any): ReduxAction => ({
     payload: data,
 });
 
-// Works for tracks and folders
-export const browseLibrary = (uri: string, prevUri: string): ReduxAction => ({
-    type: BROWSE_LIBRARY,
+export const fetchFolders = (uri: string, prevUri: string): ReduxAction => ({
+    type: FETCH_FOLDERS,
+    error: null,
+    payload: { uri, prevUri },
+});
+
+export const fetchTracks = (uri: string, prevUri: string): ReduxAction => ({
+    type: FETCH_TRACKS,
     error: null,
     payload: { uri, prevUri },
 });
