@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { View, StatusBar, TextInput, StyleSheet } from "react-native";
+import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { NavigationInjectedProps, withNavigationFocus, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
 import { searchLibrary, browseLibrary } from "../actions/browse-library";
 import { BrowseSearchResult } from "../sagas/push-browse-transform";
 import { addPlay } from "../actions/player-state";
+import Footer from "../components/Footer";
 
 
 export interface BrowseNavState {
@@ -49,8 +50,14 @@ export default class SearchScreen extends React.Component<Props, State> {
     private fetchBrowseLibrary(props: Props) {
         const navState: BrowseNavState = props.navigation.getParam('state');
 
+        if (typeof navState === 'undefined') {
+            this.setState({ searching: true, searchText: '' });
+            props.search('');
+            return;
+        }
+
         if (navState.searching) {
-            this.setState({searching: true, searchText: navState.searchText });
+            this.setState({ searching: true, searchText: navState.searchText });
             props.search(navState.searchText);
         } else {
             props.browse(navState.uri, navState.prevUri);
@@ -83,7 +90,7 @@ export default class SearchScreen extends React.Component<Props, State> {
                 prevUri: uri || 'tidal://'
             };
 
-            this.props.navigation.push('Browse', {state})
+            this.props.navigation.push('Browse', { state })
         }
     }
 
@@ -99,7 +106,7 @@ export default class SearchScreen extends React.Component<Props, State> {
         const { searching, searchText } = this.state;
 
         return (
-            <View style={{ flex: 1, backgroundColor: 'black' }}>
+            <SafeAreaView style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 {searching === true && (
                     <TextInput
@@ -110,14 +117,21 @@ export default class SearchScreen extends React.Component<Props, State> {
                         onChangeText={this.onSearchInput}
                     />
                 )}
-                <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
-            </View>
+                <ScrollView>
+                    <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
+                </ScrollView>
+                <Footer />
+            </SafeAreaView>
         )
     }
 }
 
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
+    },
     textInput: {
         backgroundColor: '#191919',
         color: 'white',

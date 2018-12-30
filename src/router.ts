@@ -25,7 +25,7 @@ const routes = {
 };
 
 const routeConfig = {
-    initialRouteName: "Home",
+    initialRouteName: "Browse",
     defaultNavigationOptions: {
         headerStyle: { backgroundColor: '#191919' },
         headerTitleStyle: { color: 'white' },

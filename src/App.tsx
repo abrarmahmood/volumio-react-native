@@ -14,7 +14,7 @@ import { AppContainer } from "./router";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(combineReducers(reducers), {}, composeWithDevTools(applyMiddleware(sagaMiddleware)));
-const socket = initSocketio('http://192.168.1.81/', store.dispatch);
+const socket = initSocketio('http://localhost:3000/', store.dispatch);
 const sagaParams: SagaParams = {socket};
 
 sagaMiddleware.run(sagas, sagaParams);
