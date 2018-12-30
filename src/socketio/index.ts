@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { Dispatch } from 'redux';
 import { pushState } from '../actions/player-state';
-import { pushBrowseLibrary } from '../actions/browse-library';
+import { pushBrowseFolders, pushBrowseTracks } from '../actions/browse-library';
 import { pushQueue } from '../actions/queue';
 import { pushSearchLibrary } from '../actions/search-library';
 
@@ -37,8 +37,10 @@ function init(host: string, dispatch: Dispatch): SocketIOClient.Socket {
         log('received event: pushBrowseLibrary');
         if (data.navigation.isSearchResult === true) {
             dispatch(pushSearchLibrary(data));
+        } else if (data.navigation.lists[0] && data.navigation.lists[0].items[0].type === 'song') {
+            dispatch(pushBrowseTracks(data));
         } else {
-            dispatch(pushBrowseLibrary(data));
+            dispatch(pushBrowseFolders(data));
         }
     });
     

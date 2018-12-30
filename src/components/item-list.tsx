@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, SectionList, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { ListItem, BrowseSearchResult } from "../sagas/push-browse-transform";
+import { ListItem, BrowseSearchResult } from "../sagas/push-search-transform";
 
 
 interface Props {

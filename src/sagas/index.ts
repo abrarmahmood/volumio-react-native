@@ -1,8 +1,9 @@
 import { fork } from 'redux-saga/effects';
 
-import {handleBrowseSaga} from './browse-library';
-import {pushBrowseTransform} from './push-browse-transform';
-import {pushStateTransform} from './push-state-transform';
+import { handleBrowseSaga } from './browse-library';
+import { pushBrowseTracksTransform } from './transform-tracks';
+import { pushBrowseFoldersTransform } from './transform-folders';
+import { pushStateTransform } from './push-state-transform';
 import {
     handlePlaySaga,
     handlePauseSaga,
@@ -31,7 +32,8 @@ export default function* rootSaga(params: SagaParams) {
     yield [
         fork(handleBrowseSaga, params),
         fork(handleSearchSaga, params),
-        fork(pushBrowseTransform, params),
+        fork(pushBrowseTracksTransform, params),
+        fork(pushBrowseFoldersTransform, params),
         fork(pushStateTransform, params),
         fork(handlePlaySaga, params),
         fork(handlePauseSaga, params),

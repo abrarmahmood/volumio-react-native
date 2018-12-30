@@ -77,7 +77,7 @@ export default class Queue extends Component<Props, State> {
             <Text style={styles.optionsText}>Clear queue</Text>
           </TouchableOpacity>
         </View>
-        <QueueList data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
+        <QueueList removable data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
       </SafeAreaView>
     );
   }

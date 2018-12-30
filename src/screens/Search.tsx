@@ -4,7 +4,7 @@ import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "reac
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
 import { browseLibrary } from "../actions/browse-library";
-import { BrowseSearchResult } from "../sagas/push-browse-transform";
+import { BrowseSearchResult } from "../sagas/push-search-transform";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
 import { BrowseNavState } from "./Browse";

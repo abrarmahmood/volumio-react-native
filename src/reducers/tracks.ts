@@ -1,4 +1,4 @@
-import { PUSH_BROWSE_LIBRARY_TRANSFORMED } from '../actions/browse-library';
+import { PUSH_BROWSE_TRACKS_TRANSFORMED } from '../actions/browse-library';
 import { ReduxAction } from '../actions/utils';
 
 const defaultState = {
@@ -6,13 +6,13 @@ const defaultState = {
     value: []
 };
 
-const library = (state = defaultState, action: ReduxAction) => {
+const tracks = (state = defaultState, action: ReduxAction) => {
 	switch (action.type) {
-		case PUSH_BROWSE_LIBRARY_TRANSFORMED:
+		case PUSH_BROWSE_TRACKS_TRANSFORMED:
 			return Object.assign({}, state, {value: action.payload});
 		default:
 			return state;
 	}
 }
 
-export default library;
+export default tracks;

@@ -2,11 +2,12 @@ import React from "react";
 import { connect } from 'react-redux';
 import { StatusBar, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { NavigationInjectedProps, withNavigationFocus, NavigationFocusInjectedProps } from "react-navigation";
-import ItemList from '../components/item-list';
 import { browseLibrary } from "../actions/browse-library";
-import { BrowseSearchResult } from "../sagas/push-browse-transform";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
+import QueueList from "../components/queue-list";
+import { FolderItem } from "../sagas/transform-folders";
+import { TrackItem } from "../sagas/transform-tracks";
 
 
 export interface BrowseNavState {
@@ -17,12 +18,14 @@ export interface BrowseNavState {
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
     addPlay(uri: string, title: string, albumart: string): void;
     browse(uri: string, prevUri?: string): void;
-    results: Array<BrowseSearchResult>;
+    resultsFolders: Array<FolderItem>;
+    resultsTracks: Array<TrackItem>;
 }
 
 @(connect(
     (state: any) => ({
-        results: state.library.value,
+        resultsFolders: state.folders.value,
+        resultsTracks: state.tracks.value,
     }),
     {
         browse: browseLibrary,
@@ -52,7 +55,12 @@ export default class SearchScreen extends React.Component<Props> {
         }
     }
 
-    onPress(obj: any): void {
+    onPress(index: number): void {
+        const navState: BrowseNavState = this.props.navigation.getParam('state');
+        const isFolder = navState.uri.split('/').length < 5;
+        const {resultsFolders, resultsTracks} = this.props;
+        const obj: any = (isFolder ? resultsFolders : resultsTracks)[index];
+
         const uri = this.props.navigation.getParam('uri');
 
         if (obj.type === 'song') {
@@ -70,20 +78,27 @@ export default class SearchScreen extends React.Component<Props> {
     }
 
     render() {
+        // Hacked until I seperate this screen in to folders/tracks
+        const navState: BrowseNavState = this.props.navigation.getParam('state');
+        const isFolder = navState.uri.split('/').length < 5;
+        const {resultsFolders, resultsTracks} = this.props;
+
 
         return (
             <SafeAreaView style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 {/* Artist/Album/Playlist info goes here */}
                 <ScrollView>
-                    <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
+                    <QueueList
+                        data={isFolder ? resultsFolders : resultsTracks}
+                        onPress={index => this.onPress(index)}
+                    />
                 </ScrollView>
                 <Footer />
             </SafeAreaView>
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {

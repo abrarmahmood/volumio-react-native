@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { PUSH_BROWSE_LIBRARY, pushBrowseLibraryTransformed } from '../actions/browse-library';
+import { PUSH_BROWSE_TRACKS, pushBrowseTracksTransformed } from '../actions/browse-library';
 import { ReduxAction } from '../actions/utils';
 import { SagaParams } from '.';
 
@@ -13,7 +13,7 @@ const ensureAlbumArt = (url = '') => {
     return DEFAULT_ALBUM_ART;
 }
 
-export type ListItem = {
+export type TrackItem = {
     type: string
     title: string;
     albumart: string;
@@ -22,12 +22,7 @@ export type ListItem = {
     unmanaged?: any;
 }
 
-export type BrowseSearchResult = {
-    title: string;
-    data: Array<ListItem>
-}
-
-const makeListItem = (obj: any): ListItem => {
+const makeListItem = (obj: any): TrackItem => {
     return {
         type: obj.type,
         title: obj.title,
@@ -38,26 +33,19 @@ const makeListItem = (obj: any): ListItem => {
     }
 }
 
-function mapServerResponse(response: any): Array<BrowseSearchResult> {
-    const groups = response.navigation.lists;
-    const result = groups.map((group: any) => {
-        const listItems = group.items.map(makeListItem);
-
-        return {
-            title: group.title,
-            data: listItems,
-        };
-    });
+function mapServerResponse(response: any): Array<TrackItem> {
+    const group = response.navigation.lists[0];
+    const result = group.items.map(makeListItem);
 
     return result;
 }
 
 
-export const pushBrowseTransform = function* (_params: SagaParams) {
-    yield takeEvery(PUSH_BROWSE_LIBRARY, function* (action: ReduxAction) {
+export const pushBrowseTracksTransform = function* (_params: SagaParams) {
+    yield takeEvery(PUSH_BROWSE_TRACKS, function* (action: ReduxAction) {
         const { payload: value } = action;
         const transformed = mapServerResponse(value);
 
-        yield put(pushBrowseLibraryTransformed(transformed));
+        yield put(pushBrowseTracksTransformed(transformed));
     });
 }
