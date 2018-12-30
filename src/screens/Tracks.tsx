@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { StatusBar, StyleSheet, ScrollView, SafeAreaView, Image, View } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchTracks } from "../actions/browse-library";
 import { addPlay } from "../actions/player-state";
@@ -12,6 +12,8 @@ import { TrackItem } from "../sagas/mappers/transform-tracks";
 export interface TracksNavState {
     uri: string;
     prevUri: string;
+    title: string;
+    albumart: string;
 }
 
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
@@ -34,24 +36,22 @@ export default class SearchScreen extends React.Component<Props> {
         title: 'Browse',
     };
 
-    private fetchBrowseLibrary(props: Props) {
-        const navState: BrowseNavState = props.navigation.getParam('state');
-
-        props.fetch(navState.uri, navState.prevUri);
-    }
-
     componentDidMount() {
-        this.fetchBrowseLibrary(this.props);
+        const navState: TracksNavState = this.props.navigation.getParam('state');
+        
+        this.props.fetch(navState.uri, navState.prevUri);
     }
-
+    
     onPress(index: number): void {
         const obj: any = this.props.results[index];
-
+        
         this.props.addPlay(obj.uri, obj.title, obj.albumart);
         this.props.navigation.push('Play');
     }
-
+    
     render() {
+        const {albumart}: TracksNavState = this.props.navigation.getParam('state');
+
         return (
             <SafeAreaView style={styles.container}>
                 <StatusBar barStyle="light-content" />
@@ -71,6 +71,6 @@ export default class SearchScreen extends React.Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        // backgroundColor: 'black',
     },
 });

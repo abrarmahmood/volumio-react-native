@@ -6,11 +6,14 @@ import { fetchFolders } from "../actions/browse-library";
 import Footer from "../components/Footer";
 import QueueList from "../components/queue-list";
 import { FolderItem } from "../sagas/mappers/transform-folders";
+import { TracksNavState } from "./Tracks";
 
 
 export interface FoldersNavState {
     uri: string;
     prevUri: string;
+    title: string;
+    albumart: string;
 }
 
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
@@ -42,12 +45,14 @@ export default class FoldersScreen extends React.Component<Props> {
     }
 
     onPress(index: number): void {
-        const obj: any = this.props.results[index];
+        const obj: FolderItem = this.props.results[index];
         const uri = this.props.navigation.getParam('uri');
 
         const state: TracksNavState = {
             uri: obj.uri,
-            prevUri: uri || 'tidal://'
+            prevUri: uri || 'tidal://',
+            albumart: obj.albumart,
+            title: obj.title,
         };
 
         this.props.navigation.push('Tracks', { state })

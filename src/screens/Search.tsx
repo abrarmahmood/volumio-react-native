@@ -57,7 +57,9 @@ export default class SearchScreen extends React.Component<Props, State> {
             case ItemTypes.ARTIST:
                 state = {
                     uri: obj.uri,
-                    prevUri: 'tidal://'
+                    prevUri: 'tidal://',
+                    title: obj.title,
+                    albumart: obj.albumart,
                 };
                 this.props.navigation.push('Folders', { state });
                 break;
@@ -65,7 +67,9 @@ export default class SearchScreen extends React.Component<Props, State> {
             case ItemTypes.PLAYLIST:
                 state = {
                     uri: obj.uri,
-                    prevUri: 'tidal://'
+                    prevUri: 'tidal://',
+                    title: obj.title,
+                    albumart: obj.albumart,
                 };
                 this.props.navigation.push('Tracks', { state });
                 break;

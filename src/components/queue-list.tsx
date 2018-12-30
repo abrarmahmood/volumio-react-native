@@ -63,7 +63,6 @@ export default class QueueList extends React.Component<Props> {
 
 const styles = StyleSheet.create({
     sectionList: {
-        backgroundColor: 'black',
         flexDirection: 'row',
     },
     listItemContainer: {
