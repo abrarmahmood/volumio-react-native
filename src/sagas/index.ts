@@ -1,9 +1,9 @@
 import { fork } from 'redux-saga/effects';
 
-import { handleBrowseSaga, handleFetchFoldersSaga, handleFetchTracksSaga } from './browse-library';
-import { pushBrowseTracksTransform } from './transform-tracks';
-import { pushBrowseFoldersTransform } from './transform-folders';
-import { pushStateTransform } from './push-state-transform';
+import { handleFetchFoldersSaga, handleFetchTracksSaga } from './browse-library';
+import { pushBrowseTracksTransform } from './mappers/transform-tracks';
+import { pushBrowseFoldersTransform } from './mappers/transform-folders';
+import { pushStateTransform } from './mappers/transform-state';
 import {
     handlePlaySaga,
     handlePauseSaga,
@@ -14,13 +14,13 @@ import {
     handleSetRepeatSaga,
     handleSeekSaga,
 } from './player-state';
-import { pushQueueTransform } from './push-queue-transform';
+import { pushQueueTransform } from './mappers/transform-queue';
 import {
     handleDeleteQueueItemSaga,
     handlePlayQueueItemSaga,
     handleClearQueueSaga,
 } from './queue';
-import { pushSearchTransform } from './push-search-transform';
+import { pushSearchTransform } from './mappers/transform-search';
 import { handleSearchSaga } from './search-library';
 
 // Circular dep doesn't seem to be an issue

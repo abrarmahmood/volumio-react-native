@@ -6,7 +6,7 @@ import { fetchTracks } from "../actions/browse-library";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
 import QueueList from "../components/queue-list";
-import { TrackItem } from "../sagas/transform-tracks";
+import { TrackItem } from "../sagas/mappers/transform-tracks";
 
 
 export interface BrowseNavState {

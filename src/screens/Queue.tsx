@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import Header from '../components/player/Header';
-import { QueueItem } from '../sagas/push-queue-transform';
+import { QueueItem } from '../sagas/mappers/transform-queue';
 import QueueList from '../components/queue-list';
 import { handleDeleteQueueItem, handlePlayQueueItem, handleClearQueue } from '../actions/queue';
 

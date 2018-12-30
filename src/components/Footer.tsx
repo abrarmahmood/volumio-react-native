@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { PlayerState } from '../sagas/push-state-transform';
+import { PlayerState } from '../sagas/mappers/transform-state';
 import {
     handlePlay,
     handlePause,

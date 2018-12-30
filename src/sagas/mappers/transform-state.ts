@@ -1,7 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { PUSH_STATE, pushStateTransformed } from '../actions/player-state';
-import { ReduxAction } from '../actions/utils';
-import { SagaParams } from '.';
+import { PUSH_STATE, pushStateTransformed } from '../../actions/player-state';
+import { ReduxAction } from '../../actions/utils';
+import { SagaParams } from '..';
 
 
 const ensure = (obj: any) => (property: string, defaultValue: any): any => {

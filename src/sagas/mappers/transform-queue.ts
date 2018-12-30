@@ -1,8 +1,8 @@
 import { takeEvery, put } from 'redux-saga/effects'
 
-import { pushQueueTransformed, PUSH_QUEUE } from '../actions/queue';
-import { ReduxAction } from '../actions/utils';
-import { SagaParams } from '.';
+import { pushQueueTransformed, PUSH_QUEUE } from '../../actions/queue';
+import { ReduxAction } from '../../actions/utils';
+import { SagaParams } from '..';
 
 
 const ensure = (obj: any) => (property: string, defaultValue: any): any => {

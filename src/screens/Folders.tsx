@@ -5,7 +5,7 @@ import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-nav
 import { fetchFolders } from "../actions/browse-library";
 import Footer from "../components/Footer";
 import QueueList from "../components/queue-list";
-import { FolderItem } from "../sagas/transform-folders";
+import { FolderItem } from "../sagas/mappers/transform-folders";
 
 
 export interface FoldersNavState {

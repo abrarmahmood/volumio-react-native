@@ -1,7 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { PUSH_BROWSE_TRACKS, pushBrowseTracksTransformed } from '../actions/browse-library';
-import { ReduxAction } from '../actions/utils';
-import { SagaParams } from '.';
+import { PUSH_BROWSE_FOLDERS, pushBrowseFoldersTransformed } from '../../actions/browse-library';
+import { ReduxAction } from '../../actions/utils';
+import { SagaParams } from '..';
 
 
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';
@@ -13,7 +13,7 @@ const ensureAlbumArt = (url = '') => {
     return DEFAULT_ALBUM_ART;
 }
 
-export type TrackItem = {
+export type FolderItem = {
     type: string
     title: string;
     albumart: string;
@@ -22,7 +22,7 @@ export type TrackItem = {
     unmanaged?: any;
 }
 
-const makeListItem = (obj: any): TrackItem => {
+const makeListItem = (obj: any): FolderItem => {
     return {
         type: obj.type,
         title: obj.title,
@@ -33,7 +33,7 @@ const makeListItem = (obj: any): TrackItem => {
     }
 }
 
-function mapServerResponse(response: any): Array<TrackItem> {
+function mapServerResponse(response: any): Array<FolderItem> {
     const group = response.navigation.lists[0];
     const result = group.items.map(makeListItem);
 
@@ -41,11 +41,11 @@ function mapServerResponse(response: any): Array<TrackItem> {
 }
 
 
-export const pushBrowseTracksTransform = function* (_params: SagaParams) {
-    yield takeEvery(PUSH_BROWSE_TRACKS, function* (action: ReduxAction) {
+export const pushBrowseFoldersTransform = function* (_params: SagaParams) {
+    yield takeEvery(PUSH_BROWSE_FOLDERS, function* (action: ReduxAction) {
         const { payload: value } = action;
         const transformed = mapServerResponse(value);
 
-        yield put(pushBrowseTracksTransformed(transformed));
+        yield put(pushBrowseFoldersTransformed(transformed));
     });
 }

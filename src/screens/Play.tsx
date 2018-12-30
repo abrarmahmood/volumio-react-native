@@ -10,7 +10,7 @@ import AlbumArt from '../components/player/AlbumArt';
 import TrackDetails from '../components/player/TrackDetails';
 import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
-import { PlayerState } from '../sagas/push-state-transform';
+import { PlayerState } from '../sagas/mappers/transform-state';
 import {
   handlePlay,
   handlePause,

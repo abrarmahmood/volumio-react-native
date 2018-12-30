@@ -1,7 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { ReduxAction } from '../actions/utils';
-import { SagaParams } from '.';
-import { PUSH_SEARCH_LIBRARY, pushSearchLibraryTransformed } from '../actions/search-library';
+import { ReduxAction } from '../../actions/utils';
+import { SagaParams } from '..';
+import { PUSH_SEARCH_LIBRARY, pushSearchLibraryTransformed } from '../../actions/search-library';
 
 
 const DEFAULT_ALBUM_ART = 'https://media.npr.org/assets/img/2014/10/29/icon-songswelove_sq-63f2f310c2ba4797b8e9e87a7c9dcf9acfb75407-s800-c85.png';

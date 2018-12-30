@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import ItemList from '../components/item-list';
-import { BrowseSearchResult } from "../sagas/push-search-transform";
+import { BrowseSearchResult } from "../sagas/mappers/transform-search";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
 import { BrowseNavState } from "./Browse";

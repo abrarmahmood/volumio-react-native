@@ -1,6 +1,6 @@
 import {PUSH_STATE_TRANSFORMED} from '../actions/player-state';
 import { ReduxAction } from '../actions/utils';
-import { mapServerResponse } from '../sagas/push-state-transform';
+import { mapServerResponse } from '../sagas/mappers/transform-state';
 
 const defaultState = {
 	error: null,

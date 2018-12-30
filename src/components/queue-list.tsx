@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, Image, FlatList, View } from "react-native";
-import { QueueItem } from "../sagas/push-queue-transform";
-import { FolderItem } from "../sagas/transform-folders";
-import { TrackItem } from "../sagas/transform-tracks";
+import { QueueItem } from "../sagas/mappers/transform-queue";
+import { FolderItem } from "../sagas/mappers/transform-folders";
+import { TrackItem } from "../sagas/mappers/transform-tracks";
 
 
 interface Props {
