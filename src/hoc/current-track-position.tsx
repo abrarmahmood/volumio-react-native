@@ -37,24 +37,32 @@ export const withCurrentTrackPosition = <P extends object>(ChildComponent: Compo
             this.setState({ currentPosition: nextProps.currentPosition });
         }
 
+        private handleIncrement() {
+            if (this.props.paused === false) {
+                this.timer = setInterval(() => {
+                    this.setState({
+                        currentPosition: ++this.state.currentPosition
+                    });
+                }, 1000);
+            } else {
+                clearTimeout(this.timer);
+            }
+        }
+
+        componentDidMount() {
+            this.handleIncrement();
+        }
+
         // FIXME: Find a better solution than this to increment the seconds
         componentDidUpdate(prevProps: Props) {
             if (prevProps.paused !== this.props.paused) {
-                if (this.props.paused === false) {
-                    this.timer = setInterval(() => {
-                        this.setState({
-                            currentPosition: ++this.state.currentPosition
-                        });
-                    }, 1000);
-                } else {
-                    clearTimeout(this.timer);
-                }
+                this.handleIncrement();
             }
         }
 
         render() {
             const { currentPosition } = this.state;
-            const {paused} = this.props;
+            const { paused } = this.props;
 
             return (
                 <ChildComponent
