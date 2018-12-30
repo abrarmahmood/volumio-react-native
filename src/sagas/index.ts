@@ -13,6 +13,7 @@ import {
     handleSetRandomSaga,
     handleSetRepeatSaga,
     handleSeekSaga,
+    handleGetStateSaga,
 } from './player-state';
 import { pushQueueTransform } from './mappers/transform-queue';
 import {
@@ -49,5 +50,6 @@ export default function* rootSaga(params: SagaParams) {
         fork(handleSeekSaga, params),
         fork(handleClearQueueSaga, params),
         fork(pushSearchTransform, params),
+        fork(handleGetStateSaga, params),
     ]
 }

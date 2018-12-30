@@ -10,6 +10,7 @@ import {
 	SET_RANDOM,
 	SET_REPEAT,
 	SEEK,
+	GET_STATE,
 } from '../actions/player-state';
 
 
@@ -58,5 +59,11 @@ export const handleSetRepeatSaga = function* (params: SagaParams) {
 export const handleSeekSaga = function* (params: SagaParams) {
 	yield takeEvery(SEEK, (action: ReduxAction) => {
 		params.socket.emit('seek', action.payload);
+	});
+}
+
+export const handleGetStateSaga = function* (params: SagaParams) {
+	yield takeEvery(GET_STATE, (action: ReduxAction) => {
+		params.socket.emit('getState');
 	});
 }

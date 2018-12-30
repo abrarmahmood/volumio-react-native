@@ -10,6 +10,7 @@ export const ADD_PLAY = 'ADD_PLAY';
 export const SET_RANDOM = 'SET_RANDOM';
 export const SET_REPEAT = 'SET_REPEAT';
 export const SEEK = 'SEEK';
+export const GET_STATE = 'GET_STATE';
 
 
 export const pushState = (playerState: any): ReduxAction => ({
@@ -70,4 +71,10 @@ export const handleSeek = (seconds: number): ReduxAction => ({
     type: SEEK,
     error: null,
     payload: seconds,
+});
+
+export const getState = (): ReduxAction => ({
+    type: GET_STATE,
+    error: null,
+    payload: null,
 });

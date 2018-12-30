@@ -19,6 +19,7 @@ import {
   setRandom,
   setRepeat,
   handleSeek,
+  getState,
 } from '../actions/player-state';
 import { withCurrentTrackPosition } from '../hoc/current-track-position';
 
@@ -33,6 +34,7 @@ interface Props extends NavigationInjectedProps {
   setRandom(bool: boolean): void;
   setRepeat(bool: boolean): void;
   seek(seconds: number): void;
+  getState(): void;
 }
 
 @(connect(
@@ -47,14 +49,18 @@ interface Props extends NavigationInjectedProps {
     setRandom: setRandom,
     setRepeat: setRepeat,
     seek: handleSeek,
+    getState: getState,
   }
 ) as any)
 @(withCurrentTrackPosition as any)
 export default class Player extends Component<Props> {
-
   static navigationOptions = {
     header: null,
   };
+
+  componentDidMount() {
+    this.props.getState();
+  }
 
   onSeek = (time: number) => {
     const seconds = Math.round(time);
