@@ -7,16 +7,15 @@ import {
     handlePlay,
     handlePause,
     handleNext,
-    handlePrev,
 } from '../actions/player-state';
+import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 
 
-interface Props {
+interface Props extends NavigationInjectedProps {
     playerState: PlayerState;
     play(): void;
     pause(): void;
     next(): void;
-    prev(): void;
 }
 
 @(connect(
@@ -27,22 +26,19 @@ interface Props {
         play: handlePlay,
         pause: handlePause,
         next: handleNext,
-        prev: handlePrev,
     }
 ) as any)
+@(withNavigation as any)
 export default class Footer extends Component<Props> {
-    onPressPlay = () => {
-
-    }
-    onPressPause = () => {
-
+    onPressFooter = () => {
+        this.props.navigation.push('Play');
     }
 
     render() {
         const { playerState } = this.props;
 
         return (
-            <View style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={this.onPressFooter}>
                 <View style={[styles.seekBar]}>
                     <View style={styles.seekBarEndContainer}>
                         <View style={styles.seekBarEnd} />
@@ -52,38 +48,40 @@ export default class Footer extends Component<Props> {
                     source={{ uri: playerState.albumart }}
                     style={styles.image}
                 />
-                <Text style={styles.title}>{playerState.title}</Text>
-                <Text style={styles.album}>{playerState.album}</Text>
-                <Text style={styles.artist}>{playerState.artist}</Text>
+                <View style={styles.textContainer}>
+                    <Text numberOfLines={1} style={styles.title}>{playerState.title}</Text>
+                    <Text numberOfLines={1} style={styles.album}>{playerState.album}</Text>
+                    <Text numberOfLines={1} style={styles.artist}>{playerState.artist}</Text>
+                </View>
+                <View style={styles.controlsBlock}/>
                 <View style={styles.controls}>
                     {playerState.status === 'play' ?
                         (
-                            <TouchableOpacity onPress={this.onPressPlay}>
+                            <TouchableOpacity onPress={() => this.props.pause()}>
                                 <View style={styles.playButton}>
-                                    <Image style={styles.playButtonImage} source={require('./player/img/ic_play_arrow_white_48pt.png')} />
+                                    <Image style={styles.playButtonImage} source={require('./player/img/ic_pause_white_48pt.png')} />
                                 </View>
                             </TouchableOpacity>
                         ) : (
-                            <TouchableOpacity onPress={this.onPressPause}>
+                            <TouchableOpacity onPress={() => this.props.play()}>
                                 <View style={styles.playButton}>
-                                    <Image style={styles.playButtonImage} source={require('./player/img/ic_pause_white_48pt.png')} />
+                                    <Image style={styles.playButtonImage} source={require('./player/img/ic_play_arrow_white_48pt.png')} />
                                 </View>
                             </TouchableOpacity>
                         )
                     }
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'rgba(20,20,20,1.0)',
+        backgroundColor: 'rgba(255,255,255,0.1)',
         height: 70,
-        // position: 'absolute',
-        // bottom: 0,
-        // left: 0,
+        borderTopWidth: 1,
+        borderTopColor: 'rgba(255,255,255,0.2)',
     },
     seekBar: {
         backgroundColor: 'white',
@@ -147,5 +145,14 @@ const styles = StyleSheet.create({
     playButtonImage: {
         width: 18,
         height: 18,
-    }
+    },
+    textContainer: {
+        width: '80%',
+        overflow: 'hidden',
+        height: 70,
+        position: 'relative',
+    },
+    controlsBlock: {
+        width: 100,
+    },
 });
