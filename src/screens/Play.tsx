@@ -22,6 +22,7 @@ import {
   getState,
 } from '../actions/player-state';
 import { withCurrentTrackPosition } from '../hoc/current-track-position';
+import BackgroundAlbumArt from '../components/background-album-art';
 
 
 interface Props extends NavigationInjectedProps {
@@ -95,6 +96,7 @@ export default class Player extends Component<Props> {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" />
+        <BackgroundAlbumArt albumart={playerState.albumart} />
         <Header message="Now Playing" onDownPress={this.goBack} onQueuePress={() => this.goQueue()} />
         <AlbumArt url={playerState.albumart} />
         <TrackDetails title={playerState.title} artist={playerState.artist} />
@@ -122,7 +124,6 @@ export default class Player extends Component<Props> {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: 'rgb(4,4,4)',
   },
   audioElement: {
     height: 0,

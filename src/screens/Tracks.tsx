@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, StyleSheet, ScrollView, SafeAreaView, Image, View } from "react-native";
+import { StatusBar, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchTracks } from "../actions/browse-library";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
 import QueueList from "../components/queue-list";
 import { TrackItem } from "../sagas/mappers/transform-tracks";
+import BackgroundAlbumArt from "../components/background-album-art";
 
 
 export interface TracksNavState {
@@ -54,6 +55,7 @@ export default class SearchScreen extends React.Component<Props> {
 
         return (
             <SafeAreaView style={styles.container}>
+                <BackgroundAlbumArt albumart={albumart} />
                 <StatusBar barStyle="light-content" />
                 {/* Artist/Album/Playlist info goes here */}
                 <ScrollView>
