@@ -8,9 +8,7 @@ import Footer from "../components/Footer";
 import { TrackItem } from "../sagas/mappers/transform-tracks";
 import BackgroundAlbumArt from "../components/background-album-art";
 import Header from "../components/player/Header";
-import { keyExtractor } from "../components/list/list-key-extractor";
-import { renderSeparator } from "../components/list/list-seperator";
-import { renderListItem } from "../components/list/list-item";
+import { renderListItem, listKeyExtractor, renderListSeparator } from "../components/list";
 
 
 export interface TracksNavState {
@@ -72,8 +70,8 @@ export default class SearchScreen extends React.Component<Props> {
                                 onItemPress: (item: any) => this.onPress(item),
                             })}
                             data={this.props.results}
-                            keyExtractor={keyExtractor}
-                            ItemSeparatorComponent={renderSeparator}
+                            keyExtractor={listKeyExtractor}
+                            ItemSeparatorComponent={renderListSeparator}
                         />
                     </ScrollView>
                     <Footer />

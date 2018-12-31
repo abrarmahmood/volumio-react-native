@@ -1,1 +1,1 @@
-export const keyExtractor = (item: any, index: number) => JSON.stringify(item) + index;
+export const listKeyExtractor = (item: any, index: number) => JSON.stringify(item) + index;

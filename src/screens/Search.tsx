@@ -11,10 +11,7 @@ import { FoldersNavState } from "./Folders";
 import { PlayerState } from "../sagas/mappers/transform-state";
 import BackgroundAlbumArt from "../components/background-album-art";
 import Header from "../components/player/Header";
-import { renderListItem } from "../components/list/list-item";
-import { renderHeader } from "../components/list/list-header";
-import { renderSeparator } from "../components/list/list-seperator";
-import { keyExtractor } from "../components/list/list-key-extractor";
+import { renderListItem, renderListHeader, listKeyExtractor, renderListSeparator } from "../components/list";
 
 
 export interface SearchNavState {
@@ -119,10 +116,10 @@ export default class SearchScreen extends React.Component<Props, State> {
                                 onItemPress: (item: any) => this.onPress(item),
                                 showAlbumArt: true,
                             })}
-                            renderSectionHeader={renderHeader}
+                            renderSectionHeader={renderListHeader}
                             sections={this.props.results}
-                            keyExtractor={keyExtractor}
-                            ItemSeparatorComponent={renderSeparator}
+                            keyExtractor={listKeyExtractor}
+                            ItemSeparatorComponent={renderListSeparator}
                         />
                     </ScrollView>
                     <Footer />

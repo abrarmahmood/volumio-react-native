@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 
 
 
-export const renderSeparator = () => (
+export const renderListSeparator = () => (
     <View style={styles.seperator} />
 );
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Text, StyleSheet } from "react-native";
 
 
-export const renderHeader = ({ section: { title } }: any) => (
+export const renderListHeader = ({ section: { title } }: any) => (
     <Text style={styles.listHeader}>{title}</Text>
 );
 

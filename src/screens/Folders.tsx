@@ -9,9 +9,7 @@ import { TracksNavState } from "./Tracks";
 import BackgroundAlbumArt from "../components/background-album-art";
 import { PlayerState } from "../sagas/mappers/transform-state";
 import Header from "../components/player/Header";
-import { keyExtractor } from "../components/list/list-key-extractor";
-import { renderSeparator } from "../components/list/list-seperator";
-import { renderListItem } from "../components/list/list-item";
+import { renderListItem, listKeyExtractor, renderListSeparator } from "../components/list";
 
 
 export interface FoldersNavState {
@@ -85,8 +83,8 @@ export default class FoldersScreen extends React.Component<Props> {
                                 showAlbumArt: true,
                             })}
                             data={this.props.results}
-                            keyExtractor={keyExtractor}
-                            ItemSeparatorComponent={renderSeparator}
+                            keyExtractor={listKeyExtractor}
+                            ItemSeparatorComponent={renderListSeparator}
                         />
                     </ScrollView>
                     <Footer />
