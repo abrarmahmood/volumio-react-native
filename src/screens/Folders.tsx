@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Text, View } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchFolders } from "../actions/browse-library";
 import Footer from "../components/Footer";
@@ -57,6 +57,7 @@ export default class FoldersScreen extends React.Component<Props> {
             uri: obj.uri,
             prevUri: uri || 'tidal://',
             albumart: obj.albumart,
+            artist: obj.artist,
             title: obj.title,
         };
 
@@ -65,6 +66,7 @@ export default class FoldersScreen extends React.Component<Props> {
 
     render() {
         const { playerState } = this.props;
+        const { title }: FoldersNavState = this.props.navigation.getParam('state');
 
         return (
             <BackgroundAlbumArt albumart={playerState.albumart}>
@@ -72,6 +74,9 @@ export default class FoldersScreen extends React.Component<Props> {
                     <StatusBar barStyle="light-content" />
                     <Header message="Folders" onDownPress={() => this.props.navigation.goBack()} />
                     {/* Artist/Album/Playlist info goes here */}
+                    <View style={styles.albumInfoContainer}>
+                        <Text style={styles.artistName}>{title}</Text>
+                    </View>
                     <ScrollView>
                         <QueueList albumart data={this.props.results} onPress={index => this.onPress(index)} />
                     </ScrollView>
@@ -85,5 +90,17 @@ export default class FoldersScreen extends React.Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    albumInfoContainer: {
+        // TODO: Use flex
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    artistName: {
+        color: 'white',
+        fontSize: 15,
+        padding: 8,
+        fontWeight: 'bold',
     },
 });

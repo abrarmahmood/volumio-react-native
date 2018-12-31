@@ -3,13 +3,25 @@ import { Text, Button, StyleSheet, TextInput, StatusBar, SafeAreaView, View } fr
 import { NavigationInjectedProps } from "react-navigation";
 import Footer from "../components/Footer";
 import { SearchNavState } from "./Search";
+import BackgroundAlbumArt from "../components/background-album-art";
+import { connect } from "react-redux";
+import { PlayerState } from "../sagas/mappers/transform-state";
 
 
 interface State {
   text: string
 }
 
-export default class HomeScreen extends React.Component<NavigationInjectedProps, State> {
+interface Props extends NavigationInjectedProps {
+  playerState: PlayerState;
+}
+
+@(connect(
+  (state: any) => ({
+      playerState: state.playerState.value,
+  })
+) as any)
+export default class HomeScreen extends React.Component<Props, State> {
   state = { text: '' };
 
   static navigationOptions = {
@@ -33,30 +45,34 @@ export default class HomeScreen extends React.Component<NavigationInjectedProps,
   }
 
   render() {
+    const { playerState } = this.props;
+
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Volumio remote control</Text>
-        </View>
-        <View style={styles.mainContainer}>
-          <StatusBar barStyle="light-content" />
-          <Text style={styles.text}>Search TIDAL</Text>
-          <TextInput
-            placeholder='Search here...'
-            style={styles.input}
-            onChangeText={text => this.setState({ text })}
-          />
-          <Button
-            title="Search"
-            onPress={() => this.onSearchPress()}
-          />
-          <Button
-            title="Now Playing"
-            onPress={() => this.props.navigation.navigate('Play')}
-          />
-        </View>
-        <Footer />
-      </SafeAreaView>
+      <BackgroundAlbumArt albumart={playerState.albumart}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleText}>Volumio remote control</Text>
+          </View>
+          <View style={styles.mainContainer}>
+            <StatusBar barStyle="light-content" />
+            <Text style={styles.text}>Search TIDAL</Text>
+            <TextInput
+              placeholder='Search here...'
+              style={styles.input}
+              onChangeText={text => this.setState({ text })}
+            />
+            <Button
+              title="Search"
+              onPress={() => this.onSearchPress()}
+            />
+            <Button
+              title="Now Playing"
+              onPress={() => this.props.navigation.navigate('Play')}
+            />
+          </View>
+          <Footer />
+        </SafeAreaView>
+      </BackgroundAlbumArt>
     );
   }
 }
@@ -66,7 +82,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
   },
   titleContainer: {
     alignItems: 'center',

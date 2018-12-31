@@ -56,7 +56,6 @@ export default class ItemList extends React.Component<Props> {
 
 const styles = StyleSheet.create({
     sectionList: {
-        backgroundColor: 'black',
     },
     listItemContainer: {
         flex: 1,
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
         maxHeight: 50,
     },
     listHeader: {
-        backgroundColor: '#191919',
+        backgroundColor: 'rgba(255,255,255,0.1)',
         color: 'white',
         // borderBottomWidth: 3,
         // borderBottomColor: 'gray',

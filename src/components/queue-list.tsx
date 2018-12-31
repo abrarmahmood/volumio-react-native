@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     listItemTitle: {
-        padding: 5,
+        padding: 7,
         color: 'white'
     },
     listItemArtist: {
         position: 'absolute',
-        left: 5,
+        left: 7,
         top: 27,
         fontSize: 12,
         color: 'white'

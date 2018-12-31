@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Image, View, Text } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchTracks } from "../actions/browse-library";
 import { addPlay } from "../actions/player-state";
@@ -15,6 +15,7 @@ export interface TracksNavState {
     uri: string;
     prevUri: string;
     title: string;
+    artist: string;
     albumart: string;
 }
 
@@ -52,7 +53,7 @@ export default class SearchScreen extends React.Component<Props> {
     }
 
     render() {
-        const { albumart }: TracksNavState = this.props.navigation.getParam('state');
+        const { albumart, title, artist }: TracksNavState = this.props.navigation.getParam('state');
 
         return (
             <BackgroundAlbumArt albumart={albumart}>
@@ -60,6 +61,11 @@ export default class SearchScreen extends React.Component<Props> {
                     <StatusBar barStyle="light-content" />
                     <Header message="Tracks" onDownPress={() => this.props.navigation.goBack()} />
                     {/* Artist/Album/Playlist info goes here */}
+                    <View style={styles.albumInfoContainer}>
+                        <Image source={{uri: albumart}} style={styles.albumImage} />
+                        <Text style={styles.albumName}>{title}</Text>
+                        <Text style={styles.albumArtistName}>{artist}</Text>
+                    </View>
                     <ScrollView>
                         <QueueList
                             data={this.props.results}
@@ -77,5 +83,27 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // backgroundColor: 'black',
+    },
+    albumInfoContainer: {
+        // TODO: Use flex
+        width: '100%',
+        marginBottom: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    albumImage: {
+        width: 200,
+        height: 200,
+    },
+    albumName: {
+        color: 'white',
+        fontSize: 11,
+        padding: 8,
+        fontWeight: 'bold',
+    },
+    albumArtistName: {
+        color: 'white',
+        fontSize: 10,
+        fontWeight: 'normal',
     },
 });
