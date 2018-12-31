@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView, SectionList } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
-import ItemList from '../components/item-list';
 import { BrowseSearchResult, SearchItem, ItemTypes } from "../sagas/mappers/transform-search";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
@@ -12,6 +11,10 @@ import { FoldersNavState } from "./Folders";
 import { PlayerState } from "../sagas/mappers/transform-state";
 import BackgroundAlbumArt from "../components/background-album-art";
 import Header from "../components/player/Header";
+import { renderListItem } from "../components/list/list-item";
+import { renderHeader } from "../components/list/list-header";
+import { renderSeparator } from "../components/list/list-seperator";
+import { keyExtractor } from "../components/list/list-key-extractor";
 
 
 export interface SearchNavState {
@@ -100,21 +103,30 @@ export default class SearchScreen extends React.Component<Props, State> {
 
         return (
             <BackgroundAlbumArt albumart={playerState.albumart}>
-            <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <Header message="Tracks" onDownPress={() => this.props.navigation.goBack()} />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Search...'
-                    placeholderTextColor='#5b5b5b'
-                    defaultValue={searchText}
-                    onChangeText={this.onSearchInput}
-                />
-                <ScrollView>
-                    <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
-                </ScrollView>
-                <Footer />
-            </SafeAreaView>
+                <SafeAreaView style={styles.container}>
+                    <StatusBar barStyle="light-content" />
+                    <Header message="Tracks" onDownPress={() => this.props.navigation.goBack()} />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Search...'
+                        placeholderTextColor='#5b5b5b'
+                        defaultValue={searchText}
+                        onChangeText={this.onSearchInput}
+                    />
+                    <ScrollView>
+                        <SectionList
+                            renderItem={renderListItem({
+                                onItemPress: (item: any) => this.onPress(item),
+                                showAlbumArt: true,
+                            })}
+                            renderSectionHeader={renderHeader}
+                            sections={this.props.results}
+                            keyExtractor={keyExtractor}
+                            ItemSeparatorComponent={renderSeparator}
+                        />
+                    </ScrollView>
+                    <Footer />
+                </SafeAreaView>
             </BackgroundAlbumArt>
         )
     }

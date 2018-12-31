@@ -1,14 +1,16 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Image, View, Text } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Image, View, Text, FlatList } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchTracks } from "../actions/browse-library";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
-import QueueList from "../components/queue-list";
 import { TrackItem } from "../sagas/mappers/transform-tracks";
 import BackgroundAlbumArt from "../components/background-album-art";
 import Header from "../components/player/Header";
+import { keyExtractor } from "../components/list/list-key-extractor";
+import { renderSeparator } from "../components/list/list-seperator";
+import { renderListItem } from "../components/list/list-item";
 
 
 export interface TracksNavState {
@@ -45,9 +47,7 @@ export default class SearchScreen extends React.Component<Props> {
         this.props.fetch(navState.uri, navState.prevUri);
     }
 
-    onPress(index: number): void {
-        const obj: any = this.props.results[index];
-
+    onPress(obj: TrackItem): void {
         this.props.addPlay(obj.uri, obj.title, obj.albumart);
         this.props.navigation.push('Play');
     }
@@ -67,9 +67,13 @@ export default class SearchScreen extends React.Component<Props> {
                         <Text style={styles.albumArtistName}>{artist}</Text>
                     </View>
                     <ScrollView>
-                        <QueueList
+                        <FlatList
+                            renderItem={renderListItem({
+                                onItemPress: (item: any) => this.onPress(item),
+                            })}
                             data={this.props.results}
-                            onPress={index => this.onPress(index)}
+                            keyExtractor={keyExtractor}
+                            ItemSeparatorComponent={renderSeparator}
                         />
                     </ScrollView>
                     <Footer />

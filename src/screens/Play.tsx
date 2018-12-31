@@ -121,13 +121,3 @@ export default class Player extends Component<Props> {
     );
   }
 }
-
-const styles = {
-  container: {
-    flex: 1,
-  },
-  audioElement: {
-    height: 0,
-    width: 0,
-  }
-};

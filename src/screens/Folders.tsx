@@ -1,15 +1,17 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Text, View } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar, Text, View, FlatList } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchFolders } from "../actions/browse-library";
 import Footer from "../components/Footer";
-import QueueList from "../components/queue-list";
 import { FolderItem } from "../sagas/mappers/transform-folders";
 import { TracksNavState } from "./Tracks";
 import BackgroundAlbumArt from "../components/background-album-art";
 import { PlayerState } from "../sagas/mappers/transform-state";
 import Header from "../components/player/Header";
+import { keyExtractor } from "../components/list/list-key-extractor";
+import { renderSeparator } from "../components/list/list-seperator";
+import { renderListItem } from "../components/list/list-item";
 
 
 export interface FoldersNavState {
@@ -49,8 +51,7 @@ export default class FoldersScreen extends React.Component<Props> {
         this.fetchBrowseLibrary(this.props);
     }
 
-    onPress(index: number): void {
-        const obj: FolderItem = this.props.results[index];
+    onPress(obj: FolderItem): void {
         const uri = this.props.navigation.getParam('uri');
 
         const state: TracksNavState = {
@@ -78,7 +79,15 @@ export default class FoldersScreen extends React.Component<Props> {
                         <Text style={styles.artistName}>{title}</Text>
                     </View>
                     <ScrollView>
-                        <QueueList albumart data={this.props.results} onPress={index => this.onPress(index)} />
+                        <FlatList
+                            renderItem={renderListItem({
+                                onItemPress: (item: any) => this.onPress(item),
+                                showAlbumArt: true,
+                            })}
+                            data={this.props.results}
+                            keyExtractor={keyExtractor}
+                            ItemSeparatorComponent={renderSeparator}
+                        />
                     </ScrollView>
                     <Footer />
                 </SafeAreaView>
