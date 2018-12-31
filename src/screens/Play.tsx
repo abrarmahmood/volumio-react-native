@@ -21,12 +21,11 @@ import {
   handleSeek,
   getState,
 } from '../actions/player-state';
-import { withCurrentTrackPosition } from '../hoc/current-track-position';
+import { withCurrentTrackPosition, InjectedCurrentPositionProps } from '../hoc/current-track-position';
 
 
-interface Props extends NavigationInjectedProps {
+interface Props extends NavigationInjectedProps, InjectedCurrentPositionProps {
   playerState: PlayerState;
-  currentPosition: number;
   play(): void;
   pause(): void;
   next(): void;
