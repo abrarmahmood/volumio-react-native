@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, SectionList, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Text, SectionList, StyleSheet, TouchableOpacity, Image, View, TouchableHighlight } from "react-native";
 import { SearchItem, BrowseSearchResult } from "../sagas/mappers/transform-search";
 
 
@@ -19,17 +19,33 @@ export default class ItemList extends React.Component<Props> {
         this.props.onPress(item);
     }
 
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: "96%",
+                    backgroundColor: "rgba(255,255,255,0.2)",
+                    marginLeft: "2%",
+                    marginRight: "2%",
+                }}
+            />
+        );
+    };
+
     renderItem = ({ item, index }: {item: SearchItem, index: number }) => {
         return (
-            <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onItemPress(item)}>
-                <Image
-                    source={{uri: item.albumart}}
-                    style={styles.listItemArt}
-                />
-                <Text key={index} style={styles.listItemText}>
-                    {item.title}
-                </Text>
-            </TouchableOpacity>
+            <TouchableHighlight onPress={() => this.onItemPress(item)} underlayColor='rgba(255,255,255,0.25)'>
+                <View style={styles.listItemContainer}>
+                    <Image
+                        source={{uri: item.albumart}}
+                        style={styles.listItemArt}
+                    />
+                    <Text key={index} style={styles.listItemText}>
+                        {item.title}
+                    </Text>
+                </View>
+            </TouchableHighlight>
         );
     }
 
@@ -49,6 +65,7 @@ export default class ItemList extends React.Component<Props> {
                 renderSectionHeader={this.renderHeader}
                 sections={data}
                 keyExtractor={(item, index) => JSON.stringify(item) + index}
+                ItemSeparatorComponent={this.renderSeparator}
             />
         );
     }

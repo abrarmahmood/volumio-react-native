@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, TouchableOpacity, Image, FlatList, View } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, Image, FlatList, View, TouchableHighlight } from "react-native";
 import { QueueItem } from "../sagas/mappers/transform-queue";
 import { FolderItem } from "../sagas/mappers/transform-folders";
 import { TrackItem } from "../sagas/mappers/transform-tracks";
@@ -25,7 +25,7 @@ export default class QueueList extends React.Component<Props> {
     }
 
     renderItem = ({ item, index }: { item: QueueItem | FolderItem | TrackItem, index: number }) => {
-        const {removable = false, albumart = false} = this.props;
+        const { removable = false, albumart = false } = this.props;
 
         return (
             <View style={styles.sectionList}>
@@ -56,17 +56,17 @@ export default class QueueList extends React.Component<Props> {
 
     renderSeparator = () => {
         return (
-          <View
-            style={{
-              height: 0.5,
-              width: "96%",
-              backgroundColor: "rgba(255,255,255,0.5)",
-              marginLeft: "2%",
-              marginRight: "2%",
-            }}
-          />
+            <View
+                style={{
+                    height: 1,
+                    width: "96%",
+                    backgroundColor: "rgba(255,255,255,0.2)",
+                    marginLeft: "2%",
+                    marginRight: "2%",
+                }}
+            />
         );
-      };
+    };
 
     render() {
         const { data } = this.props;
