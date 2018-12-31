@@ -56,7 +56,7 @@ interface Props extends NavigationInjectedProps {
 @(withCurrentTrackPosition as any)
 export default class Player extends Component<Props> {
   static navigationOptions = {
-    header: null,
+    // header: null,
   };
 
   componentDidMount() {
@@ -94,29 +94,30 @@ export default class Player extends Component<Props> {
     const { playerState, currentPosition } = this.props;
 
     return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <BackgroundAlbumArt albumart={playerState.albumart} />
-        <Header message="Now Playing" onDownPress={this.goBack} onQueuePress={() => this.goQueue()} />
-        <AlbumArt url={playerState.albumart} />
-        <TrackDetails title={playerState.title} artist={playerState.artist} />
-        <SeekBar
-          onSeek={this.onSeek}
-          trackLength={playerState.duration}
-          onSlidingStart={() => this.props.pause()}
-          currentPosition={currentPosition} />
-        <Controls
-          onPressRepeat={this.onRepeat}
-          repeatOn={playerState.repeat}
-          shuffleOn={playerState.random}
-          forwardDisabled={/*this.state.selectedTrack === this.props.tracks.length - 1*/ false}
-          onPressShuffle={this.onRandom}
-          onPressPlay={() => this.props.play()}
-          onPressPause={() => this.props.pause()}
-          onBack={() => this.props.prev()}
-          onForward={() => this.props.next()}
-          paused={playerState.status !== 'play'} />
-      </SafeAreaView>
+      <BackgroundAlbumArt albumart={playerState.albumart}>
+        <SafeAreaView >
+          <StatusBar barStyle="light-content" />
+          <Header message="Now Playing" onDownPress={this.goBack} onQueuePress={() => this.goQueue()} />
+          <AlbumArt url={playerState.albumart} />
+          <TrackDetails title={playerState.title} artist={playerState.artist} />
+          <SeekBar
+            onSeek={this.onSeek}
+            trackLength={playerState.duration}
+            onSlidingStart={() => this.props.pause()}
+            currentPosition={currentPosition} />
+          <Controls
+            onPressRepeat={this.onRepeat}
+            repeatOn={playerState.repeat}
+            shuffleOn={playerState.random}
+            forwardDisabled={/*this.state.selectedTrack === this.props.tracks.length - 1*/ false}
+            onPressShuffle={this.onRandom}
+            onPressPlay={() => this.props.play()}
+            onPressPause={() => this.props.pause()}
+            onBack={() => this.props.prev()}
+            onForward={() => this.props.next()}
+            paused={playerState.status !== 'play'} />
+        </SafeAreaView>
+      </BackgroundAlbumArt>
     );
   }
 }

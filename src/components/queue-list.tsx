@@ -8,6 +8,7 @@ import { TrackItem } from "../sagas/mappers/transform-tracks";
 interface Props {
     data: Array<QueueItem | FolderItem | TrackItem>;
     removable?: boolean;
+    albumart?: boolean;
     onPress(index: number): any;
     onDeletePress?(index: number): any;
 }
@@ -24,18 +25,23 @@ export default class QueueList extends React.Component<Props> {
     }
 
     renderItem = ({ item, index }: { item: QueueItem | FolderItem | TrackItem, index: number }) => {
-        const {removable = false} = this.props;
+        const {removable = false, albumart = false} = this.props;
 
         return (
             <View style={styles.sectionList}>
                 <TouchableOpacity style={styles.listItemContainer} onPress={() => this.onItemPress(index)}>
-                    <Image
+                    {albumart === true && <Image
                         source={{ uri: item.albumart }}
                         style={styles.listItemArt}
-                    />
-                    <Text key={index} style={styles.listItemText}>
-                        {item.title}
-                    </Text>
+                    />}
+                    <View style={styles.textContainer}>
+                        <Text style={styles.listItemTitle}>
+                            {item.title}
+                        </Text>
+                        <Text style={styles.listItemArtist}>
+                            {item.artist}
+                        </Text>
+                    </View>
                 </TouchableOpacity>
                 {removable && <TouchableOpacity onPress={() => this.onDeletePress(index)} style={styles.modifierButton}>
                     <Image
@@ -48,6 +54,20 @@ export default class QueueList extends React.Component<Props> {
         );
     }
 
+    renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: 0.5,
+              width: "96%",
+              backgroundColor: "rgba(255,255,255,0.5)",
+              marginLeft: "2%",
+              marginRight: "2%",
+            }}
+          />
+        );
+      };
+
     render() {
         const { data } = this.props;
 
@@ -56,6 +76,7 @@ export default class QueueList extends React.Component<Props> {
                 data={data}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => index.toString()}
+                ItemSeparatorComponent={this.renderSeparator}
             />
         );
     }
@@ -67,14 +88,24 @@ const styles = StyleSheet.create({
     },
     listItemContainer: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'row', // FIXME: This squishes the image if there's too much text
         borderWidth: 3,
         borderColor: 'transparent',
         height: 60,
     },
-    listItemText: {
-        flex: 2,
+    textContainer: {
+        position: 'relative',
+        overflow: 'hidden',
+    },
+    listItemTitle: {
         padding: 5,
+        color: 'white'
+    },
+    listItemArtist: {
+        position: 'absolute',
+        left: 5,
+        top: 27,
+        fontSize: 12,
         color: 'white'
     },
     listItemArt: {

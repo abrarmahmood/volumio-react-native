@@ -37,8 +37,9 @@ const routes: NavigationRouteConfigMap = {
 const routeConfig: StackNavigatorConfig = {
     initialRouteName: "Home",
     defaultNavigationOptions: {
-        headerStyle: { backgroundColor: '#191919' },
-        headerTitleStyle: { color: 'white' },
+        // headerStyle: { backgroundColor: '#191919' },
+        // headerTitleStyle: { color: 'white' },
+        header: null,
     }
 };
 

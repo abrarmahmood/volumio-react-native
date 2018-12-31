@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchTracks } from "../actions/browse-library";
 import { addPlay } from "../actions/player-state";
@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import QueueList from "../components/queue-list";
 import { TrackItem } from "../sagas/mappers/transform-tracks";
 import BackgroundAlbumArt from "../components/background-album-art";
+import Header from "../components/player/Header";
 
 
 export interface TracksNavState {
@@ -39,33 +40,35 @@ export default class SearchScreen extends React.Component<Props> {
 
     componentDidMount() {
         const navState: TracksNavState = this.props.navigation.getParam('state');
-        
+
         this.props.fetch(navState.uri, navState.prevUri);
     }
-    
+
     onPress(index: number): void {
         const obj: any = this.props.results[index];
-        
+
         this.props.addPlay(obj.uri, obj.title, obj.albumart);
         this.props.navigation.push('Play');
     }
-    
+
     render() {
-        const {albumart}: TracksNavState = this.props.navigation.getParam('state');
+        const { albumart }: TracksNavState = this.props.navigation.getParam('state');
 
         return (
-            <SafeAreaView style={styles.container}>
-                <BackgroundAlbumArt albumart={albumart} />
-                <StatusBar barStyle="light-content" />
-                {/* Artist/Album/Playlist info goes here */}
-                <ScrollView>
-                    <QueueList
-                        data={this.props.results}
-                        onPress={index => this.onPress(index)}
-                    />
-                </ScrollView>
-                <Footer />
-            </SafeAreaView>
+            <BackgroundAlbumArt albumart={albumart}>
+                <SafeAreaView style={styles.container}>
+                    <StatusBar barStyle="light-content" />
+                    <Header message="Tracks" onDownPress={() => this.props.navigation.goBack()} />
+                    {/* Artist/Album/Playlist info goes here */}
+                    <ScrollView>
+                        <QueueList
+                            data={this.props.results}
+                            onPress={index => this.onPress(index)}
+                        />
+                    </ScrollView>
+                    <Footer />
+                </SafeAreaView>
+            </BackgroundAlbumArt>
         )
     }
 }

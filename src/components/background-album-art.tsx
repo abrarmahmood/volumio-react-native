@@ -15,10 +15,11 @@ export default class BackgroundAlbumArt extends React.Component<Props> {
                 <Image
                     source={{ uri: albumart }}
                     style={styles.backgroundAlbumArt}
-                    blurRadius={5}
+                    blurRadius={10}
                     resizeMode="cover"
                 />
                 <View style={styles.backgroundAlbumArtTint} /> 
+                {this.props.children}
             </View>
         )
     }

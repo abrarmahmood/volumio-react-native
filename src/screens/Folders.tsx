@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { StyleSheet, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
 import { fetchFolders } from "../actions/browse-library";
 import Footer from "../components/Footer";
 import QueueList from "../components/queue-list";
 import { FolderItem } from "../sagas/mappers/transform-folders";
 import { TracksNavState } from "./Tracks";
+import BackgroundAlbumArt from "../components/background-album-art";
+import { PlayerState } from "../sagas/mappers/transform-state";
+import Header from "../components/player/Header";
 
 
 export interface FoldersNavState {
@@ -19,11 +22,13 @@ export interface FoldersNavState {
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
     fetch(uri: string, prevUri?: string): void;
     results: Array<FolderItem>;
+    playerState: PlayerState;
 }
 
 @(connect(
     (state: any) => ({
         results: state.folders.value,
+        playerState: state.playerState.value,
     }),
     {
         fetch: fetchFolders,
@@ -59,15 +64,20 @@ export default class FoldersScreen extends React.Component<Props> {
     }
 
     render() {
+        const { playerState } = this.props;
+
         return (
-            <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                {/* Artist/Album/Playlist info goes here */}
-                <ScrollView>
-                    <QueueList data={this.props.results} onPress={index => this.onPress(index)} />
-                </ScrollView>
-                <Footer />
-            </SafeAreaView>
+            <BackgroundAlbumArt albumart={playerState.albumart}>
+                <SafeAreaView style={styles.container}>
+                    <StatusBar barStyle="light-content" />
+                    <Header message="Folders" onDownPress={() => this.props.navigation.goBack()} />
+                    {/* Artist/Album/Playlist info goes here */}
+                    <ScrollView>
+                        <QueueList albumart data={this.props.results} onPress={index => this.onPress(index)} />
+                    </ScrollView>
+                    <Footer />
+                </SafeAreaView>
+            </BackgroundAlbumArt>
         )
     }
 }
@@ -75,6 +85,5 @@ export default class FoldersScreen extends React.Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
     },
 });

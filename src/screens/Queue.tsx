@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigationInjectedProps } from 'react-navigation';
 import {
-  StatusBar,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   StyleSheet,
   View,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import Header from '../components/player/Header';
 import { QueueItem } from '../sagas/mappers/transform-queue';
@@ -73,17 +73,18 @@ export default class Queue extends Component<Props, State> {
     const { queue, playerState } = this.props;
 
     return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <BackgroundAlbumArt albumart={playerState.albumart} />
-        <Header message="Play Queue" onDownPress={this.goBack} />
-        <View style={styles.options}>
-          <TouchableOpacity style={styles.optionsButton} onPress={this.onClearPress}>
-            <Text style={styles.optionsText}>Clear queue</Text>
-          </TouchableOpacity>
-        </View>
-        <QueueList removable data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
-      </SafeAreaView>
+      <BackgroundAlbumArt albumart={playerState.albumart}>
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle="light-content" />
+          <Header message="Play Queue" onDownPress={this.goBack} />
+          <View style={styles.options}>
+            <TouchableOpacity style={styles.optionsButton} onPress={this.onClearPress}>
+              <Text style={styles.optionsText}>Clear queue</Text>
+            </TouchableOpacity>
+          </View>
+          <QueueList removable data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
+        </SafeAreaView>
+      </BackgroundAlbumArt>
     );
   }
 }
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   options: {
     width: '100%',
     height: 40,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     alignItems: 'flex-end',
   },
   optionsButton: {
