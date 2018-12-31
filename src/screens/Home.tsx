@@ -6,6 +6,7 @@ import { SearchNavState } from "./Search";
 import BackgroundAlbumArt from "../components/background-album-art";
 import { connect } from "react-redux";
 import { PlayerState } from "../sagas/mappers/transform-state";
+import Header from "../components/player/Header";
 
 
 interface State {
@@ -50,6 +51,7 @@ export default class HomeScreen extends React.Component<Props, State> {
     return (
       <BackgroundAlbumArt albumart={playerState.albumart}>
         <SafeAreaView style={styles.container}>
+        <Header message="Home" noBack/>
           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Volumio remote control</Text>
           </View>

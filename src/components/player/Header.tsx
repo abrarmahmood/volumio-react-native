@@ -11,26 +11,27 @@ import {
 
 interface Props {
   message: string;
+  queueIcon?: boolean;
+  noBack?: boolean;
   onDownPress? (): any;
-  onQueuePress? (): any;
+  onAltPress? (): any;
   onMessagePress? (): any;
 }
 
 export default class Header extends Component<Props> {
   render() {
-    const { message, onDownPress, onQueuePress, onMessagePress } = this.props;
+    const { message, onDownPress, onAltPress: onQueuePress, onMessagePress, queueIcon = false, noBack = false } = this.props;
 
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={onDownPress}>
-          <Image style={styles.buttonBack}
-            source={require('./img/ic_keyboard_arrow_down_white.png')} />
+          {noBack === false && <Image style={styles.buttonBack} source={require('./img/ic_keyboard_arrow_down_white.png')} />}
         </TouchableOpacity>
         <Text onPress={onMessagePress}
           style={styles.message}>{message.toUpperCase()}</Text>
         <TouchableOpacity onPress={onQueuePress}>
           <Image style={styles.button}
-            source={require('./img/ic_queue_music_white.png')} />
+            source={queueIcon === true ? require('./img/ic_queue_music_white.png') : require('./img/more_horiz.png')} />
         </TouchableOpacity>
       </View>
     )

@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigationInjectedProps } from 'react-navigation';
-import {
-  StatusBar,
-  SafeAreaView,
-} from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
 import Header from '../components/player/Header';
 import AlbumArt from '../components/player/AlbumArt';
 import TrackDetails from '../components/player/TrackDetails';
 import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
 import { PlayerState } from '../sagas/mappers/transform-state';
-import {
-  handlePlay,
-  handlePause,
-  handleNext,
-  handlePrev,
-  setRandom,
-  setRepeat,
-  handleSeek,
-  getState,
-} from '../actions/player-state';
+import * as actions from '../actions/player-state';
 import { withCurrentTrackPosition } from '../hoc/current-track-position';
 import BackgroundAlbumArt from '../components/background-album-art';
 
@@ -43,14 +31,14 @@ interface Props extends NavigationInjectedProps {
     playerState: state.playerState.value,
   }),
   {
-    play: handlePlay,
-    pause: handlePause,
-    next: handleNext,
-    prev: handlePrev,
-    setRandom: setRandom,
-    setRepeat: setRepeat,
-    seek: handleSeek,
-    getState: getState,
+    play: actions.handlePlay,
+    pause: actions.handlePause,
+    next: actions.handleNext,
+    prev: actions.handlePrev,
+    setRandom: actions.setRandom,
+    setRepeat: actions.setRepeat,
+    seek: actions.handleSeek,
+    getState: actions.getState,
   }
 ) as any)
 @(withCurrentTrackPosition as any)
@@ -97,7 +85,7 @@ export default class Player extends Component<Props> {
       <BackgroundAlbumArt albumart={playerState.albumart}>
         <SafeAreaView >
           <StatusBar barStyle="light-content" />
-          <Header message="Now Playing" onDownPress={this.goBack} onQueuePress={() => this.goQueue()} />
+          <Header message="Now Playing" onDownPress={this.goBack} onAltPress={() => this.goQueue()} queueIcon />
           <AlbumArt url={playerState.albumart} />
           <TrackDetails title={playerState.title} artist={playerState.artist} />
           <SeekBar

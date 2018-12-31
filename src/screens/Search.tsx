@@ -102,7 +102,7 @@ export default class SearchScreen extends React.Component<Props, State> {
             <BackgroundAlbumArt albumart={playerState.albumart}>
                 <SafeAreaView style={styles.container}>
                     <StatusBar barStyle="light-content" />
-                    <Header message="Tracks" onDownPress={() => this.props.navigation.goBack()} />
+                    <Header message="Search" onDownPress={() => this.props.navigation.goBack()} />
                     <TextInput
                         style={styles.textInput}
                         placeholder='Search...'
