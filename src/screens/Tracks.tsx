@@ -60,7 +60,7 @@ export default class SearchScreen extends React.Component<Props> {
                     <Header message="Tracks" onDownPress={() => this.props.navigation.goBack()} />
                     {/* Artist/Album/Playlist info goes here */}
                     <View style={styles.albumInfoContainer}>
-                        <Image source={{uri: albumart}} style={styles.albumImage} />
+                        <Image source={{ uri: albumart }} style={styles.albumImage} />
                         <Text style={styles.albumName}>{title}</Text>
                         <Text style={styles.albumArtistName}>{artist}</Text>
                     </View>
