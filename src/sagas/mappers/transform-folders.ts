@@ -17,6 +17,7 @@ export type FolderItem = {
     type: string
     title: string;
     albumart: string;
+    artist: string;
     service: string;
     uri: string;
     unmanaged?: any;
@@ -28,6 +29,7 @@ const makeListItem = (obj: any): FolderItem => {
         title: obj.title,
         albumart: ensureAlbumArt(obj.albumart),
         service: obj.service,
+        artist: obj.artist,
         uri: obj.uri,
         // unmanaged: obj,
     }

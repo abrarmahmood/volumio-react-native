@@ -26,6 +26,7 @@ export type SearchItem = {
     type: string
     title: string;
     albumart: string;
+    artist: string;
     service: string;
     uri: string;
     unmanaged?: any;
@@ -58,6 +59,7 @@ const makeListItem = (title: string) => (obj: any): SearchItem => {
         itemType: parseItemType(title),
         type: obj.type,
         title: obj.title,
+        artist: (obj.artist || 'unknown'),
         albumart: ensureAlbumArt(obj.albumart),
         service: obj.service,
         uri: obj.uri,

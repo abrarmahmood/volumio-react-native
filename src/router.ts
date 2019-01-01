@@ -37,11 +37,28 @@ const routes: NavigationRouteConfigMap = {
 const routeConfig: StackNavigatorConfig = {
     initialRouteName: "Home",
     defaultNavigationOptions: {
-        headerStyle: { backgroundColor: '#191919' },
-        headerTitleStyle: { color: 'white' },
+        // headerStyle: { backgroundColor: '#191919' },
+        // headerTitleStyle: { color: 'white' },
+        header: null,
     }
 };
 
 const AppNavigator = createStackNavigator(routes, routeConfig);
 
 export const AppContainer = createAppContainer(AppNavigator);
+
+export const getRouteDebugInfo = (routeInfo: any) => {
+    try {
+        return {
+            name: routeInfo.routes[routeInfo.index].routeName,
+            params: routeInfo.routes[routeInfo.index].params,
+            state: routeInfo.routes[routeInfo.index].params.state,
+        }
+    } catch (e) {
+        return {
+            name: routeInfo.routes[routeInfo.index].routeName,
+            params: routeInfo.routes[routeInfo.index].params,
+            state: undefined,
+        }
+    }
+}

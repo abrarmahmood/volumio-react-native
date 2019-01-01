@@ -1,14 +1,17 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView } from "react-native";
+import { StatusBar, TextInput, StyleSheet, ScrollView, SafeAreaView, SectionList } from "react-native";
 import { NavigationInjectedProps, NavigationFocusInjectedProps } from "react-navigation";
-import ItemList from '../components/item-list';
 import { BrowseSearchResult, SearchItem, ItemTypes } from "../sagas/mappers/transform-search";
 import { addPlay } from "../actions/player-state";
 import Footer from "../components/Footer";
 import { searchLibrary } from "../actions/search-library";
 import { TracksNavState } from "./Tracks";
 import { FoldersNavState } from "./Folders";
+import { PlayerState } from "../sagas/mappers/transform-state";
+import BackgroundAlbumArt from "../components/background-album-art";
+import Header from "../components/player/Header";
+import { renderListItem, renderListHeader, listKeyExtractor, renderListSeparator } from "../components/list";
 
 
 export interface SearchNavState {
@@ -20,6 +23,7 @@ interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
     search(term: string): void;
     addPlay(uri: string, title: string, albumart: string): void;
     results: Array<BrowseSearchResult>;
+    playerState: PlayerState;
 }
 
 interface State {
@@ -30,6 +34,7 @@ interface State {
 @(connect(
     (state: any) => ({
         results: state.search.value,
+        playerState: state.playerState.value,
     }),
     {
         search: searchLibrary,
@@ -70,6 +75,7 @@ export default class SearchScreen extends React.Component<Props, State> {
                     prevUri: 'tidal://',
                     title: obj.title,
                     albumart: obj.albumart,
+                    artist: obj.artist,
                 };
                 this.props.navigation.push('Tracks', { state });
                 break;
@@ -90,22 +96,35 @@ export default class SearchScreen extends React.Component<Props, State> {
 
     render() {
         const { searchText } = this.state;
+        const { playerState } = this.props;
 
         return (
-            <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Search...'
-                    placeholderTextColor='#5b5b5b'
-                    defaultValue={searchText}
-                    onChangeText={this.onSearchInput}
-                />
-                <ScrollView>
-                    <ItemList data={this.props.results} onPress={data => this.onPress(data)} />
-                </ScrollView>
-                <Footer />
-            </SafeAreaView>
+            <BackgroundAlbumArt albumart={playerState.albumart}>
+                <SafeAreaView style={styles.container}>
+                    <StatusBar barStyle="light-content" />
+                    <Header message="Search" onDownPress={() => this.props.navigation.goBack()} />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Search...'
+                        placeholderTextColor='#5b5b5b'
+                        defaultValue={searchText}
+                        onChangeText={this.onSearchInput}
+                    />
+                    <ScrollView>
+                        <SectionList
+                            renderItem={renderListItem({
+                                onItemPress: (item: any) => this.onPress(item),
+                                showAlbumArt: true,
+                            })}
+                            renderSectionHeader={renderListHeader}
+                            sections={this.props.results}
+                            keyExtractor={listKeyExtractor}
+                            ItemSeparatorComponent={renderListSeparator}
+                        />
+                    </ScrollView>
+                    <Footer />
+                </SafeAreaView>
+            </BackgroundAlbumArt>
         )
     }
 }
@@ -114,10 +133,9 @@ export default class SearchScreen extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
     },
     textInput: {
-        backgroundColor: '#191919',
+        backgroundColor: 'rgba(255,255,255,0.1)',
         color: 'white',
         fontSize: 18,
         margin: 10,

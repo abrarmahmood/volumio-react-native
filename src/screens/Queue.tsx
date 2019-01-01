@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigationInjectedProps } from 'react-navigation';
 import {
-  StatusBar,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   StyleSheet,
   View,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import Header from '../components/player/Header';
 import { QueueItem } from '../sagas/mappers/transform-queue';
 import QueueList from '../components/queue-list';
 import { handleDeleteQueueItem, handlePlayQueueItem, handleClearQueue } from '../actions/queue';
+import BackgroundAlbumArt from '../components/background-album-art';
+import { PlayerState } from '../sagas/mappers/transform-state';
 
 
 interface State {
@@ -26,6 +28,7 @@ interface State {
 }
 
 interface Props extends NavigationInjectedProps {
+  playerState: PlayerState;
   queue: Array<QueueItem>;
   delete(index: number): void;
   play(index: number): void;
@@ -34,6 +37,7 @@ interface Props extends NavigationInjectedProps {
 
 @(connect(
   (state: any) => ({
+    playerState: state.playerState.value,
     queue: state.queue.value,
   }),
   {
@@ -66,19 +70,21 @@ export default class Queue extends Component<Props, State> {
   }
 
   render() {
-    const { queue } = this.props;
+    const { queue, playerState } = this.props;
 
     return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Header message="Play Queue" onDownPress={this.goBack} />
-        <View style={styles.options}>
-          <TouchableOpacity style={styles.optionsButton} onPress={this.onClearPress}>
-            <Text style={styles.optionsText}>Clear queue</Text>
-          </TouchableOpacity>
-        </View>
-        <QueueList removable data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
-      </SafeAreaView>
+      <BackgroundAlbumArt albumart={playerState.albumart}>
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle="light-content" />
+          <Header message="Play Queue" onDownPress={this.goBack} />
+          <View style={styles.options}>
+            <TouchableOpacity style={styles.optionsButton} onPress={this.onClearPress}>
+              <Text style={styles.optionsText}>Clear queue</Text>
+            </TouchableOpacity>
+          </View>
+          <QueueList removable data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
+        </SafeAreaView>
+      </BackgroundAlbumArt>
     );
   }
 }
@@ -86,7 +92,6 @@ export default class Queue extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(4,4,4)',
   },
   audioElement: {
     height: 0,
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
   options: {
     width: '100%',
     height: 40,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     alignItems: 'flex-end',
   },
   optionsButton: {
