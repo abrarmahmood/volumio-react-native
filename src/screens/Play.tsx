@@ -9,13 +9,12 @@ import SeekBar from '../components/player/SeekBar';
 import Controls from '../components/player/Controls';
 import { PlayerState } from '../sagas/mappers/transform-state';
 import * as actions from '../actions/player-state';
-import { withCurrentTrackPosition } from '../hoc/current-track-position';
 import BackgroundAlbumArt from '../components/background-album-art';
+import { withCurrentTrackPosition, InjectedCurrentPositionProps } from '../hoc/current-track-position';
 
 
-interface Props extends NavigationInjectedProps {
+interface Props extends NavigationInjectedProps, InjectedCurrentPositionProps {
   playerState: PlayerState;
-  currentPosition: number;
   play(): void;
   pause(): void;
   next(): void;

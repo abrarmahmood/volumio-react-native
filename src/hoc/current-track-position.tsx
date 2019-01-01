@@ -2,23 +2,23 @@ import React, { Component, ComponentType } from 'react';
 import { connect } from 'react-redux';
 
 
-interface Props {
+export interface InjectedCurrentPositionProps {
     currentPosition: number;
     paused: boolean;
 }
 
-interface State {
+interface CurrentPositionState {
     currentPosition: number;
 }
 
-export const withCurrentTrackPosition = <P extends object>(ChildComponent: ComponentType<P>) => {
+export const withCurrentTrackPosition = <P extends InjectedCurrentPositionProps>(ChildComponent: ComponentType<P>) => {
     @(connect(
         (state: any) => ({
             currentPosition: state.playerState.value.seek,
             paused: state.playerState.value.status !== 'play',
         })
     ) as any)
-    class Wrapped extends Component<P & Props, State> {
+    class Wrapped extends Component<Exclude<P, InjectedCurrentPositionProps>, CurrentPositionState> {
         timer: any;
         state = {
             currentPosition: 0,
@@ -32,7 +32,7 @@ export const withCurrentTrackPosition = <P extends object>(ChildComponent: Compo
             }
         }
 
-        componentWillReceiveProps(nextProps: Props) {
+        componentWillReceiveProps(nextProps: InjectedCurrentPositionProps) {
             // Ususally on each pushState
             this.setState({ currentPosition: nextProps.currentPosition });
         }
@@ -54,7 +54,7 @@ export const withCurrentTrackPosition = <P extends object>(ChildComponent: Compo
         }
 
         // FIXME: Find a better solution than this to increment the seconds
-        componentDidUpdate(prevProps: Props) {
+        componentDidUpdate(prevProps: InjectedCurrentPositionProps) {
             if (prevProps.paused !== this.props.paused) {
                 this.handleIncrement();
             }
