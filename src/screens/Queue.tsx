@@ -8,13 +8,14 @@ import {
   View,
   StatusBar,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import Header from '../components/player/Header';
 import { QueueItem } from '../sagas/mappers/transform-queue';
-import QueueList from '../components/queue-list';
 import { handleDeleteQueueItem, handlePlayQueueItem, handleClearQueue } from '../actions/queue';
 import BackgroundAlbumArt from '../components/background-album-art';
 import { PlayerState } from '../sagas/mappers/transform-state';
+import { listKeyExtractor, renderListSeparator, renderListItem } from '../components/list';
 
 
 interface State {
@@ -56,12 +57,16 @@ export default class Queue extends Component<Props, State> {
     this.props.navigation.goBack();
   }
 
-  onPress = (index: number) => {
+  onPress = (data: any) => {
+    const index = this.props.queue.indexOf(data);
+
     this.props.play(index);
     this.props.navigation.goBack();
   }
 
-  onDeletePress = (index: number) => {
+  onDeletePress = (data: any) => {
+    const index = this.props.queue.indexOf(data);
+
     this.props.delete(index);
   }
 
@@ -82,7 +87,16 @@ export default class Queue extends Component<Props, State> {
               <Text style={styles.optionsText}>Clear queue</Text>
             </TouchableOpacity>
           </View>
-          <QueueList removable data={queue} onPress={this.onPress} onDeletePress={this.onDeletePress} />
+          <FlatList
+            renderItem={renderListItem({
+              onItemPress: (item: any) => this.onPress(item),
+              onAltPress: (item: any) => this.onDeletePress(item),
+              icon: 'remove',
+            })}
+            data={queue}
+            keyExtractor={listKeyExtractor}
+            ItemSeparatorComponent={renderListSeparator}
+          />
         </SafeAreaView>
       </BackgroundAlbumArt>
     );

@@ -4,12 +4,13 @@ import { TrackItem } from "../../sagas/mappers/transform-tracks";
 import { FolderItem } from "../../sagas/mappers/transform-folders";
 import { SearchItem } from "../../sagas/mappers/transform-search";
 
+
 export interface ListItemOptions {
     onItemPress?(obj: any): void;
     onAltPress?(obj: any): void;
     showAlbumArt?: boolean,
+    icon?: string,
 }
-
 
 export const renderListItem = (options: ListItemOptions) => {
     return ({ item, index }: { item: TrackItem | FolderItem | SearchItem, index: number }) => {
@@ -20,7 +21,20 @@ export const renderListItem = (options: ListItemOptions) => {
 
         let onAltPress = undefined;
         if (typeof options.onAltPress !== 'undefined') {
-            onPress = () => options.onAltPress(item);
+            onAltPress = () => options.onAltPress(item);
+        }
+
+        let iconImage: any = false;
+        switch (options.icon) {
+            case 'more':
+                iconImage = require('./img/more_vert.png');
+                break;
+            case 'remove':
+                iconImage = require('./img/clear.png');
+                break;
+            default:
+                iconImage = false;
+                break;
         }
 
         return (
@@ -34,12 +48,12 @@ export const renderListItem = (options: ListItemOptions) => {
                         <Text style={styles.text1}>{item.title}</Text>
                         <Text style={styles.text2}>{item.artist}</Text>
                     </View>
-                    <TouchableOpacity style={styles.altContainer} onPress={onAltPress}>
+                    {iconImage && <TouchableOpacity style={styles.altContainer} onPress={onAltPress}>
                         <Image
-                            source={require('./img/more_vert.png')}
+                            source={iconImage}
                             style={styles.altImage}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>
             </TouchableHighlight>
         );

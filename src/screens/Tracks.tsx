@@ -68,6 +68,7 @@ export default class SearchScreen extends React.Component<Props> {
                         <FlatList
                             renderItem={renderListItem({
                                 onItemPress: (item: any) => this.onPress(item),
+                                icon: 'more',
                             })}
                             data={this.props.results}
                             keyExtractor={listKeyExtractor}

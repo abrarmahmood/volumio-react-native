@@ -81,6 +81,7 @@ export default class FoldersScreen extends React.Component<Props> {
                             renderItem={renderListItem({
                                 onItemPress: (item: any) => this.onPress(item),
                                 showAlbumArt: true,
+                                icon: 'more',
                             })}
                             data={this.props.results}
                             keyExtractor={listKeyExtractor}
