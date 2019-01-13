@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Slider from 'react-native-slider';
 
-function pad(n: any, width: number, z: any = 0) {
+const pad = (n: any, width: number, z: any = 0) => {
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
