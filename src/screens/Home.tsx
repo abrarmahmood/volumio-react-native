@@ -7,8 +7,9 @@ import BackgroundAlbumArt from "../components/background-album-art";
 import { connect } from "react-redux";
 import { PlayerState } from "../sagas/mappers/transform-state";
 import Header from "../components/player/Header";
+import MyModal from "../components/menu-modal";
 
-
+const hello = (...params) => console.log('hello', ...params);
 interface State {
   text: string
 }
@@ -19,7 +20,7 @@ interface Props extends NavigationInjectedProps {
 
 @(connect(
   (state: any) => ({
-      playerState: state.playerState.value,
+    playerState: state.playerState.value,
   })
 ) as any)
 export default class HomeScreen extends React.Component<Props, State> {
@@ -51,7 +52,7 @@ export default class HomeScreen extends React.Component<Props, State> {
     return (
       <BackgroundAlbumArt albumart={playerState.albumart}>
         <SafeAreaView style={styles.container}>
-        <Header message="Home" noBack/>
+          <Header message="Home" noBack />
           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Volumio remote control</Text>
           </View>
@@ -71,6 +72,12 @@ export default class HomeScreen extends React.Component<Props, State> {
               title="Now Playing"
               onPress={() => this.props.navigation.navigate('Play')}
             />
+            <MyModal title='Now Playing' options={[
+              { text: 'Play now', action: hello },
+              { text: 'Add to Queue', action: hello },
+              { text: 'Play all now', action: hello },
+              { text: 'Add all to queue', action: hello },
+            ]} />
           </View>
           <Footer />
         </SafeAreaView>
