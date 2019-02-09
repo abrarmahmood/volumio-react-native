@@ -74,8 +74,8 @@ export default class HomeScreen extends React.Component<Props, State> {
             />
             <MyModal title='Now Playing' options={[
               { text: 'Play now', action: hello },
-              { text: 'Add to Queue', action: hello },
               { text: 'Play all now', action: hello },
+              { text: 'Add to Queue', action: hello },
               { text: 'Add all to queue', action: hello },
             ]} />
           </View>

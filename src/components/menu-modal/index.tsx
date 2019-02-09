@@ -40,7 +40,7 @@ export default class MyModal extends React.Component<Props, State> {
                         <View>
                             <Text style={styles.title}>{title}</Text>
                             {options.map((o, i, arr) => (
-                                <ModalButton text={o.text} action={() => o.action(arr[i])} />
+                                <ModalButton key={i} text={o.text} action={() => o.action(arr[i])} />
                             ))}
                             {cancel && <ModalButton text='close' action={() => this.setState({ modalVisible: false })} />}
                         </View>
