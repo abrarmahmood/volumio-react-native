@@ -1,0 +1,115 @@
+{
+    "navigation": {
+        "lists": [
+            {
+                "availableListViews": [
+                    "list"
+                ],
+                "items": [
+                    {
+                        "type": "song",
+                        "title": "Big Shot",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268481",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "Honesty",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268482",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "My Life",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268483",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "Zanzibar",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268484",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "Stiletto",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268485",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "Rosalinda's Eyes",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268486",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "Half a Mile Away",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268487",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "Until the Night",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268488",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    },
+                    {
+                        "type": "song",
+                        "title": "52nd Street",
+                        "album": "52nd Street",
+                        "artist": "Billy Joel",
+                        "uri": "tidal://song/1268489",
+                        "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+                        "service": "streaming_services",
+                        "explicit": false
+                    }
+                ]
+            }
+        ],
+        "info": {
+            "uri": "tidal://album/1268480",
+            "artist": "Billy Joel",
+            "album": "52nd Street",
+            "duration": "40:32",
+            "service": "streaming_services",
+            "type": "song",
+            "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg"
+        },
+        "prev": {
+            "uri": "tidal://artist/59"
+        }
+    }
+}

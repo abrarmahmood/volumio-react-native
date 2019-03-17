@@ -1,0 +1,395 @@
+{
+  "navigation": {
+    "isSearchResult": true,
+    "lists": [
+      {
+        "type": "title",
+        "title": "Tidal Artists",
+        "availableListViews": [
+          "list"
+        ],
+        "items": [
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/87b25b92/1674/4f89/ae00/777f4b2226c4/480x480.jpg",
+            "uri": "tidal://artist/59",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Billy Joe Shaver",
+            "albumart": "https://resources.tidal.com/images/8455d9c1/2131/4907/a509/fe03be72a289/480x480.jpg",
+            "uri": "tidal://artist/25617",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Billy Joe Royal",
+            "albumart": "https://resources.tidal.com/images/9f3c921f/58d8/4b9c/8e77/c1de42af44bc/480x480.jpg",
+            "uri": "tidal://artist/6178",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Lee Morgan, Joe Henderson, Barry Harris, Bob Crenshaw, Billy Higgins",
+            "albumart": "/albumart?icon=users",
+            "uri": "tidal://artist/6046472",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Billie Joe Armstrong",
+            "albumart": "/albumart?icon=users",
+            "uri": "tidal://artist/6174270",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "BILLIE JOE SPEARS",
+            "albumart": "https://resources.tidal.com/images/596d1281/7db1/4686/bbda/34e4c3180646/480x480.jpg",
+            "uri": "tidal://artist/3600550",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Bill Rank & Bix Beiderbecke & Bobby Davis & Don Murray & Frank Signorelli & Frank Trumbauer & Hymie Farberman & Joe Tarto Tuba & Joe Venuti & John Cali & Red Nichols & Vic Burton",
+            "albumart": "/albumart?icon=users",
+            "uri": "tidal://artist/5299411",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "HIROTAKA IZUMI & BILLY JOEL & HIROTAKA IZUMI",
+            "albumart": "/albumart?icon=users",
+            "uri": "tidal://artist/7962579",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Billy Joe Holloman",
+            "albumart": "/albumart?icon=users",
+            "uri": "tidal://artist/3584689",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "South & Billie Joe Royal",
+            "albumart": "/albumart?icon=users",
+            "uri": "tidal://artist/5373073",
+            "explicit": false
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "title": "Tidal Albums",
+        "availableListViews": [
+          "list",
+          "grid"
+        ],
+        "items": [
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "The Essential Billy Joel",
+            "albumart": "https://resources.tidal.com/images/e70db94c/1c20/401d/a237/5e873c32e1de/640x640.jpg",
+            "artist": "Billy Joel",
+            "uri": "tidal://album/20570157",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Piano Man: The Very Best of Billy Joel",
+            "albumart": "https://resources.tidal.com/images/14e892ff/b56e/40d6/82bc/7127b596ff7b/640x640.jpg",
+            "artist": "Billy Joel",
+            "uri": "tidal://album/110590",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Karaoke - Billy Joel",
+            "albumart": "https://resources.tidal.com/images/fc74d041/72ba/46be/8bf4/383a79630e0c/640x640.jpg",
+            "artist": "Roq Star Karaoke",
+            "uri": "tidal://album/34301168",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Hits of Billy Joel",
+            "albumart": "https://resources.tidal.com/images/e8254bd3/4dd5/4545/90e5/1ade9ceecb2a/640x640.jpg",
+            "artist": "New York Session Singers",
+            "uri": "tidal://album/18267860",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Karaoke Hits: Billy Joel",
+            "albumart": "https://resources.tidal.com/images/767e0970/6d20/46a9/9ce8/543f5e3107cb/640x640.jpg",
+            "artist": "APM Karaoke",
+            "uri": "tidal://album/56964617",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Piano Plays Billy Joel",
+            "albumart": "https://resources.tidal.com/images/925576d0/0278/462e/97b1/b957ca2159ca/640x640.jpg",
+            "artist": "Ricardo Caliente",
+            "uri": "tidal://album/94222281",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Lullaby Tribute: Billy Joel",
+            "albumart": "https://resources.tidal.com/images/f3247fd5/53c3/4a55/be3d/bc56326b0888/640x640.jpg",
+            "artist": "Snooze Tunes (for Babies)",
+            "uri": "tidal://album/6142514",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Best of Billy Joel",
+            "albumart": "https://resources.tidal.com/images/5d29ff01/b985/4fb1/83fd/f9e62456aa46/640x640.jpg",
+            "artist": "Tom Arte",
+            "uri": "tidal://album/60312967",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Helena singt billy joel",
+            "albumart": "https://resources.tidal.com/images/becdc57f/c4e8/4e20/8abd/1c8a81934426/640x640.jpg",
+            "artist": "Helena Vondráčková",
+            "uri": "tidal://album/89022847",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Lullaby Tribute: Billy Joel",
+            "albumart": "https://resources.tidal.com/images/9ff2fa0c/85da/4bb3/8391/3d34e2223983/640x640.jpg",
+            "artist": "Snooze Tunes (for Babies)",
+            "uri": "tidal://album/8474598",
+            "explicit": false
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "title": "Tidal PLaylists",
+        "availableListViews": [
+          "list",
+          "grid"
+        ],
+        "items": [
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Billy Joel Essentials",
+            "albumart": "https://resources.tidal.com/images/35dbb73e/8460/4054/9ebb/0e45f72b3f65/640x428.jpg",
+            "uri": "tidal://playlist/40f546bb-19c0-4ba6-bbf9-907e9863e334",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Classic Rock Classics",
+            "albumart": "https://resources.tidal.com/images/95ec3180/08ba/4f2e/b843/76bac5dd16c9/640x428.jpg",
+            "uri": "tidal://playlist/79406a77-854a-4703-9409-9376f1077127",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Rolling Stone: Best Songs of All Time",
+            "albumart": "https://resources.tidal.com/images/bc79eb20/914b/4bf2/9003/54183487c390/640x428.jpg",
+            "uri": "tidal://playlist/eacd9536-3a86-4841-a930-0d3a4cdb6a21",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Music To Make You Smile",
+            "albumart": "https://resources.tidal.com/images/aa66da6b/782c/4aae/8bae/005bed3257dd/640x428.jpg",
+            "uri": "tidal://playlist/7ce8bba9-67a1-45cf-863f-adb8e0fb9928",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Remember... The Seventies",
+            "albumart": "https://resources.tidal.com/images/e11d493d/e497/46f2/a2a7/01ea209c057f/640x428.jpg",
+            "uri": "tidal://playlist/e62a74be-853d-47d2-b1cd-61706efd1f43",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Throwback Pop Hits",
+            "albumart": "https://resources.tidal.com/images/9d54970f/995e/4747/86b7/c57de09e76c6/640x428.jpg",
+            "uri": "tidal://playlist/edb69697-fc65-4580-b938-55f0f4bd7c54",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "1977!",
+            "albumart": "https://resources.tidal.com/images/c37843fd/7296/49d0/baf9/a33a0042c69e/640x428.jpg",
+            "uri": "tidal://playlist/ac5f569e-d4f1-495c-98ba-9ee7e7514253",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "Song of the Year (1959 - )",
+            "albumart": "https://resources.tidal.com/images/6866f11b/f249/42aa/962b/0795a5f18819/640x428.jpg",
+            "uri": "tidal://playlist/f6d2b417-c3ee-441c-9264-70ecb1e42161",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "1986!",
+            "albumart": "https://resources.tidal.com/images/2abbf01a/07db/41f3/a15e/4091988d8d2d/640x428.jpg",
+            "uri": "tidal://playlist/58650a31-faba-4db2-a9f9-ae1217743466",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "folder-with-favourites",
+            "title": "1976!",
+            "albumart": "https://resources.tidal.com/images/2c793e7f/5665/4a75/a730/52d30f2612e7/640x428.jpg",
+            "uri": "tidal://playlist/cfeacb98-565e-4cc4-8b8a-7ba0c3234df0",
+            "explicit": false
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "title": "Tidal Tracks",
+        "availableListViews": [
+          "list"
+        ],
+        "items": [
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/9eb17206/efef/4a02/a4cc/d0fa5ab66a12/640x640.jpg",
+            "album": "Monque",
+            "artist": "Jeremy Essig",
+            "uri": "tidal://song/46005753",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/48d5ce45/6184/4015/9689/1e59f925aa9d/640x640.jpg",
+            "album": "Ascension",
+            "artist": "Seenai",
+            "uri": "tidal://song/74478027",
+            "explicit": true
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/c52ce561/8b7b/419f/8296/50c77420108d/640x640.jpg",
+            "album": "Moments",
+            "artist": "North Shore",
+            "uri": "tidal://song/48197238",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/5b62451e/516a/42b6/935d/c55b20ff62d8/640x640.jpg",
+            "album": "The Words I Mean to Say",
+            "artist": "Nobody's Babe",
+            "uri": "tidal://song/65457214",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/ef4bd435/1769/4efb/8a69/a99f6eef75f4/640x640.jpg",
+            "album": "Soul Killa",
+            "artist": "Ransom",
+            "uri": "tidal://song/51911418",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/7851e10d/58da/4fea/b10b/5b437ad00e78/640x640.jpg",
+            "album": "Gucci Sushi",
+            "artist": "Absolem",
+            "uri": "tidal://song/94205785",
+            "explicit": true
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel",
+            "albumart": "https://resources.tidal.com/images/9eeb41b3/a235/490a/909c/ba9a397da11e/640x640.jpg",
+            "album": "klickitat",
+            "artist": "bed.",
+            "uri": "tidal://song/61325189",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel DUI",
+            "albumart": "https://resources.tidal.com/images/d754eeb2/9684/499e/b1d7/696b4bf27739/640x640.jpg",
+            "album": "Basic Instinct",
+            "artist": "U.S. Underground",
+            "uri": "tidal://song/80234324",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Billy Joel (Karaoke Version)",
+            "albumart": "https://resources.tidal.com/images/9127c3d1/f0cb/4c63/b978/ca51f2ee83f8/640x640.jpg",
+            "album": "Backing Tracks / Pop Artists Index, A, (Alex Clare / Alex Day / Alex Gaudino & Kelly Rowland / Alex Gaudino & Shena / Alex Parks / Alex Party / Alexa Goddard / Alexa the Downeaster / Alex. O'neal / Alex. Rybak / Alex. Burke & Erick Morillo), Volume 27",
+            "artist": "BT Band",
+            "uri": "tidal://song/49072751",
+            "explicit": false
+          },
+          {
+            "service": "streaming_services",
+            "type": "song",
+            "title": "Face Like Billy Joel",
+            "albumart": "https://resources.tidal.com/images/d7dfacfd/3dfe/4592/a8be/55aa680c08c2/640x640.jpg",
+            "album": "Brontosaurus",
+            "artist": "Da Vinci's Notebook",
+            "uri": "tidal://song/3478294",
+            "explicit": false
+          }
+        ]
+      }
+    ]
+  }
+}

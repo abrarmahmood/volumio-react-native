@@ -1,0 +1,327 @@
+{
+  "navigation": {
+    "lists": [
+      {
+        "availableListViews": [
+          "list",
+          "grid"
+        ],
+        "items": [
+          {
+            "type": "folder",
+            "title": "52nd Street",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1268480",
+            "albumart": "https://resources.tidal.com/images/466f16ce/7b26/4672/8de4/28b03faa6715/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Collected Additional Masters",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/23922112",
+            "albumart": "https://resources.tidal.com/images/88ece807/17c6/408b/b2bc/d5090a616fa9/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Live On Stage  FM Broadcasts - Nassau Coliseum 11th December 1977",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/78609838",
+            "albumart": "https://resources.tidal.com/images/f3ad5390/093a/4c38/9477/5f845091f737/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "A Matter of Trust - The Bridge to Russia: The Music (Live)",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/29904460",
+            "albumart": "https://resources.tidal.com/images/990bb534/0f04/4288/9d16/69afd016b4f2/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "She's Got A Way: Love Songs",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/18536824",
+            "albumart": "https://resources.tidal.com/images/5db57616/ca35/4f8e/a12c/7e2679940325/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Piano Man (Legacy Edition)",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/8631993",
+            "albumart": "https://resources.tidal.com/images/11d476a8/a010/4d86/a7ee/ca911739756e/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Further Than Heaven",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/7112662",
+            "albumart": "https://resources.tidal.com/images/1f22b2c0/0c22/4c7e/bf61/3bbbf01ff6e9/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Live At Shea Stadium",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/5855793",
+            "albumart": "https://resources.tidal.com/images/eb2f831c/7fab/433a/a008/a71e4f731244/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "My Lives",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/4917375",
+            "albumart": "https://resources.tidal.com/images/58f980de/f98c/436f/92f7/1b628c67f726/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "The Stranger (Legacy Edition)",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1807880",
+            "albumart": "https://resources.tidal.com/images/7299cd88/2a72/4d44/8adb/78e203806ea3/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Piano Man: The Very Best of Billy Joel",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/110590",
+            "albumart": "https://resources.tidal.com/images/14e892ff/b56e/40d6/82bc/7127b596ff7b/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "12 Gardens Live",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20570247",
+            "albumart": "https://resources.tidal.com/images/078226a4/3835/4f93/9254/8e06e21bb975/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "As Time Goes By",
+            "artist": "Phillip Mindenhall",
+            "uri": "tidal://artist/59/52346277",
+            "albumart": "https://resources.tidal.com/images/2e21bc89/0e14/4666/9a5f/e29b468b7d9c/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Turnstiles",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20558526",
+            "albumart": "https://resources.tidal.com/images/30479cf1/be5d/4053/8e00/01dd035e48ea/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Greatest Hits Volume I & Volume II",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/11337661",
+            "albumart": "https://resources.tidal.com/images/d844ee3e/6726/4970/8d1f/824d374cd201/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "The Essential Billy Joel",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20570157",
+            "albumart": "https://resources.tidal.com/images/e70db94c/1c20/401d/a237/5e873c32e1de/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "2000 Years - The Millennium Concert",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/540220",
+            "albumart": "https://resources.tidal.com/images/1279eda9/4171/46b7/be23/c2e1682ded61/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Kohuept",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1268020",
+            "albumart": "https://resources.tidal.com/images/b8a3b71c/741d/4806/817b/c30a3a89b3df/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Piano Man",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20558513",
+            "albumart": "https://resources.tidal.com/images/74894b36/aad2/4691/bb22/6fec08301ccd/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "The Bridge",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/4710144",
+            "albumart": "https://resources.tidal.com/images/7aaddd31/6e7b/473a/993d/3db00cd89faf/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Greatest Hits Vol. III",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/5358",
+            "albumart": "https://resources.tidal.com/images/1bbd79be/7fbd/4641/bd53/4154676a51cc/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Storm Front",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1268063",
+            "albumart": "https://resources.tidal.com/images/350d0216/b5ee/4c6c/92fb/8ceb80c0fad7/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "River Of Dreams",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1268071",
+            "albumart": "https://resources.tidal.com/images/41520a3e/bdae/49dc/95cc/2c6ec51baea8/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Streetlife Serenade",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20570018",
+            "albumart": "https://resources.tidal.com/images/cbb13abf/1a86/4447/ba1d/0decede0822e/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Cold Spring Harbor",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20570194",
+            "albumart": "https://resources.tidal.com/images/3d699705/0125/4fd9/bd91/b2db93e17711/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "The Nylon Curtain",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/91",
+            "albumart": "https://resources.tidal.com/images/fee86632/3270/494c/9ea4/96d1d4fe0243/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "An Innocent Man",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1268490",
+            "albumart": "https://resources.tidal.com/images/9bbc95b9/20cf/46d9/a547/1da546727923/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Songs In the Attic",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/20559873",
+            "albumart": "https://resources.tidal.com/images/08842915/a2ae/4ad0/aee5/40ede1347253/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "Glass Houses",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/1268017",
+            "albumart": "https://resources.tidal.com/images/a28176e7/9dbf/46bf/9a64/45ccb3033273/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "The Stranger",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/2942736",
+            "albumart": "https://resources.tidal.com/images/b9eb42e0/956a/4ec9/a42f/16e7b76e25e5/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          },
+          {
+            "type": "folder",
+            "title": "The Early Years - Sigma Studios, Philadelphia 15th Apr '72 (Remastered)",
+            "artist": "Billy Joel",
+            "uri": "tidal://artist/59/47646400",
+            "albumart": "https://resources.tidal.com/images/f531c8dc/7b5a/4a5f/b3fe/6ef8b4d29806/640x640.jpg",
+            "service": "streaming_services",
+            "explicit": false,
+            "qualityDescription": "LOSSLESS"
+          }
+        ]
+      }
+    ],
+    "prev": {
+      "uri": "tidal://"
+    }
+  }
+}
